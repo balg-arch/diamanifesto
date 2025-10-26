@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DIA▲MANIFESTO</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600&display=swap');
+    :root{
+      --bg:#ffffff;
+      --fg:#111111;
+    }
+    html, body { margin:0; padding:0; width:100vw; height:100vh; background:var(--bg); overflow:hidden; }
+    #p5-bg { position:fixed; inset:0; z-index:0; pointer-events:none; }
+    .caption-wrap{
+      position:fixed; left:0; right:0; bottom:6vh; z-index:2;
+      display:grid; place-items:center; pointer-events:none;
+      padding:0 20px;
+    }
+    .caption{
+      font-family: "EB Garamond", serif;
+      font-size: clamp(1.6rem, 4.8vw, 3rem);
+      font-weight: 600; letter-spacing:.02em; line-height:1;
+      color: var(--fg); text-align:center;
+      user-select:none;
+    }
+    .subcaption {
+      font-size: 0.6em;
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      margin-top: 0.3em;
+      opacity: 0.65;
+    }
+  </style>
+</head>
+<body>
+  <div id="p5-bg"></div>
+  <div class="caption-wrap" aria-hidden="true">
+    <div class="caption">
+      DIA▲MANIFESTO
+      <div class="subcaption">(website under construction)</div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js"></script>
+  <script>
+    new p5(function(p){
+      let state = -1, nodes = [], edges = [], diagrams = [];
+      let logoAlpha = 1, animStart = 0, triAlpha = 0, cycleStart = 0;
+
+      p.setup = function() {
+        p.createCanvas(window.innerWidth, window.innerHeight);
+        setTimeout(fadeOutLogoAndStart, 700);
+      };
+
+      p.windowResized = function(){
+        p.resizeCanvas(window.innerWidth, window.innerHeight);
+      };
+
+      p.draw = function() {
+        p.background(255);
+
+        if (state === -1) {
+          drawLogoP5(p.width/2, p.height/2, Math.min(p.width,p.height)/4, 255*logoAlpha);
+          return;
+        }
+
+        let t = (p.millis() - animStart) / 1000;
+
+        if (state === 0) {
+          if (nodes.length < 17 && t > nodes.length * 0.18) {
+            let angle = p.map(nodes.length, 0, 16, 0, p.TWO_PI);
+            let rad = p.random(100, Math.min(p.width,p.height)/2.4);
+            let cx = p.width/2 + p.cos(angle+p.random(-0.1,0.1))*rad + p.random(-20,20);
+            let cy = p.height/2 + p.sin(angle+p.random(-0.12,0.12))*rad + p.random(-15,15);
+            let s = p.random(15,34);
+            let typ = p.random([0,1,2]);
+            let a = 0;
+            nodes.push({x:cx, y:cy, s:s, t:typ, a:a});
+          }
+          nodes.forEach(n=>{
+            n.a = Math.min(n.a+0.07,1);
+            drawNode(n);
+          });
+          if (nodes.length === 17 && t > 5) {
+            state = 1;
+          }
+        }
+
+        if (state === 1) {
+          nodes.forEach(drawNode);
+          if (edges.length < 29 && p.frameCount % 5 === 0) {
+            let a = p.floor(p.random(nodes.length));
+            let b = p.floor(p.random(nodes.length));
+            if (a!==b && !edges.some(e=>(e[0]===a&&e[1]===b)||(e[1]===a&&e[0]===b))){
+              let tt = p.random([0,1]);
+              edges.push([a,b,tt,0]);
+            }
+          }
+          p.stroke(18,18,18,90);
+          p.strokeWeight(2);
+          edges.forEach(e=>{
+            let n1=nodes[e[0]], n2=nodes[e[1]];
+            if (e[2]===0) p.line(n1.x, n1.y, n2.x, n2.y);
+            else {
+              p.noFill();
+              p.bezier(n1.x, n1.y, n1.x+p.random(-25,25), n1.y+p.random(-25,25), n2.x+p.random(-25,25), n2.y+p.random(-25,25), n2.x, n2.y);
+            }
+          });
+          if (edges.length >= 29 && t > 9) state = 2;
+        }
+
+        if (state === 2) {
+          nodes.forEach(drawNode);
+          p.stroke(18,18,18,90);
+          p.strokeWeight(2);
+          edges.forEach(e=>{
+            let n1=nodes[e[0]], n2=nodes[e[1]];
+            if (e[2]===0) p.line(n1.x, n1.y, n2.x, n2.y);
+            else {
+              p.noFill();
+              p.bezier(n1.x, n1.y, n1.x+p.random(-25,25), n1.y+p.random(-25,25), n2.x+p.random(-25,25), n2.y+p.random(-25,25), n2.x, n2.y);
+            }
+          });
+          if (diagrams.length < 4 && t > 10 + diagrams.length * 1.5) {
+            let idx = [];
+            while(idx.length<3) {
+              let r = p.floor(p.random(nodes.length));
+              if (!idx.includes(r)) idx.push(r);
+            }
+            diagrams.push(idx);
+          }
+          p.noStroke();
+          p.fill(0,40);
+          diagrams.forEach(idx=>{
+            p.beginShape();
+            idx.forEach(i=> p.vertex(nodes[i].x, nodes[i].y));
+            p.endShape(p.CLOSE);
+          });
+          if (diagrams.length >= 4 && t > 18) {
+            state = 3;
+            triAlpha = 0;
+            cycleStart = p.millis();
+          }
+        }
+
+        if (state === 3) {
+          nodes.forEach(drawNode);
+          p.stroke(18,18,18,90);
+          p.strokeWeight(2);
+          edges.forEach(e=>{
+            let n1=nodes[e[0]], n2=nodes[e[1]];
+            if (e[2]===0) p.line(n1.x, n1.y, n2.x, n2.y);
+            else {
+              p.noFill();
+              p.bezier(n1.x, n1.y, n1.x+p.random(-25,25), n1.y+p.random(-25,25), n2.x+p.random(-25,25), n2.y+p.random(-25,25), n2.x, n2.y);
+            }
+          });
+          p.noStroke();
+          p.fill(0,40);
+          diagrams.forEach(idx=>{
+            p.beginShape();
+            idx.forEach(i=> p.vertex(nodes[i].x, nodes[i].y));
+            p.endShape(p.CLOSE);
+          });
+          triAlpha = Math.min(triAlpha + 0.013, 1.0);
+          drawLogoP5(p.width/2, p.height/2, Math.min(p.width,p.height)/4.5, 220*triAlpha);
+          if (triAlpha >= 1 && p.millis() - cycleStart > 3000) {
+            state = 4;
+            cycleStart = p.millis();
+          }
+        }
+
+        if (state === 4) {
+          let a = Math.min(255, (p.millis() - cycleStart)/2);
+          p.noStroke();
+          p.fill(255, a);
+          p.rect(0,0,p.width,p.height);
+          if (a >= 255) {
+            nodes = []; edges = []; diagrams = [];
+            triAlpha = 0; logoAlpha = 1;
+            state = -1;
+            setTimeout(fadeOutLogoAndStart, 700);
+          }
+        }
+      };
+
+      p.mousePressed = function() {
+        if (state === -1) fadeOutLogoAndStart();
+      };
+
+      function fadeOutLogoAndStart() {
+        if (state !== -1) return;
+        let fade = setInterval(()=>{
+          logoAlpha -= 0.03;
+          if(logoAlpha <= 0.01){
+            clearInterval(fade);
+            state = 0;
+            animStart = p.millis();
+          }
+        }, 16);
+      }
+
+      function drawNode(n) {
+        p.noStroke();
+        p.fill(20,20,20, 225*n.a);
+        if (n.t===0) p.ellipse(n.x, n.y, n.s, n.s);
+        else if (n.t===1) p.ellipse(n.x, n.y, n.s*1.5, n.s*1.5*p.random(0.85,1.15));
+        else p.rect(n.x-n.s/2, n.y-n.s/2, n.s, n.s, 7);
+      }
+      function drawLogoP5(cx, cy, r, alpha=255) {
+        p.push();
+        p.translate(cx, cy);
+        p.fill(0, alpha);
+        p.stroke(0, alpha*0.5);
+        p.strokeWeight(3);
+        p.triangle(
+          p.cos(-p.PI/2)*r, p.sin(-p.PI/2)*r,
+          p.cos(p.PI/6)*r,  p.sin(p.PI/6)*r,
+          p.cos(p.PI*5/6)*r, p.sin(p.PI*5/6)*r
+        );
+        p.pop();
+      }
+    }, document.getElementById('p5-bg'));
+  </script>
+</body>
+</html>
