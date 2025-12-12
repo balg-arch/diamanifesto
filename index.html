@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DIA▲MANIFESTO</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+\1
 
   <!-- Favicon & App Icons -->
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -11,224 +11,249 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
   <meta name="theme-color" content="#ffffff">
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600&display=swap');
-    :root{
-      --bg:#ffffff;
-      --fg:#111111;
-    }
-    html, body { margin:0; padding:0; width:100vw; height:100vh; background:var(--bg); overflow:hidden; }
-    #p5-bg { position:fixed; inset:0; z-index:0; pointer-events:none; }
-    .caption-wrap{
-      position:fixed; left:0; right:0; bottom:6vh; z-index:2;
-      display:grid; place-items:center; pointer-events:none;
-      padding:0 20px;
-    }
-    .caption{
-      font-family: "EB Garamond", serif;
-      font-size: clamp(1.6rem, 4.8vw, 3rem);
-      font-weight: 600; letter-spacing:.02em; line-height:1;
-      color: var(--fg); text-align:center;
-      user-select:none;
-    }
-    .subcaption {
-      font-size: 0.6em;
-      font-style: italic;
-      font-weight: 400;
-      letter-spacing: 0.02em;
-      margin-top: 0.3em;
-      opacity: 0.65;
-    }
-  </style>
-</head>
-<body>
-  <div id="p5-bg"></div>
-  <div class="caption-wrap" aria-hidden="true">
-    <div class="caption">
-      DIA▲MANIFESTO
-      <div class="subcaption">(website under construction)</div>
-    </div>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js"></script>
-  <script>
-    new p5(function(p){
-      let state = -1, nodes = [], edges = [], diagrams = [];
-      let logoAlpha = 1, animStart = 0, triAlpha = 0, cycleStart = 0;
+  <!-- Meta Description for search snippet -->
+  <meta name="description" content="DIA▲MANIFESTO — a living architecture of thought. Explore the official text, symbolic grammar, and write using the DIA▲MANIFESTO notation.">
 
-      p.setup = function() {
-        p.createCanvas(window.innerWidth, window.innerHeight);
-        setTimeout(fadeOutLogoAndStart, 700);
-      };
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="DIA▲MANIFESTO">
+  <meta property="og:description" content="A living architecture of thought: read, traverse, and write using DIA▲MANIFESTO’s symbolic grammar.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://diamanifesto.org/">
+  <meta property="og:image" content="https://diamanifesto.org/favicon-192.png">
+  <meta name="twitter:card" content="summary">
 
-      p.windowResized = function(){
-        p.resizeCanvas(window.innerWidth, window.innerHeight);
-      };
-
-      p.draw = function() {
-        p.background(255);
-
-        if (state === -1) {
-          drawLogoP5(p.width/2, p.height/2, Math.min(p.width,p.height)/4, 255*logoAlpha);
-          return;
-        }
-
-        let t = (p.millis() - animStart) / 1000;
-
-        if (state === 0) {
-          if (nodes.length < 17 && t > nodes.length * 0.18) {
-            let angle = p.map(nodes.length, 0, 16, 0, p.TWO_PI);
-            let rad = p.random(100, Math.min(p.width,p.height)/2.4);
-            let cx = p.width/2 + p.cos(angle+p.random(-0.1,0.1))*rad + p.random(-20,20);
-            let cy = p.height/2 + p.sin(angle+p.random(-0.12,0.12))*rad + p.random(-15,15);
-            let s = p.random(15,34);
-            let typ = p.random([0,1,2]);
-            let a = 0;
-            nodes.push({x:cx, y:cy, s:s, t:typ, a:a});
-          }
-          nodes.forEach(n=>{
-            n.a = Math.min(n.a+0.07,1);
-            drawNode(n);
-          });
-          if (nodes.length === 17 && t > 5) {
-            state = 1;
-          }
-        }
-
-        if (state === 1) {
-          nodes.forEach(drawNode);
-          if (edges.length < 29 && p.frameCount % 5 === 0) {
-            let a = p.floor(p.random(nodes.length));
-            let b = p.floor(p.random(nodes.length));
-            if (a!==b && !edges.some(e=>(e[0]===a&&e[1]===b)||(e[1]===a&&e[0]===b))){
-              let tt = p.random([0,1]);
-              edges.push([a,b,tt,0]);
-            }
-          }
-          p.stroke(18,18,18,90);
-          p.strokeWeight(2);
-          edges.forEach(e=>{
-            let n1=nodes[e[0]], n2=nodes[e[1]];
-            if (e[2]===0) p.line(n1.x, n1.y, n2.x, n2.y);
-            else {
-              p.noFill();
-              p.bezier(n1.x, n1.y, n1.x+p.random(-25,25), n1.y+p.random(-25,25), n2.x+p.random(-25,25), n2.y+p.random(-25,25), n2.x, n2.y);
-            }
-          });
-          if (edges.length >= 29 && t > 9) state = 2;
-        }
-
-        if (state === 2) {
-          nodes.forEach(drawNode);
-          p.stroke(18,18,18,90);
-          p.strokeWeight(2);
-          edges.forEach(e=>{
-            let n1=nodes[e[0]], n2=nodes[e[1]];
-            if (e[2]===0) p.line(n1.x, n1.y, n2.x, n2.y);
-            else {
-              p.noFill();
-              p.bezier(n1.x, n1.y, n1.x+p.random(-25,25), n1.y+p.random(-25,25), n2.x+p.random(-25,25), n2.y+p.random(-25,25), n2.x, n2.y);
-            }
-          });
-          if (diagrams.length < 4 && t > 10 + diagrams.length * 1.5) {
-            let idx = [];
-            while(idx.length<3) {
-              let r = p.floor(p.random(nodes.length));
-              if (!idx.includes(r)) idx.push(r);
-            }
-            diagrams.push(idx);
-          }
-          p.noStroke();
-          p.fill(0,40);
-          diagrams.forEach(idx=>{
-            p.beginShape();
-            idx.forEach(i=> p.vertex(nodes[i].x, nodes[i].y));
-            p.endShape(p.CLOSE);
-          });
-          if (diagrams.length >= 4 && t > 18) {
-            state = 3;
-            triAlpha = 0;
-            cycleStart = p.millis();
-          }
-        }
-
-        if (state === 3) {
-          nodes.forEach(drawNode);
-          p.stroke(18,18,18,90);
-          p.strokeWeight(2);
-          edges.forEach(e=>{
-            let n1=nodes[e[0]], n2=nodes[e[1]];
-            if (e[2]===0) p.line(n1.x, n1.y, n2.x, n2.y);
-            else {
-              p.noFill();
-              p.bezier(n1.x, n1.y, n1.x+p.random(-25,25), n1.y+p.random(-25,25), n2.x+p.random(-25,25), n2.y+p.random(-25,25), n2.x, n2.y);
-            }
-          });
-          p.noStroke();
-          p.fill(0,40);
-          diagrams.forEach(idx=>{
-            p.beginShape();
-            idx.forEach(i=> p.vertex(nodes[i].x, nodes[i].y));
-            p.endShape(p.CLOSE);
-          });
-          triAlpha = Math.min(triAlpha + 0.013, 1.0);
-          drawLogoP5(p.width/2, p.height/2, Math.min(p.width,p.height)/4.5, 220*triAlpha);
-          if (triAlpha >= 1 && p.millis() - cycleStart > 3000) {
-            state = 4;
-            cycleStart = p.millis();
-          }
-        }
-
-        if (state === 4) {
-          let a = Math.min(255, (p.millis() - cycleStart)/2);
-          p.noStroke();
-          p.fill(255, a);
-          p.rect(0,0,p.width,p.height);
-          if (a >= 255) {
-            nodes = []; edges = []; diagrams = [];
-            triAlpha = 0; logoAlpha = 1;
-            state = -1;
-            setTimeout(fadeOutLogoAndStart, 700);
-          }
-        }
-      };
-
-      p.mousePressed = function() {
-        if (state === -1) fadeOutLogoAndStart();
-      };
-
-      function fadeOutLogoAndStart() {
-        if (state !== -1) return;
-        let fade = setInterval(()=>{
-          logoAlpha -= 0.03;
-          if(logoAlpha <= 0.01){
-            clearInterval(fade);
-            state = 0;
-            animStart = p.millis();
-          }
-        }, 16);
-      }
-
-      function drawNode(n) {
-        p.noStroke();
-        p.fill(20,20,20, 225*n.a);
-        if (n.t===0) p.ellipse(n.x, n.y, n.s, n.s);
-        else if (n.t===1) p.ellipse(n.x, n.y, n.s*1.5, n.s*1.5*p.random(0.85,1.15));
-        else p.rect(n.x-n.s/2, n.y-n.s/2, n.s, n.s, 7);
-      }
-      function drawLogoP5(cx, cy, r, alpha=255) {
-        p.push();
-        p.translate(cx, cy);
-        p.fill(0, alpha);
-        p.stroke(0, alpha*0.5);
-        p.strokeWeight(3);
-        p.triangle(
-          p.cos(-p.PI/2)*r, p.sin(-p.PI/2)*r,
-          p.cos(p.PI/6)*r,  p.sin(p.PI/6)*r,
-          p.cos(p.PI*5/6)*r, p.sin(p.PI*5/6)*r
-        );
-        p.pop();
-      }
-    }, document.getElementById('p5-bg'));
+  <!-- Structured Data: Website + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "DIA▲MANIFESTO",
+    "url": "https://diamanifesto.org/",
+    "inLanguage": "en"
+  }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "DIA▲MANIFESTO",
+    "url": "https://diamanifesto.org/",
+    "logo": "https://diamanifesto.org/favicon-192.png"
+  }
+  </script>
+
+<meta content="light only" name="color-scheme"/>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap');
+    :root {
+      --bg: #ffffff;
+      --fg: #111111;
+      --muted:#6a6a6f;
+      --border:#ececf1;
+      --radius: 14px;
+      --shadow: 0 4px 16px rgba(0,0,0,.05);
+    }
+    html, body { margin:0; padding:0; height:100%; background:var(--bg); color:var(--fg); }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial; }
+
+    #p5-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+    .wrap {
+      position: relative; z-index: 1; min-height: 100dvh;
+      display: grid; place-items: center; padding: 6vh 20px;
+    }
+    .panel { width: 100%; max-width: 820px; text-align: center; }
+    .title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.8rem, 5.8vw, 6rem);
+      font-weight: 700;
+      letter-spacing:.01em;
+      margin: 0 0 16px;
+      color:#000;
+      line-height:.95;
+    }
+    .divider { width: 72px; height: 1px; background: var(--border); margin: 16px auto 28px; }
+
+    .links { display: flex; justify-content: center; margin-top: 20px; }
+    .link {
+      display: inline-block; padding: 18px 28px;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: linear-gradient(135deg, #fff, #f6f6f8);
+      text-decoration: none; color:#111; font-weight: 700;
+      letter-spacing: .01em; box-shadow: var(--shadow);
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      font-size: 1.05rem;
+    }
+    .link:hover {
+      transform: translateY(-2px);
+      border-color:#dcdce3;
+      box-shadow: 0 10px 26px rgba(0,0,0,.06);
+      background: linear-gradient(135deg, #fafafa, #fff);
+    }
+
+    .topbar-right { position: fixed; top: 16px; right: 16px; z-index: 9999; }
+    .interact-btn {
+      display:inline-block; padding:10px 14px; background:#fff; color:#111; text-decoration:none;
+      border:1px solid #e0e0e0; border-radius:10px; font-weight:600; letter-spacing:.02em;
+      box-shadow:0 4px 14px rgba(0,0,0,.05); font-size:14px;
+      transition:border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+    }
+    .interact-btn:hover { border-color:#ccc; box-shadow:0 10px 24px rgba(0,0,0,.08); transform:translateY(-1px); }
+
+    .topbar-left { position: fixed; top: 16px; left: 16px; z-index: 9999; }
+
+/* ===== Mobile enhancements (≤ 820px) — layout only, no content changes ===== */
+@media (max-width: 820px){
+  /* Make top buttons non-fixed so they don't overlap content */
+  .topbar-left, .topbar-right{ position: static; display:block; text-align:center; margin: 8px 0; }
+  .interact-btn{ padding: 12px 16px; font-size: 15px; }
+  
+  /* Give the main wrapper more breathing room on small screens */
+  .wrap{ padding: 8vh 16px; }
+  
+  /* Stack links vertically with comfortable spacing */
+  .links{ display: grid; grid-template-columns: 1fr; gap: 12px; justify-items: stretch; }
+  .link{ width: 100%; font-size: 1rem; }
+  
+  /* Prevent horizontal scroll with long text */
+  body{ overflow-wrap:anywhere; word-break:break-word; }
+  
+  /* Performance: disable p5 background on small screens */
+  #p5-bg{ display:none !important; }
+}
+
+/* Safe-area padding for iOS if needed (bottom) */
+@supports(padding: max(0px)){
+  @media (max-width: 820px){
+    .wrap{ padding-bottom: max(8vh, env(safe-area-inset-bottom)); }
+  }
+}
+
+/* Reduce motion accessibility */
+@media (prefers-reduced-motion: reduce){
+  .link, .interact-btn{ transition:none; }
+}
+
+</style>
+</head>
+
+<body>
+<div class="topbar-left">
+  <a class="interact-btn" href="DIA▲MANIFESTO SYMBOLISM.html">Write with the Symbolism of DIA▲MANIFESTO</a>
+</div>
+<div class="topbar-right">
+  <a class="interact-btn" href="https://chatgpt.com/g/g-685faef0137c8191b81171de69f26076-dia-manifesto-beta" target="_blank">Interact with DIA▲MANIFESTO GPT</a>
+</div>
+
+<div id="p5-bg"></div>
+
+<div class="wrap">
+  <section aria-label="Index" class="panel">
+    <h1 class="title">DIA▲MANIFESTO</h1>
+    <div aria-hidden="true" class="divider"></div>
+    <nav aria-label="Main link" class="links">
+      <a class="link" href="DIA▲MANIFESTO.html">Go to the OFFICIAL ENGLISH VERSION OF DIA▲MANIFESTO</a>
+    </nav>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js"></script>
+<script>
+  new p5(function(p){
+    const NODE_TARGET = 12;
+    const EDGE_TARGET = 18;
+    const PARTICLE_MAX = 5;
+    const JITTER = 10;
+    const STROKE_ALPHA = 40;
+
+    let state = 0;
+    let nodes = [], edges = [], particles = [];
+    let t0 = 0, triAlpha = 0, fadeAlpha = 0;
+
+    p.setup = function(){
+      p.createCanvas(p.windowWidth, p.windowHeight);
+      p.pixelDensity(1);
+      p.frameRate(60);
+      resetCycle();
+    };
+    p.windowResized = function(){ p.resizeCanvas(p.windowWidth, p.windowHeight); };
+
+    function resetCycle(){
+      nodes.length = 0; edges.length = 0; particles.length = 0;
+      triAlpha = 0; fadeAlpha = 0; state = 0; t0 = p.millis();
+    }
+
+    p.draw = function(){
+      p.background(255);
+      const t = (p.millis()-t0)/1000;
+
+      if(state===0){
+        if(nodes.length < NODE_TARGET && t > nodes.length * 0.22){
+          const angle = p.map(nodes.length, 0, NODE_TARGET-1, 0, p.TWO_PI);
+          const rad = p.random(90, Math.min(p.width,p.height)/3.0);
+          const cx = p.width/2 + p.cos(angle + p.random(-0.06,0.06)) * rad + p.random(-14,14);
+          const cy = p.height/2 + p.sin(angle + p.random(-0.07,0.07)) * rad + p.random(-10,10);
+          const s  = p.random(14, 28);
+          const typ = p.random([0,1,2]);
+          nodes.push({x:cx, y:cy, s:s, t:typ, a:0});
+        }
+        nodes.forEach(n=>{ n.a = Math.min(1, n.a + 0.045); drawNode(n); });
+        if(nodes.length===NODE_TARGET && t>4.5){ state=1; t0=p.millis(); }
+      }
+
+      if(state===1){
+        nodes.forEach(drawNode);
+        if(edges.length < EDGE_TARGET && p.frameCount % 6 === 0){
+          const a = p.floor(p.random(nodes.length));
+          const b = p.floor(p.random(nodes.length));
+          if(a!==b && !edges.some(e=> (e[0]===a&&e[1]===b)||(e[0]===b&&e[1]===a))){
+            edges.push([a,b,p.random([0,1])]);
+          }
+        }
+        p.stroke(18,18,18,STROKE_ALPHA); p.strokeWeight(2);
+        edges.forEach(e=>{
+          const n1=nodes[e[0]], n2=nodes[e[1]];
+          if(e[2]===0){ p.line(n1.x,n1.y,n2.x,n2.y); }
+          else{ p.noFill(); p.bezier(n1.x,n1.y, n1.x+p.random(-JITTER,JITTER), n1.y+p.random(-JITTER,JITTER), n2.x+p.random(-JITTER,JITTER), n2.y+p.random(-JITTER,JITTER), n2.x,n2.y); }
+        });
+        if(particles.length < PARTICLE_MAX && p.frameCount % 16 === 0 && edges.length>0){
+          const e = edges[p.floor(p.random(edges.length))];
+          const a = nodes[e[0]], b = nodes[e[1]];
+          if(a&&b) particles.push({ax:a.x, ay:a.y, bx:b.x, by:b.y, u:0, life:p.random(70,120)});
+        }
+        particles.forEach(pt=>{ pt.u += 1/pt.life; const x=p.lerp(pt.ax,pt.bx,pt.u), y=p.lerp(pt.ay,pt.by,pt.u); p.noStroke(); p.fill(24,24,24,90); p.circle(x,y,5); });
+        particles = particles.filter(pt=> pt.u<1);
+        if(t>7){ state=2; t0=p.millis(); }
+      }
+
+      if(state===2){
+        nodes.forEach(drawNode);
+        p.stroke(18,18,18,STROKE_ALPHA); p.strokeWeight(2);
+        edges.forEach(e=>{ const n1=nodes[e[0]], n2=nodes[e[1]]; if(e[2]===0) p.line(n1.x,n1.y,n2.x,n2.y); else{ p.noFill(); p.bezier(n1.x,n1.y, n1.x+p.random(-JITTER,JITTER), n1.y+p.random(-JITTER,JITTER), n2.x+p.random(-JITTER,JITTER), n2.y+p.random(-JITTER,JITTER), n2.x,n2.y);} });
+        triAlpha = Math.min(1, triAlpha + 0.01);
+        drawLogo(p.width/2, p.height/2, Math.min(p.width,p.height)/5, 200*triAlpha);
+        if(triAlpha>=1 && t>3.6){ state=3; t0=p.millis(); }
+      }
+
+      if(state===3){
+        fadeAlpha = Math.min(1, fadeAlpha + 0.02);
+        p.noStroke(); p.fill(255, 255*fadeAlpha); p.rect(0,0,p.width,p.height);
+        if(fadeAlpha>=1) resetCycle();
+      }
+    };
+
+    function drawNode(n){
+      p.noStroke(); p.fill(20,20,20, 205*n.a);
+      if(n.t===0) p.circle(n.x,n.y,n.s);
+      else if(n.t===1) p.ellipse(n.x,n.y,n.s*1.35,n.s*1.35 * p.random(0.9,1.08));
+      else p.rect(n.x-n.s/2,n.y-n.s/2,n.s,n.s,7);
+    }
+    function drawLogo(cx,cy,r,alpha=255){
+      p.push(); p.translate(cx,cy); p.fill(0,alpha); p.stroke(0, alpha*0.4); p.strokeWeight(3);
+      p.triangle( p.cos(-p.PI/2)*r, p.sin(-p.PI/2)*r, p.cos(p.PI/6)*r, p.sin(p.PI/6)*r, p.cos(5*p.PI/6)*r, p.sin(5*p.PI/6)*r );
+      p.pop();
+    }
+  }, document.getElementById('p5-bg'));
+</script>
 </body>
 </html>

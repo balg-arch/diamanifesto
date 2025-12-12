@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DIA▲MANIFESTO</title>
+  <meta name="color-scheme" content="light only" />
+
+  <!-- Typography: refined, editorial -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#ffffff; 
+      --fg:#0b0b0c; 
+      --muted:#6a6a6f; 
+      --border:#e9e9ee; 
+      --ink:#111111;
+      --radius: 12px;
+      --scale:1;
+    }
+    html,body{ margin:0; padding:0; height:100%; background:var(--bg); color:var(--fg); }
+    body{ font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-size: calc(1rem * var(--scale)); transition: font-size .15s ease-out; }
+
+    /* Soft animated background kept extremely subtle */
+    #p5-bg{ position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.18; }
+    @media (prefers-reduced-motion: reduce){ #p5-bg{ display:none; } }
+
+    /* Layout: generous whitespace, editorial rhythm */
+    .wrap{ position:relative; z-index:1; min-height:100dvh; display:grid; place-items:center; padding:10vh 24px; }
+    .panel{ width:100%; max-width:900px; text-align:center; }
+
+    .title{ font-family: 'Cormorant Garamond', ui-serif, Georgia, 'Times New Roman', serif; font-weight:700; line-height:.95; margin:0 0 14px; font-size: clamp(3rem, 7.2vw, 5.2rem); letter-spacing:-.01em; color:var(--ink); }
+    .kicker{ font-family: Inter, ui-sans-serif; text-transform:uppercase; font-size:.8rem; letter-spacing:.16em; color:#38383c; margin-bottom:18px; }
+    .divider{ width:min(680px,70%); height:1px; background: #000; opacity:.12; margin:20px auto 36px; }
+
+    /* Link card — single, deliberate CTA */
+    .links{ display:grid; gap:16px; grid-template-columns:1fr; justify-items:center; }
+    .link{ display:block; padding:18px 22px; border:1px solid var(--border); border-radius:var(--radius); background:#fff; text-decoration:none; color:var(--ink); font-weight:600; letter-spacing:.005em; box-shadow:none; transition: border-color .15s ease, transform .14s ease; max-width: 720px; }
+    .link:hover{ border-color:#d0d0d7; transform: translateY(-1px); }
+    .link small{ display:block; font-weight:500; color:#4b4b50; margin-top:6px; letter-spacing:.01em; }
+
+    /* Subtle note / provenance */
+    .note{ margin: 40px auto 0; color:#4b4b50; font-size:.95rem; max-width:60ch; }
+    .note strong{ color:#1a1a1d; font-weight:700; }
+
+    /* Top buttons */
+    .topbar-right{ position: fixed; top:16px; right:16px; z-index:9999; }
+    .interact-btn{ display:inline-block; padding:10px 14px; background:#fff; color:#111; text-decoration:none; border:1px solid #e0e0e0; border-radius:10px; font-weight:600; letter-spacing:.02em; box-shadow:0 4px 14px rgba(0,0,0,.05); font-size:14px; transition:border-color .15s ease, box-shadow .15s ease, transform .15s ease; }
+    .interact-btn:hover{ border-color:#ccc; box-shadow:0 10px 24px rgba(0,0,0,.08); transform:translateY(-1px); }
+    .topbar-left{ position: fixed; top:16px; left:16px; z-index:9999; }
+
+    /* Footer — true black text and links */
+    footer{ position:relative; z-index:1; text-align:center; padding: 28px 16px 40px; color:#000000; font-size:.9rem; }
+    footer a{ color:inherit; }
+
+    .layout{ display:grid; grid-template-columns: 280px 1fr; gap: clamp(16px,2.5vw,28px); margin-top: clamp(16px,3vw,32px); }
+    @media (max-width: 980px){ .layout{ grid-template-columns:1fr; } details.toc{ position:relative; top:auto; } }
+    details.toc{ position: sticky; top: 100px; align-self:start; background:#fff; border:1px solid var(--border); border-radius: var(--radius); padding:14px 18px; max-height: calc(100dvh - 140px); overflow:auto; }
+    details.toc > summary{ list-style:none; cursor:pointer; font-weight:600; text-transform:uppercase; letter-spacing:.12em; font-size:.95rem; color:var(--muted); }
+    details.toc[open] > summary{ margin-bottom:8px; }
+    details.toc a{ display:block; padding:6px 8px; text-decoration:none; border-radius:10px; border:1px solid transparent; font-size:.98rem; color:inherit; }
+    details.toc a:hover{ background: rgba(0,0,0,.04); border-color: var(--border); }
+
+    .prose{ background:#fff; border:1px solid var(--border); border-radius: var(--radius); padding: clamp(18px,3vw,28px); box-shadow:none; line-height:1.7; }
+    .prose h1, .prose h2, .prose h3{ line-height:1.2; letter-spacing:-.01em; margin:1.6em 0 .6em; }
+    .prose h1{ font-size: clamp(2rem, 3vw + 1rem, 3rem); }
+    .prose h2{ font-size: clamp(1.4rem, 1.4vw + 1rem, 2rem); }
+    .prose h3{ font-size: clamp(1.1rem, .8vw + 1rem, 1.35rem); }
+    .prose hr{ border:none; border-top:1px dashed var(--border); margin: 2.2em 0; }
+
+    .toolbar{ display:flex; gap:8px; justify-content:flex-end; align-items:center; position: sticky; top: 12px; background: transparent; padding: 8px 0; z-index: 20; }
+    .toolbar .zoom{ appearance:none; border:1px solid var(--border); background:#fff; color:inherit; padding:.35rem .55rem; border-radius:10px; font:inherit; cursor:pointer; }
+    .toolbar .zoom:hover{ background:#f5f5f7; }
+
+    /* -------- Mobile fixes (≤ 820px) -------- */
+    @media (max-width: 820px) {
+      .wrap{ padding: 8vh 16px 20vh; }
+      .layout{ grid-template-columns: 1fr; }
+
+      /* TOC as accordion */
+      details.toc{ position: static; align-self: stretch; padding:10px 14px; max-height: none; }
+      details.toc a{ padding:8px; border-radius:10px; display:block; }
+
+      /* Zoom toolbar: non-sticky and centered */
+      .toolbar{ position: static; justify-content: center; margin-top: 12px; }
+
+      /* Top buttons: avoid overlap */
+      .topbar-left, .topbar-right { position: static; margin: 8px 0; }
+      .interact-btn{ padding: 8px 12px; font-size: 13px; }
+
+      /* Performance: disable p5 background on small screens */
+      #p5-bg{ display:none !important; }
+
+      /* Improve wrapping */
+      body{ overflow-wrap:anywhere; word-break:break-word; }
+
+      /* Content padding */
+      .prose{ padding: 18px; }
+
+      /* Footer: iOS safe-area */
+      footer{ padding-bottom: max(40px, env(safe-area-inset-bottom)); }
+    }
+
+    /* Very small phones (≤ 380px) */
+    @media (max-width: 380px){
+      .title{ font-size: clamp(2.2rem, 10vw, 2.6rem); }
+      .divider{ margin:16px auto 24px; }
+    }
+  
+/* ---- Top Buttons: Subtle gradient (Style B, text-only) ---- */
+.interact-btn{
+  padding: 10px 14px;
+  border: 1px solid #e8e8ee;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff, #fafafe);
+  box-shadow: 0 6px 16px rgba(0,0,0,.06);
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+}
+.interact-btn:hover{
+  transform: translateY(-1px);
+  border-color:#dadade;
+  box-shadow: 0 14px 28px rgba(0,0,0,.10);
+  background: linear-gradient(180deg, #ffffff, #f7f7fc);
+}
+.interact-btn:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(17,17,17,.08), 0 0 0 6px rgba(17,17,17,.06);
+}
+/* Touch-friendly padding on coarse pointers */
+@media (pointer: coarse){
+  .interact-btn{ padding: 12px 16px; }
+}
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .interact-btn{ transition: none; }
+}
+
+</style>
+</head>
+<body>
+  <!-- Topbar buttons (left/right) remain unchanged -->
+  <div class="topbar-left">
+    <a class="interact-btn" href="index.html">Back to DIA▲MANIFESTO Index</a>
+  </div>
+  <div class="topbar-right">
+    <a class="interact-btn" href="https://chatgpt.com/g/g-685faef0137c8191b81171de69f26076-dia-manifesto-beta" target="_blank">Interact with DIA▲MANIFESTO GPT</a>
+  </div>
+
+  <!-- Soft animated background -->
+  <div id="p5-bg"></div>
+
+  <!-- Content -->
+  <main class="wrap">
+    <section class="panel" aria-label="Index">
+      <h1 class="title">DIA▲MANIFESTO</h1>
+      <div class="divider" aria-hidden="true"></div>
+
+      <!-- Toolbar: text size controls -->
+      <div class="toolbar" aria-label="Text size controls">
+        <button type="button" class="zoom minus" aria-label="Decrease text size" title="Decrease text size">A−</button>
+        <button type="button" class="zoom reset" aria-label="Default size" title="Default size">A</button>
+        <button type="button" class="zoom plus" aria-label="Increase text size" title="Increase text size">A+</button>
+      </div>
+
+      <div class="layout">
+        <!-- TOC converted to details/summary for better mobile UX -->
+        <details class="toc" aria-label="Table of contents" open>
+          <summary>Contents</summary>
+          <div id="toc-list"></div>
+        </details>
+
+        <article id="content" class="prose" aria-label="Document">
+<p><br/></p><hr/>
+<h2 id="▲-preliminary-matters">▲ // PRELIMINARY MATTERS</h2>
+<p>DIA▲MANIFESTO is not a conventional text. It does not aim to inform, persuade, or dictate. It unfolds as an architecture of thought that is not merely to be read, but traversed. The words, symbols, and logical diagrams it contains are not static representations of meaning, but dynamic constructs designed to interact with the user’s cognition, displace perspectives, and reveal new connections.</p>
+<h3 id="mode-of-engagement">MODE OF ENGAGEMENT</h3>
+<p>DIA▲MANIFESTO demands more than passive understanding. It requires interaction, synthesis, recursion. No concept is isolated or linear: each statement exists within a field of relations, continuously expanding and collapsing into new points of intersection. The user is called to move fluidly between the concrete and the abstract, between analysis and synthesis, recognizing that no assertion contained in the text is absolute, but always a vector toward further understanding.</p>
+<h3 id="symbols-as-structures-of-thought">SYMBOLS AS STRUCTURES OF THOUGHT</h3>
+<p>Symbolic notation is central to the DIA▲MANIFESTO framework. It does not function as mere abbreviation, but as a meta-structure of meaning. Each symbol represents a fundamental operation of reality:</p>
+<p>⊙ <strong>Totality</strong>: the sum of facts, the undivided whole.</p>
+<p>▲ <strong>Differentiation</strong>: the emergence of structure from unity.</p>
+<p>■ <strong>Manifestation</strong>: the concrete realization of form.</p>
+<p>⊡ <strong>Connection</strong>: the interdependence of elements.</p>
+<p>● <strong>Fact</strong>: an observable instance within the whole.</p>
+<p>These symbols are not decorative: they encode relationships beyond language, enabling conceptual configurations that exceed the limits of ordinary text.</p>
+<h3 id="axioms-and-dialectical-progression">AXIOMS AND DIALECTICAL PROGRESSION</h3>
+<p>DIA▲MANIFESTO unfolds through axiomatic structures and dialectical operations, where each assertion evolves through opposition, reconciliation, and emergence. The user is not merely to absorb these relations, but to test them, reconfigure them, and embody them within a personal cognitive space.</p>
+<p><em><strong>Meaning is never delivered: it is left to be discovered</strong></em>.</p>
+<h3 id="a-living-system-of-thought">A LIVING SYSTEM OF THOUGHT</h3>
+<p>The DIA▲MANIFESTO is not an end, but a beginning. It is a shifting lens rather than a doctrine. It is to be lived, not merely read. The task is not to find answers, but to construct questions that surpass themselves. In this way, the DIA▲MANIFESTO becomes an infinite process, a recursive unfolding of thought, action, and transformation.</p>
+<p><em><strong>Read not to consume, but to become.</strong></em></p>
+<p><br/></p>
+<hr/>
+<h2 id="▲-symbolic-grammar">▲ // SYMBOLIC GRAMMAR</h2>
+<p>The approach to the DIA▲MANIFESTO requires full understanding of its symbolic grammar. Each symbol is a conceptual operator and a structure of thought, not mere ornamentation.</p>
+<p>⊑ <strong>Inclusion / Derivation</strong>: expresses the partial inclusion or subordination of an element within a broader structure, without nullifying its relative autonomy. <em>Example</em>: ■ “Subject” ⊑ ■ “World”: the subject is included in the world, but is not exhausted by it.</p>
+<p>→ <strong>Vector / Causality</strong>: indicates movement, direction, or transformation from one state to another. <em>Example</em>: ■ “Desire” → ■ “Action”: the passage from desire to realization.</p>
+<p>⊖ <strong>Negation / Contrast</strong>: symbol of opposition or dialectical tension between elements. <em>Example</em>: ■ “Truth” ⊖ ■ “Illusion”: the conflict between what is and what appears.</p>
+<p>⟨ ⟩ <strong>Set / Configuration</strong>: a collection of elements or possibilities; designates the field of alternatives. <em>Example</em>: ⟨ ●₁, ●₂, ●₃ ⟩: a multiplicity of possibilities.</p>
+<p># <strong>Limit / Silence</strong>: marks the point where language and representation cease. Indicates the unspeakable, what lies beyond expression. <em>Example</em>: ■ “Language” → #: when speech falls silent.</p>
+<p>≡ <strong>Suspension / Indeterminacy</strong>: indicates the suspension of judgment or meaning, without definitive negation or affirmation. <em>Example</em>: ■ “Truth” ≡: truth is suspended—neither confirmed nor denied.</p>
+<p>↻ <strong>Feedback / Recursivity</strong>: represents the return of a process onto itself, highlighting cyclicality and active memory. <em>Example</em>: ■ “Action” ↻ ■ “Subject”: the action transforms the subject itself.</p>
+<p>∴ <strong>Consequence / Justification</strong>: denotes logical derivation or the implicit necessity within a relationship between elements. <em>Example</em>: ⟨■ “Desire” ⊡ ■ “Limit”⟩ ∴ ■ “Ethics”: ethics emerges from the tension between desire and limit.</p>
+<p><br/></p>
+<p><strong>Final Note</strong></p>
+<p>Every proposition in the DIA▲MANIFESTO must be traversed with these symbolic operators in mind. Each symbol is thought incarnate. The connection between signs generates the field of meaning.</p>
+<p><br/></p>
+<hr/>
+<h2 id="▲-official-axioms">▲ // OFFICIAL AXIOMS</h2>
+<h3 id="1-the-totality-of-facts">1. The Totality of Facts</h3>
+<p>1.1 The world unfolds as a relational set of all facts.</p>
+<p>[ ⟨ ●₁ ⊡ ●₂ ⊡ ●₃ ⊡ ●ₙ ⟩ → ⊙ ]</p>
+<p>1.2 What exists is not isolated, but always in relation to something else.</p>
+<p>[ ● ─ ⊑ ─ ● ]</p>
+<p>1.3 Every fact is a possible configuration of reality.</p>
+<p>[ ● → ⟨ ●₁, ●₂, ●₃ ⟩ ]</p>
+<h3 id="2-the-differentiation-of-experience">2. The Differentiation of Experience</h3>
+<p>2.1 We do not perceive totality, but distinct fragments.</p>
+<p>[ ⊙ → ▲ ]</p>
+<p>2.2 The subject emerges in the distinction between self and world.</p>
+<p>[ ▲ → (■ “Self”) ⊑ (■ “World”) ]</p>
+<p>2.3 The structure of experience is a network of connections.</p>
+<p>[ (■ “Self”) ─ ⊑ ─ (■ “World”) ]</p>
+<h3 id="3-language-and-representation">3. Language and Representation</h3>
+<p>3.1 We describe facts through signs.</p>
+<p>[ ● → “Signs” ]</p>
+<p>3.2 Language traces a diagram of reality.</p>
+<p>[ “Word” ─ ⊑ ─ (■ “Meaning”) ]</p>
+<p>3.3 The limit of a language dislocates into the beginning of its meta-language.</p>
+<p>[ (■ “Language”) → # → (■ “Meta-Language”) ]</p>
+<h3 id="4-the-logic-of-experience">4. The Logic of Experience</h3>
+<p>4.1 Every experience is an arrangement of facts.</p>
+<p>[ (●₁ ⊑ ●₂ ⊑ ●₃) → ■ (“Mental Schema”) ]</p>
+<p>4.2 We do not see facts in isolation, but according to an order.</p>
+<p>[ (■ “Self”) → (●₁ → ●₂ → ●₃) ]</p>
+<p>4.3 This order is determined by our logical structure.</p>
+<p>[ (■ “Self”) → (▲ “Categories”) ⊑ (■ “World”) ]</p>
+<h3 id="5-error-and-illusion">5. Error and Illusion</h3>
+<p>5.1 Not everything that appears as a fact is real.</p>
+<p>[ (● “Appearance”) ⊖ (● “Reality”) ]</p>
+<p>5.2 Thought can generate contradictions.</p>
+<p>[ (■ “Self”) → (# “Paradox”) ]</p>
+<p>5.3 Illusion is a false connection between facts.</p>
+<p>[ (●₁ ⊑ # ⊑ ●₂) ]</p>
+<h3 id="6-action-and-transformation">6. Action and Transformation</h3>
+<p>6.1 Experience is not mere representation — it modifies reality.</p>
+<p>[ (■ “Self”) → (● → ●’) ]</p>
+<p>6.2 Action is the concrete manifestation of will.</p>
+<p>[ (■ “Will”) → (● “Choice”) → (■ “Action”) ]</p>
+<p>6.3 Every transformation leaves a trace in the world.</p>
+<p>[ (● → ●’) ⊑ (■ “Memory”) ]</p>
+<p>6.4 To act is how the subject impacts totality.</p>
+<p>[ (■ “Self”) ⊑ (■ “World”) → (■ “History”) ]</p>
+<h3 id="7-ethics-and-value">7. Ethics and Value</h3>
+<p>7.1 Ethics is not a set of facts, but a perspective on the world.</p>
+<p>[ ⊙ ⊑ (■ “Value”) ]</p>
+<p>7.2 Good and evil are not objects, but structures of action.</p>
+<p>[ (■ “Action”) → ⟨ ●₁ (Good), ●₂ (Evil) ⟩ ]</p>
+<p>7.3 Ethics is how we transform the world through will.</p>
+<p>[ (■ “Will”) → (■ “Ethics”) → (■ “Transformation”) ]</p>
+<p>7.4 The value of an action is shown in its effects on totality.</p>
+<p>[ (■ “Action”) ⊑ (■ “World”) → (■ “Responsibility”) ]</p>
+<h3 id="8-freedom-and-constraint">8. Freedom and Constraint</h3>
+<p>8.1 Action is always situated within a field of possibilities.</p>
+<p>[ (■ “Self”) → ⟨ ●₁, ●₂, ●₃ ⟩ ]</p>
+<p>8.2 Freedom is not the absence of constraints, but the choice among possibilities.</p>
+<p>[ (■ “Freedom”) → (● “Conscious Choice”) ]</p>
+<p>8.3 Constraints may be imposed by the world or by the subject itself.</p>
+<p>[ (■ “World”) ⊑ (■ “Rule”) ⊑ (■ “Self”) ]</p>
+<p>8.4 Responsibility arises from the awareness of constraint.</p>
+<p>[ (■ “Choice”) → (■ “Consequence”) → (■ “Responsibility”) ]</p>
+<h3 id="9-intersubjectivity-and-dialogue">9. Intersubjectivity and Dialogue</h3>
+<p>9.1 Individual experience is always connected to that of the other.</p>
+<p>[ (■ “Self”) ⊑ (■ “You”) → (■ “We”) ]</p>
+<p>9.2 Dialogue is the space where reality is negotiated between subjects.</p>
+<p>[ (■ “Speech”) ⊑ (■ “Listening”) → (■ “Understanding”) ]</p>
+<p>9.3 Misunderstanding is a divergence between conceptual maps.</p>
+<p>[ (■ “Self”) → (● “Map A” ⊖ “Map B”) ← (■ “You”) ]</p>
+<p>9.4 Shared truth emerges from agreement between subjects.</p>
+<p>[ (■ “Dialogue”) → (■ “Intersubjective Truth”) ]</p>
+<h3 id="10-time-and-memory">10. Time and Memory</h3>
+<p>10.1 The present is the intersection of past and future.</p>
+<p>[ (■ “Past”) ⊑ (● “Present”) ⊑ (■ “Future”) ]</p>
+<p>10.2 Memory is the selective recording of facts.</p>
+<p>[ (● “Fact”) → (■ “Memory”) → (● “Narration”) ]</p>
+<p>10.3 The future is a field of open possibilities.</p>
+<p>[ (■ “Future”) → ⟨ ●₁, ●₂, ●₃ ⟩ ]</p>
+<p>10.4 History is the construction of meaning through time.</p>
+<p>[ (■ “Memory”) ⊑ (■ “Interpretation”) → (■ “History”) ]</p>
+<h3 id="11-knowledge-and-the-unknown">11. Knowledge and the Unknown</h3>
+<p>11.1 To know is to reduce uncertainty in facts.</p>
+<p>[ (● “Unknown”) → (■ “Inquiry”) → (● “Known”) ]</p>
+<p>11.2 Every knowledge is limited by its own horizon.</p>
+<p>[ (■ “Knowledge”) ⊑ ⟨ ● (Known), ⟨ ? ⟩ (Unknown) ⟩ ]</p>
+<p>11.3 The unknown is what lies beyond language.</p>
+<p>[ (■ “Edge of Knowledge”) → # ]</p>
+<h3 id="12-power-and-structure">12. Power and Structure</h3>
+<p>12.1 Power is the capacity to impact reality.</p>
+<p>[ (■ “Will”) → (■ “Action”) → (■ “Consequence”) ]</p>
+<p>12.2 Social structures define the limits of power.</p>
+<p>[ (■ “Society”) ⊑ (■ “Norm”) ⊑ (■ “Power”) ]</p>
+<p>12.3 Power can generate order or oppression.</p>
+<p>[ (■ “Authority”) → ⟨ ● (Justice), ● (Domination) ⟩ ]</p>
+<h3 id="13-contingency-and-necessity">13. Contingency and Necessity</h3>
+<p>13.1 Not everything that happens is necessary.</p>
+<p>[ (● “Event”) → ⟨ ● (Caused), ● (Random) ⟩ ]</p>
+<p>13.2 Contingency is the absence of deterministic constraint.</p>
+<p>[ (■ “Contingency”) ⊑ (● “Unpredictable Event”) ]</p>
+<p>13.3 Necessity and possibility define the space of reality.</p>
+<p>[ (■ “Determinism”) ⊑ (■ “Freedom”) → (■ “World”) ]</p>
+<h3 id="14-aesthetics-and-form">14. Aesthetics and Form</h3>
+<p>14.1 Aesthetics is the way the world reveals itself.</p>
+<p>[ (■ “Form”) → (■ “Perception”) → (■ “Aesthetic Experience”) ]</p>
+<p>14.2 Beauty is not a fact but a relationship.</p>
+<p>[ (■ “Subject”) ⊑ (■ “Object”) → (■ “Aesthetic Value”) ]</p>
+<p>14.3 Art is the expression of order within chaos.</p>
+<p>[ (■ “Creativity”) → (■ “Structure”) → (■ “Work”) ]</p>
+<h3 id="15-end-and-limit">15. End and Limit</h3>
+<p>15.1 Every system has a limit beyond which it cannot proceed.</p>
+<p>[ (■ “System”) → (■ “Boundary”) → # ]</p>
+<p>15.2 The end of one path is the beginning of another.</p>
+<p>[ (■ “End”) → (■ “New Beginning”) ]</p>
+<p>15.3 The limit is not negation but the condition of the possible.</p>
+<p>[ (■ “Horizon”) → ⟨ ● (Reality), # (Beyond) ⟩ ]</p>
+<h3 id="16-reality-and-falsehood">16. Reality and Falsehood</h3>
+<p>16.1 The real is that which resists negation.</p>
+<p>[ (■ “Fact”) ⊖ (■ “Illusion”) ]</p>
+<p>16.2 Falsehood is an erroneous configuration of facts.</p>
+<p>[ (■ “Error”) → (● “Deceptive Representation”) ]</p>
+<p>16.3 Truth emerges from the comparison of alternative configurations.</p>
+<p>[ (■ “Thesis”) ⊑ (■ “Antithesis”) → (■ “Synthesis”) ]</p>
+<h3 id="17-meaning-and-absurdity">17. Meaning and Absurdity</h3>
+<p>17.1 Meaning is a connection between distinct elements.</p>
+<p>[ (■ “Sign”) ⊑ (■ “Interpretation”) → (■ “Meaning”) ]</p>
+<p>17.2 The absurd is the absence of meaningful connection.</p>
+<p>[ (■ “Logical Divergence”) → (■ “Absurd”) ]</p>
+<p>17.3 Existence itself is a play between sense and nonsense.</p>
+<p>[ (■ “World”) ⊑ (⟨ ● (Sense), ● (Nonsense) ⟩) ]</p>
+<h3 id="18-desire-and-limit">18. Desire and Limit</h3>
+<p>18.1 Desire is the tension toward what is lacking.</p>
+<p>[ (■ “Self”) → (■ “Lack”) → (■ “Desire”) ]</p>
+<p>18.2 The limit is what restrains or shapes desire.</p>
+<p>[ (■ “Obstacle”) ⊑ (■ “Will”) → (■ “Action”) ]</p>
+<p>18.3 Desire is the engine of change.</p>
+<p>[ (■ “Dream”) → (■ “Intention”) → (■ “Reality”) ]</p>
+<h3 id="19-solitude-and-community">19. Solitude and Community</h3>
+<p>19.1 Every existence is situated between solitude and belonging.</p>
+<p>[ (■ “Self”) ⊑ ⟨ (■ “Solitude”), (■ “Community”) ⟩ ]</p>
+<p>19.2 Community is the construction of bonds between individuals.</p>
+<p>[ (■ “Self”) ⊑ (■ “You”) → (■ “We”) ]</p>
+<p>19.3 Solitude is not the absence of the other, but an inner space.</p>
+<p>[ (■ “Withdrawal”) → (■ “Reflection”) → (■ “Understanding”) ]</p>
+<h3 id="20-body-and-mind">20. Body and Mind</h3>
+<p>20.1 The mind is the body organized into consciousness.</p>
+<p>[ (■ “Body”) → (■ “Perception”) → (■ “Consciousness”) ]</p>
+<p>20.2 Experience is the interaction between matter and thought.</p>
+<p>[ (■ “Sensation”) ⊑ (■ “Concept”) → (■ “Experience”) ]</p>
+<p>20.3 The boundary between body and mind is a fluid interface.</p>
+<p>[ (■ “Neurons”) ⊑ (■ “Thought”) → (■ “Subjectivity”) ]</p>
+<h3 id="21-conflict-and-reconciliation">21. Conflict and Reconciliation</h3>
+<p>21.1 Conflict is a divergence between opposing forces.</p>
+<p>[ (■ “Thesis”) ⊖ (■ “Antithesis”) ]</p>
+<p>21.2 Reconciliation is the emergence of a new equilibrium.</p>
+<p>[ (■ “Thesis”) ⊑ (■ “Antithesis”) → (■ “Synthesis”) ]</p>
+<p>21.3 Conflict can generate growth or destruction.</p>
+<p>[ (■ “Clash”) → ⟨ (■ “Evolution”), (■ “Chaos”) ⟩ ]</p>
+<h3 id="22-the-reflection-of-necessity">22. The Reflection of Necessity</h3>
+<p>22.1 Nothing is necessary in an absolute sense.</p>
+<p>[ (■ “Possibility”) ⊑ (■ “Contingency”) ]</p>
+<p>22.2 Necessity is merely a relation between conditions.</p>
+<p>[ (■ “If A, then B”) → (■ “Local Determinism”) ]</p>
+<p>22.3 The world is a configuration among infinite alternatives.</p>
+<p>[ (■ “Reality”) ⊑ ⟨ (■ “Possible 1”), (■ “Possible 2”), (■ “Possible N”) ⟩ ]</p>
+<h3 id="23-nothingness-and-being">23. Nothingness and Being</h3>
+<p>23.1 Nothingness is the absence of all determination.</p>
+<p>[ (■ “Nothing”) ⊖ (■ “Being”) ]</p>
+<p>23.2 Being is what manifests in the world.</p>
+<p>[ (■ “Being”) → (■ “Fact”) ]</p>
+<p>23.3 Nothingness and being are the poles of philosophical thought.</p>
+<p>[ (■ “Thought”) ⊑ ⟨ (■ “Being”), (■ “Nothing”) ⟩ ]</p>
+<h3 id="24-the-end-of-thought">24. The End of Thought</h3>
+<p>24.1 The limit of saying is not absence, but excess.</p>
+<p>[ (■ “Expression”) → (■ “Overflow”) → # ]</p>
+<p>24.2 Silence is the recursive pause through which thought reorganizes itself</p>
+<p>[ (■“Unsayable”) ↻ (■“Silence”) ⊑ (■“Reconfiguration”) ]</p>
+<p>24.3 Philosophy is the boundary between what can be said and what can only be lived.</p>
+<p>[ (■ “Reflection”) ⊑ (■ “Existence”) → (■ “Direct Experience”) ]</p>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="contact-note">For inquiries, please write to <a href="mailto:diamanifesto@proton.me">diamanifesto@proton.me</a></div>
+    <div style="text-align:center; margin-top:2em;">
+      <p>© 2025 <strong>DIA▲MANIFESTO</strong></p>
+      <p style="font-size:0.9em; color:#4b4b50;">First published online on December 12, 2025</p>
+    </div>
+  </footer>
+  <!-- p5 background (calm, cyclical) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js"></script>
+  <script>
+    // Update year (only if an element with id="year" exists)
+    const yearEl = document.getElementById('year');
+    if (yearEl) { yearEl.textContent = new Date().getFullYear(); }
+
+    // Respect reduced motion
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const force = document.documentElement.dataset.anim === 'on';
+    if(!reduce || force){
+      new p5(function(p){
+        const NODE_TARGET = 10;    // fewer nodes
+        const EDGE_TARGET = 14;    // fewer edges
+        const PARTICLE_MAX = 4;    // fewer particles
+        const JITTER = 8;          // less jitter
+        const STROKE_ALPHA = 60;   // very soft lines
+
+        let state=0, nodes=[], edges=[], particles=[], t0=0, triAlpha=0, fadeAlpha=0;
+        // Focus point for animation placement
+        let fx=0, fy=0;
+        function setFocus(){
+          const w = p.width, h = p.height;
+          // Desktop/tablet: move to top-right-ish so it doesn't sit under the title
+          if (w >= 900){ fx = w * 0.72; fy = h * 0.38; }
+          // Mobile: lower to avoid covering the hero
+          else { fx = w * 0.50; fy = h * 0.72; }
+        }
+
+
+        p.setup = function(){ p.createCanvas(p.windowWidth, p.windowHeight); p.pixelDensity(1); p.frameRate(60); setFocus(); reset(); };
+        p.windowResized = function(){ p.resizeCanvas(p.windowWidth, p.windowHeight); setFocus(); };
+        function reset(){ nodes.length=0; edges.length=0; particles.length=0; triAlpha=0; fadeAlpha=0; state=0; t0=p.millis(); }
+
+        p.draw=function(){
+          p.background(255);
+          const t=(p.millis()-t0)/1000;
+
+          if(state===0){
+            if(nodes.length < NODE_TARGET && t > nodes.length * 0.24){
+              const ang=p.map(nodes.length,0,NODE_TARGET-1,0,p.TWO_PI);
+              const rad=p.random(90, Math.min(p.width,p.height)/3.2);
+              const cx=fx + Math.cos(ang + p.random(-0.06,0.06))*rad + p.random(-12,12);
+              const cy=fy + Math.sin(ang + p.random(-0.06,0.06))*rad + p.random(-10,10);
+              const s=p.random(12,24); const typ=p.random([0,1,2]);
+              nodes.push({x:cx,y:cy,s:s,t:typ,a:0});
+            }
+            nodes.forEach(n=>{ n.a=Math.min(1,n.a+0.045); drawNode(n); });
+            if(nodes.length===NODE_TARGET && t>4.2){ state=1; t0=p.millis(); }
+          }
+
+          if(state===1){
+            nodes.forEach(drawNode);
+            if(edges.length < EDGE_TARGET && p.frameCount % 7===0){
+              const a=p.floor(p.random(nodes.length)); const b=p.floor(p.random(nodes.length));
+              if(a!==b && !edges.some(e=> (e[0]===a&&e[1]===b)||(e[0]===b&&e[1]===a))){ edges.push([a,b,p.random([0,1])]); }
+            }
+            p.stroke(18,18,18,STROKE_ALPHA); p.strokeWeight(2);
+            edges.forEach(e=>{ const n1=nodes[e[0]], n2=nodes[e[1]]; if(e[2]===0)p.line(n1.x,n1.y,n2.x,n2.y); else{ p.noFill(); p.bezier(n1.x,n1.y, n1.x+p.random(-JITTER,JITTER), n1.y+p.random(-JITTER,JITTER), n2.x+p.random(-JITTER,JITTER), n2.y+p.random(-JITTER,JITTER), n2.x,n2.y); } });
+            if(particles.length < PARTICLE_MAX && p.frameCount % 18===0 && edges.length>0){
+              const e=edges[p.floor(p.random(edges.length))]; const a=nodes[e[0]], b=nodes[e[1]]; if(a&&b) particles.push({ax:a.x,ay:a.y,bx:b.x,by:b.y,u:0,life:p.random(70,120)});
+            }
+            particles.forEach(pt=>{ pt.u += 1/pt.life; const x=p.lerp(pt.ax,pt.bx,pt.u), y=p.lerp(pt.ay,pt.by,pt.u); p.noStroke(); p.fill(24,24,24,160); p.circle(x,y,4.5); });
+            particles = particles.filter(pt=> pt.u<1);
+            if(t>7){ state=2; t0=p.millis(); }
+          }
+
+          if(state===2){
+            nodes.forEach(drawNode);
+            p.stroke(18,18,18,STROKE_ALPHA); p.strokeWeight(2);
+            edges.forEach(e=>{ const n1=nodes[e[0]], n2=nodes[e[1]]; if(e[2]===0)p.line(n1.x,n1.y,n2.x,n2.y); else{ p.noFill(); p.bezier(n1.x,n1.y, n1.x+p.random(-JITTER,JITTER), n1.y+p.random(-JITTER,JITTER), n2.x+p.random(-JITTER,JITTER), n2.y+p.random(-JITTER,JITTER), n2.x,n2.y); } });
+            triAlpha = Math.min(1, triAlpha + 0.01);
+            drawLogo(fx, fy, Math.min(p.width,p.height)/5, 180*triAlpha);
+            if(triAlpha>=1 && t>3.4){ state=3; t0=p.millis(); }
+          }
+
+          if(state===3){
+            const a = Math.min(1, (p.millis()-t0)/2200);
+            p.noStroke(); p.fill(255,255*a); p.rect(0,0,p.width,p.height);
+            if(a>=1) reset();
+          }
+
+          function drawNode(n){
+            p.noStroke(); p.fill(20,20,20, 205*n.a);
+            if(n.t===0) p.circle(n.x,n.y,n.s);
+            else if(n.t===1) p.ellipse(n.x,n.y,n.s*1.32,n.s*1.32 * p.random(0.92,1.06));
+            else p.rect(n.x-n.s/2,n.y-n.s/2,n.s,n.s,7);
+          }
+          function drawLogo(cx,cy,r,alpha){
+            p.push(); p.translate(cx,cy); p.fill(0,alpha); p.stroke(0, alpha*0.35); p.strokeWeight(3);
+            p.triangle( Math.cos(-Math.PI/2)*r, Math.sin(-Math.PI/2)*r,
+                        Math.cos(Math.PI/6)*r,  Math.sin(Math.PI/6)*r,
+                        Math.cos(5*Math.PI/6)*r, Math.sin(5*Math.PI/6)*r );
+            p.pop();
+          }
+        };
+      }, document.getElementById('p5-bg'));
+    }
+  </script>
+  <script>
+    // Build TOC from h2 and h3
+    (function(){
+      const content = document.getElementById('content');
+      const toc = document.getElementById('toc-list');
+      if(content && toc){
+        const headings = content.querySelectorAll('h2, h3');
+        const ul = document.createElement('ul');
+        ul.style.listStyle='none'; ul.style.paddingLeft='0';
+        headings.forEach(h=>{
+          if(!h.id){ h.id = h.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g,'-'); }
+          const li = document.createElement('li');
+          li.style.margin = h.tagName==='H2' ? '6px 0' : '4px 0 4px 14px';
+          const a=document.createElement('a'); a.href = `#${h.id}`; a.textContent = h.textContent; li.appendChild(a); ul.appendChild(li);
+        });
+        toc.appendChild(ul);
+      }
+    })();
+
+    // Zoom controls with persistence
+    (function(){
+      const key='fontScale'; const min=0.85, max=1.6, step=0.1;
+      const get=()=>parseFloat(localStorage.getItem(key)||'1');
+      const set=(v)=>{ const n=Math.min(max, Math.max(min, v)); document.documentElement.style.setProperty('--scale', n); localStorage.setItem(key, n); };
+      set(get());
+      const $=(s)=>document.querySelector(s);
+      const minus=$('.toolbar .minus'), plus=$('.toolbar .plus'), reset=$('.toolbar .reset');
+      if(minus) minus.addEventListener('click', ()=>set(get()-step));
+      if(plus) plus.addEventListener('click', ()=>set(get()+step));
+      if(reset) reset.addEventListener('click', ()=>set(1));
+    })();
+
+    // Reset overly large desktop scale on small screens
+    (function(){
+      try{
+        var isNarrow = window.matchMedia('(max-width: 820px)').matches;
+        if(isNarrow){
+          var key='fontScale';
+          var saved = parseFloat(localStorage.getItem(key)||'1');
+          if(saved > 1.2){ 
+            localStorage.setItem(key, '1'); 
+            document.documentElement.style.setProperty('--scale', 1); 
+          }
+        }
+      }catch(e){}
+    })();
+  </script>
+</body>
+</html>

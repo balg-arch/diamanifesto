@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DIA▲MANIFESTO-SYMBOLISM</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --ink: #111111;
+      --muted: #6b7280;
+      --accent: #00a388;
+      --accent-2: #2b8ef9;
+      --danger: #dc2626;
+      --radius: 16px;
+    }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--ink); background: linear-gradient(180deg, #ffffff 0%, #f5f7fb 100%);
+      display: grid; grid-template-rows: auto 1fr auto; gap: 16px;
+    }
+    header {
+      padding: 20px clamp(16px, 4vw, 36px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      border-bottom: 1px solid #e5e7eb; background: rgba(255,255,255,0.8);
+      position: sticky; top: 0; backdrop-filter: blur(6px);
+    }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .tri { width: 0; height: 0; border-left: 18px solid transparent; border-right: 18px solid transparent; border-bottom: 26px solid #000; background: white; box-shadow: 0 0 0 2px #fff inset; }
+    .title { font-weight: 800; letter-spacing: 0.5px; font-size: clamp(16px, 2.2vw, 22px); }
+    .subtitle { color: var(--muted); font-size: 12px; }
+    .toolbar {
+      padding: 12px clamp(16px, 4vw, 36px); display: grid; gap: 12px; align-items: start;
+      grid-template-columns: 1fr; 
+    }
+    .row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .btn {
+      --pad: 10px 12px;
+      padding: var(--pad); border-radius: 12px; border: 1px solid #e5e7eb; background: #ffffff; color: var(--ink);
+      cursor: pointer; transition: .16s ease; user-select: none; font: 600 14px/1 ui-sans-serif, system-ui;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn:hover { transform: translateY(-1px); border-color: #d1d5db; background: #f9fafb; }
+    .btn:active { transform: translateY(0); }
+    .sym {
+      font-size: 20px; line-height: 1; display:inline-block; min-width: 1.15em; text-align:center;
+      font-family: "Noto Sans Symbols 2", "Segoe UI Symbol", "Noto Sans", system-ui, sans-serif;
+    }
+    .chip { font-size: 12px; color: var(--muted); padding: 2px 8px; border-radius: 999px; border: 1px dashed #d1d5db; }
+    .workbench {
+      display: grid; grid-template-columns: 1fr; gap: 12px; padding: 0 clamp(16px, 4vw, 36px) 24px;
+    }
+    .panel {
+      background: var(--panel); border: 1px solid #e5e7eb; border-radius: var(--radius); overflow: hidden;
+    }
+    .editor-bar { display:flex; align-items:center; justify-content:space-between; padding: 10px 12px; border-bottom: 1px solid #e5e7eb; background: #f9fafb; }
+    .editor { padding: 18px; min-height: 280px; outline: none; white-space: pre-wrap; word-break: break-word; font-size: clamp(16px, 1.4vw, 18px); line-height: 1.6; }
+    .hint { color: var(--muted); font-size: 12px; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+    .card { background:#ffffff; border:1px solid #e5e7eb; border-radius: 12px; padding: 10px 12px; }
+    .card h4 { margin: 0 0 6px; font-size: 13px; letter-spacing: .2px; }
+    .card p { margin: 0; font-size: 12px; color: var(--muted); }
+    .footer { padding: 16px clamp(16px, 4vw, 36px); color: var(--muted); font-size: 12px; border-top: 1px solid #e5e7eb; }
+    .toast { position: fixed; bottom: 18px; right: 18px; background:#ffffff; border:1px solid #e5e7eb; color: var(--ink); padding: 10px 12px; border-radius: 12px; opacity:0; transform: translateY(8px); transition:.2s ease; }
+    .toast.show { opacity:1; transform: translateY(0); }
+    .kbd { font: 600 12px/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; padding:2px 6px; border: 1px solid #d1d5db; border-bottom-width:2px; border-radius:6px; }
+    @media (min-width: 980px){
+      .toolbar { grid-template-columns: 1fr 300px; align-items: stretch; }
+      .help { border-left: 1px solid #e5e7eb; padding-left: 16px; }
+    }
+  </style>
+<style id="grammar-uniform-buttons">
+/* Uniform size for all 8 Grammar buttons */
+[aria-label="Symbolic Grammar (8)"] {
+  display: grid !important;
+  grid-template-columns: repeat(8, 1fr) !important;
+  gap: 10px !important;
+  align-items: stretch;
+  justify-items: stretch;
+}
+[aria-label="Symbolic Grammar (8)"] .btn {
+  width: 100% !important;
+  height: 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  border-radius: 10px !important;
+  white-space: nowrap !important;
+}
+/* Responsiveness */
+@media (max-width: 1100px) {
+  [aria-label="Symbolic Grammar (8)"] {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+@media (max-width: 640px) {
+  [aria-label="Symbolic Grammar (8)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+</style>
+
+<style>
+/* Elegant fixed badge top-right */
+.interact-badge {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  backdrop-filter: blur(6px);
+  background: rgba(255,255,255,0.8);
+  border: 1px solid var(--border, #ccc);
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 0.35rem 0.9rem;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial;
+  font-size: 0.9rem;
+}
+.interact-badge a {
+  text-decoration: none;
+  color: var(--ink, #111);
+  letter-spacing: 0.02em;
+}
+.interact-badge a:hover {
+  color: var(--accent, #7c5cff);
+}
+@media (max-width: 640px) {
+  .interact-badge {
+    top: auto;
+    bottom: 16px;
+    right: 16px;
+    font-size: 0.85rem;
+    padding: 0.3rem 0.7rem;
+  }
+}
+</style>
+
+<style>
+.topbar {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 9999;
+}
+.back-btn {
+  display:inline-block; padding:10px 14px; background:#fff; color:#111; text-decoration:none;
+  border:1px solid #e0e0e0; border-radius:10px; font-weight:600; letter-spacing:.02em;
+  box-shadow:0 4px 14px rgba(0,0,0,.05); font-size:14px;
+  transition:border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+.back-btn:hover {
+  border-color:#ccc; box-shadow:0 10px 24px rgba(0,0,0,.08); transform:translateY(-1px);
+}
+</style>
+
+
+<style id="safe-top-spacing">
+main, .container, body {
+  margin-top: 90px !important;
+}
+@media (max-width: 640px) {
+  main, .container, body {
+    margin-top: 110px !important;
+  }
+}
+</style>
+
+</head>
+<body><div class="topbar"><a class="back-btn" href="index.html">Back to DIA▲MANIFESTO Index</a></div><div class="interact-badge"><a href="https://chatgpt.com/g/g-685faef0137c8191b81171de69f26076-dia-manifesto-beta" rel="noopener noreferrer" target="_blank">Interact with the DIA▲MANIFESTO</a></div>
+  
+  <section class="toolbar">
+    <div>
+      <div class="row" role="group" aria-label="Symbolic Notation (5)">
+        <button class="btn symBtn" data-sym="⊙" title="⊙ Totality"><span class="sym">⊙</span> Totality</button>
+        <button class="btn symBtn" data-sym="▲" title="▲ Differentiation"><span class="sym">▲</span> Differentiation</button>
+        <button class="btn symBtn" data-sym="■" title="■ Manifestation"><span class="sym">■</span> Manifestation</button>
+        <button class="btn symBtn" data-sym="⊡" title="⊡ Connection"><span class="sym">⊡</span> Connection</button>
+        <button class="btn symBtn" data-sym="●" title="● Fact"><span class="sym">●</span> Fact</button>
+      </div>
+      <div class="row" role="group" aria-label="Symbolic Grammar (8)" style="margin-top:10px;">
+  <button class="btn symBtn" data-sym="⊑" title="⊑ Inclusion / Derivation"><span class="sym">⊑</span> Inclusion</button>
+  <button class="btn symBtn" data-sym="→" title="→ Vector / Causality"><span class="sym">→</span> Vector</button>
+  <button class="btn symBtn" data-sym="⊖" title="⊖ Negation / Contrast"><span class="sym">⊖</span> Negation</button>
+  <button class="btn symBtn pair" data-left="⟨" data-right="⟩" title="⟨ ⟩ Set / Configuration"><span class="sym">⟨⟩</span> Configuration</button>
+  <button class="btn symBtn" data-sym="#" title="# Limit / Silence"><span class="sym">#</span> Limit</button>
+  <button class="btn symBtn" data-sym="≡" title="≡ Suspension / Indeterminacy"><span class="sym">≡</span> Suspension</button>
+  <button class="btn symBtn" data-sym="↻" title="↻ Feedback / Recursion"><span class="sym">↻</span> Recursion</button>
+  <button class="btn symBtn" data-sym="∴" title="∴ Consequence / Justification"><span class="sym">∴</span> Consequence</button>
+</div>
+    </div>
+    <aside class="help">
+      <div class="grid">
+      </div>
+    </aside>
+  </section>
+  <main class="workbench">
+    <section class="panel" aria-label="Editor">
+      <div class="editor-bar">
+        <div class="hint">Writing area — DIA▲MANIFESTO symbols support copy/paste to Word.</div>
+        <div class="row">
+          <label class="hint">Text size
+            <input type="range" id="fontRange" min="14" max="28" value="18" style="vertical-align:middle; margin-left:8px;" />
+          </label>
+        </div>
+      </div>
+      <div id="editor" class="editor" contenteditable="true" spellcheck="false" aria-multiline="true"></div>
+    </section>
+    <section class="panel" aria-label="Symbol map">
+      <div class="editor-bar"><div><strong>Symbol map (13)</strong></div><div class="hint"></div></div>
+      <div class="grid" style="padding:12px;">
+        <div class="card"><h4><span class="sym">⊙</span> Totality</h4><p>Undivided field of facts.</p></div>
+        <div class="card"><h4><span class="sym">▲</span> Differentiation</h4><p>Incision that generates structure.</p></div>
+        <div class="card"><h4><span class="sym">■</span> Manifestation</h4><p>Concrete appearance of form.</p></div>
+        <div class="card"><h4><span class="sym">⊡</span> Connection</h4><p>Interdependence among elements.</p></div>
+        <div class="card"><h4><span class="sym">●</span> Fact</h4><p>Observable instance within totality.</p></div>
+        <div class="card"><h4><span class="sym">⊑</span> Inclusion</h4><p>Partial insertion / derivation.</p></div>
+        <div class="card"><h4><span class="sym">→</span> Vector</h4><p>Direction / transformation.</p></div>
+        <div class="card"><h4><span class="sym">⊖</span> Negation</h4><p>Opposition / contrast.</p></div>
+        <div class="card"><h4><span class="sym">⟨⟩</span> Configuration</h4><p>Field of alternatives.</p></div>
+        <div class="card"><h4><span class="sym">#</span> Limit</h4><p>Point of silence of language.</p></div>
+        <div class="card"><h4><span class="sym">≡</span> Suspension</h4><p>Active indeterminacy.</p></div>
+        <div class="card"><h4><span class="sym">↻</span> Recursion</h4><p>Return of the process onto itself.</p></div>
+        <div class="card"><h4><span class="sym">∴</span> Consequence</h4><p>Derivation / justification.</p></div>
+      </div>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <footer class="footer">
+    Read not to consume, but to become.
+  </footer>
+  <script>
+    const editor = document.getElementById('editor');
+    const toast = document.getElementById('toast');
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(()=> toast.classList.remove('show'), 1500);
+    }
+    // Insert symbol at caret within contenteditable
+    function insertSymbol(sym){
+      editor.focus();
+      const sel = window.getSelection();
+      if(!sel || sel.rangeCount === 0){
+        document.execCommand('insertText', false, sym);
+        return;
+      }
+      const range = sel.getRangeAt(0);
+      range.deleteContents();
+      const node = document.createTextNode(sym);
+      range.insertNode(node);
+      // Move caret after inserted node
+      range.setStartAfter(node);
+      range.setEndAfter(node);
+      sel.removeAllRanges(); sel.addRange(range);
+    }
+    function wrapSelection(left, right){
+      editor.focus();
+      const sel = window.getSelection();
+      if(!sel || sel.rangeCount === 0){ insertSymbol(left + right); return; }
+      const range = sel.getRangeAt(0);
+      const content = range.toString();
+      range.deleteContents();
+      const node = document.createTextNode(left + (content || '') + right);
+      range.insertNode(node);
+      const newRange = document.createRange();
+      // place caret inside the brackets if there was no selection, else after
+      if(content){
+        newRange.setStartAfter(node);
+        newRange.setEndAfter(node);
+      } else {
+        // position between the two
+        const pos = left.length;
+        const middle = document.createTextNode('');
+        // split the node to place caret between brackets
+        const text = node.textContent;
+        const before = document.createTextNode(text.slice(0, pos));
+        const after = document.createTextNode(text.slice(pos));
+        node.replaceWith(before, after);
+        newRange.setStart(after, 0);
+        newRange.setEnd(after, 0);
+      }
+      sel.removeAllRanges(); sel.addRange(newRange);
+    }
+    // Bind buttons
+    document.querySelectorAll('.symBtn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const left = btn.dataset.left, right = btn.dataset.right;
+        if(left && right){ wrapSelection(left, right); }
+        else { insertSymbol(btn.dataset.sym); }
+      });
+    });
+    // Copy & Clear
+    const copyBtn = document.getElementById('copyAll');
+if (copyBtn) copyBtn.addEventListener('click', async ()=>{
+  const text = editor.innerText.replace(/\u200B/g, '');
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast('Copyto negli appunti');
+  } catch (e){
+    const sel = window.getSelection();
+    const range = document.createRange();
+    range.selectNodeContents(editor);
+    sel.removeAllRanges(); sel.addRange(range);
+    document.execCommand('copy');
+    sel.removeAllRanges();
+    showToast('Copyto (fallback)');
+  }
+});
+const clearBtn = document.getElementById('clear');
+if (clearBtn) clearBtn.addEventListener('click', ()=>{
+  editor.innerHTML = '';
+  showToast('Editor cleared');
+  editor.focus();
+});
+// Font size control
+    const fontRange = document.getElementById('fontRange');
+    fontRange.addEventListener('input', ()=>{
+      editor.style.fontSize = fontRange.value + 'px';
+    });
+    
+window.addEventListener('load', ()=>{ if(fontRange){ editor.style.fontSize = fontRange.value + 'px'; }});
+// Keyboard shortcuts: Alt+Shift+...
+    // Map 13 shortcuts in a memorable layout
+    const keyMap = new Map([
+      ['1','⊙'], // Totality
+      ['2','▲'], // Differentiation
+      ['3','■'], // Manifestation
+      ['4','⊡'], // Connection
+      ['5','●'], // Fact
+      ['6','⊑'], // Inclusion
+      ['7','→'], // Vector
+      ['8','⊖'], // Negation
+      ['9','∴'], // Consequence
+      ['q','⟨'], // Configuration (apre e chiude)
+      ['w','#'], // Limit
+      ['e','≡'], // Suspension
+      ['r','↻']  // Recursion
+    ]);
+    document.addEventListener('keydown', (e)=>{
+      if(e.altKey && e.shiftKey){
+        const k = e.key.toLowerCase();
+        if(keyMap.has(k)){
+          e.preventDefault();
+          if(k === 'q'){ wrapSelection('⟨','⟩'); }
+          else { insertSymbol(keyMap.get(k)); }
+        }
+      }
+    });
+    // Place caret in editor on load
+    window.addEventListener('load', ()=>{
+      editor.focus();
+    });
+  </script>
+</body>
+</html>
