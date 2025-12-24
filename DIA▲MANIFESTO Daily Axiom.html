@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+  <title>DIA▲MANIFESTO — Daily Axiom</title>
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#ffffff"/>
+  <meta name="color-scheme" content="light only"/>
+
+  <meta name="description" content="A daily axiom or aspect from DIA▲MANIFESTO for reflective practice.">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap');
+
+    :root{
+      --bg:#ffffff;
+      --fg:#111111;
+      --muted:#6a6a6f;
+      --border:#ececf1;
+      --radius:14px;
+      --shadow:0 4px 16px rgba(0,0,0,.05);
+    }
+
+    html, body{
+      margin:0;
+      padding:0;
+      height:100%;
+      background:var(--bg);
+      color:var(--fg);
+    }
+
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+    }
+
+    #p5-bg{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+    }
+
+    .wrap{
+      position:relative;
+      z-index:1;
+      min-height:100vh;
+      min-height:100dvh;
+      display:grid;
+      place-items:center;
+      padding:6vh 20px;
+    }
+
+    .panel{
+      width:100%;
+      max-width:820px;
+      text-align:center;
+    }
+
+    .title{
+      font-family:"Cormorant Garamond", serif;
+      font-size:clamp(2.2rem, 5.2vw, 4.2rem);
+      font-weight:700;
+      letter-spacing:.01em;
+      margin:0 0 10px;
+      color:#000;
+      line-height:.98;
+    }
+
+    .subtitle{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:1rem;
+      line-height:1.35;
+    }
+
+    .divider{
+      width:72px;
+      height:1px;
+      background:var(--border);
+      margin:16px auto 22px;
+    }
+
+    .links{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .link{
+      display:inline-block;
+      padding:16px 22px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:linear-gradient(135deg, #fff, #f6f6f8);
+      text-decoration:none;
+      color:#111;
+      font-weight:700;
+      letter-spacing:.01em;
+      box-shadow:var(--shadow);
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      font-size:1rem;
+      cursor:pointer;
+      user-select:none;
+    }
+
+    .link:hover{
+      transform:translateY(-2px);
+      border-color:#dcdce3;
+      box-shadow:0 10px 26px rgba(0,0,0,.06);
+      background:linear-gradient(135deg, #fafafa, #fff);
+    }
+
+    .topbar-right{
+      position:fixed;
+      top:16px;
+      right:16px;
+      z-index:9999;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .topbar-left{
+      position:fixed;
+      top:16px;
+      left:16px;
+      z-index:9999;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .interact-btn{
+      display:inline-block;
+      padding:10px 14px;
+      background:#fff;
+      color:#111;
+      text-decoration:none;
+      border:1px solid #e0e0e0;
+      border-radius:10px;
+      font-weight:600;
+      letter-spacing:.02em;
+      box-shadow:0 4px 14px rgba(0,0,0,.05);
+      font-size:14px;
+      transition:border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+      cursor:pointer;
+    }
+
+    .interact-btn:hover{
+      border-color:#ccc;
+      box-shadow:0 10px 24px rgba(0,0,0,.08);
+      transform:translateY(-1px);
+    }
+
+    .card{
+      text-align:left;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:#fff;
+      box-shadow:var(--shadow);
+      padding:18px 18px 16px;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 14px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:12px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:linear-gradient(135deg, #fff, #f6f6f8);
+      font-weight:700;
+      font-size:0.95rem;
+    }
+
+    .small{
+      color:var(--muted);
+      font-weight:600;
+      font-size:0.92rem;
+    }
+
+    .axiom-title{
+      font-weight:800;
+      font-size:1.05rem;
+      margin:6px 0 10px;
+    }
+
+    .quote{
+      margin:0;
+      padding:0;
+      line-height:1.45;
+      font-size:1.02rem;
+    }
+
+    .diagram{
+      margin-top:12px;
+      padding:12px 12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:linear-gradient(135deg, #fff, #f6f6f8);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:0.95rem;
+      overflow:auto;
+      white-space:pre-wrap;
+    }
+
+    .tools{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      margin-top:16px;
+    }
+
+    input[type="date"]{
+      padding:10px 12px;
+      border:1px solid #e0e0e0;
+      border-radius:10px;
+      box-shadow:0 4px 14px rgba(0,0,0,.05);
+      font-size:14px;
+      background:#fff;
+      color:#111;
+    }
+
+    .sr-only{
+      position:absolute !important;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar-left">
+    <a class="interact-btn" href="index.html" aria-label="Back to Index">Index</a>
+    <a class="interact-btn" href="DIA▲MANIFESTO.html" aria-label="Go to the Official English Version">Official Text</a>
+  </div>
+
+  <div class="topbar-right">
+    <a class="interact-btn"
+       href="https://chatgpt.com/g/g-685faef0137c8191b81171de69f26076-dia-manifesto"
+       target="_blank"
+       rel="noopener noreferrer">
+      Interact with DIA▲MANIFESTO GPT
+    </a>
+  </div>
+
+  <div id="p5-bg" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <section class="panel" aria-label="Daily axiom">
+      <h1 class="title">Daily Axiom</h1>
+      <p class="subtitle">One proposition per day — a prompt for reflection, not consumption.</p>
+      <div class="divider" aria-hidden="true"></div>
+
+      <div class="card" role="region" aria-label="Axiom content">
+        <div class="meta">
+          <div class="pill" id="datePill">—</div>
+          <div class="small" id="slotInfo">—</div>
+        </div>
+
+        <div class="axiom-title" id="axiomRef">—</div>
+        <p class="quote" id="axiomText">—</p>
+        <div class="diagram" id="axiomDiagram" aria-label="Symbolic diagram">—</div>
+
+        <div class="tools" aria-label="Controls">
+          <button class="interact-btn" id="prevBtn" type="button">Previous day</button>
+          <button class="interact-btn" id="todayBtn" type="button">Today</button>
+          <button class="interact-btn" id="nextBtn" type="button">Next day</button>
+          <span class="sr-only" id="dateHelp">Choose a date to view the assigned daily axiom.</span>
+          <input aria-describedby="dateHelp" id="datePicker" type="date"/>
+          <button class="interact-btn" id="copyBtn" type="button">Copy</button>
+          <button class="interact-btn" id="shareBtn" type="button">Share link</button>
+        </div>
+      </div>
+
+      <nav class="links" aria-label="More">
+        <a class="link" href="DIA▲MANIFESTO SYMBOLISM.html">Write with the Symbolism</a>
+      </nav>
+    </section>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js"></script>
+
+  <script>
+    /********************
+     * DAILY DATA (verbatim excerpts)
+     * Source: OFFICIAL ENGLISH VERSION OF DIA▲MANIFESTO (axioms section).
+     ********************/
+    const ITEMS = [
+      // 1 — The Totality of Facts
+      { ref:"Ax 1.1 — The Totality of Facts", text:"The world unfolds as a relational set of all facts.", diagram:"[ ⟨ ●₁ ⊡ ●₂ ⊡ ●₃ ⊡ ●ₙ ⟩ → ⊙ ]" },
+      { ref:"Ax 1.2 — The Totality of Facts", text:"What exists is not isolated, but always in relation to something else.", diagram:"[ ● ─ ⊑ ─ ● ]" },
+      { ref:"Ax 1.3 — The Totality of Facts", text:"Every fact is a possible configuration of reality.", diagram:"[ ● → ⟨ ●₁, ●₂, ●₃ ⟩ ]" },
+
+      // 2 — The Differentiation of Experience
+      { ref:"Ax 2.1 — The Differentiation of Experience", text:"We do not perceive totality, but distinct fragments.", diagram:"[ ⊙ → ▲ ]" },
+      { ref:"Ax 2.2 — The Differentiation of Experience", text:"The subject emerges in the distinction between self and world.", diagram:"[ ▲ → (■ “Self”) ⊑ (■ “World”) ]" },
+      { ref:"Ax 2.3 — The Differentiation of Experience", text:"The structure of experience is a network of connections.", diagram:"[ (■ “Self”) ─ ⊑ ─ (■ “World”) ]" },
+
+      // 3 — Language and Representation
+      { ref:"Ax 3.1 — Language and Representation", text:"We describe facts through signs.", diagram:"[ ● → “Signs” ]" },
+      { ref:"Ax 3.2 — Language and Representation", text:"Language traces a diagram of reality.", diagram:"[ “Word” ─ ⊑ ─ (■ “Meaning”) ]" },
+      { ref:"Ax 3.3 — Language and Representation", text:"The limit of a language dislocates into the beginning of its meta-language.", diagram:"[ (■ “Language”) → # → (■ “Meta-Language”) ]" },
+
+      // 4 — The Logic of Experience
+      { ref:"Ax 4.1 — The Logic of Experience", text:"Every experience is an arrangement of facts.", diagram:"[ (●₁ ⊑ ●₂ ⊑ ●₃) → ■ (“Mental Schema”) ]" },
+      { ref:"Ax 4.2 — The Logic of Experience", text:"We do not see facts in isolation, but according to an order.", diagram:"[ (■ “Self”) → (●₁ → ●₂ → ●₃) ]" },
+      { ref:"Ax 4.3 — The Logic of Experience", text:"This order is determined by our logical structure.", diagram:"[ (■ “Self”) → (▲ “Categories”) ⊑ (■ “World”) ]" },
+
+      // 5 — Error and Illusion
+      { ref:"Ax 5.1 — Error and Illusion", text:"Not everything that appears as a fact is real.", diagram:"[ (● “Appearance”) ⊖ (● “Reality”) ]" },
+      { ref:"Ax 5.2 — Error and Illusion", text:"Thought can generate contradictions.", diagram:"[ (■ “Self”) → (# “Paradox”)  ]" },
+      { ref:"Ax 5.3 — Error and Illusion", text:"Illusion is a false connection between facts.", diagram:"[ (●₁ ⊑ # ⊑ ●₂) ]" },
+
+      // 6 — Action and Transformation
+      { ref:"Ax 6.1 — Action and Transformation", text:"Experience is not mere representation — it modifies reality.", diagram:"[ (■ “Self”) → (● → ●’) ]" },
+      { ref:"Ax 6.2 — Action and Transformation", text:"Action is the concrete manifestation of will.", diagram:"[ (■ “Will”) → (● “Choice”) → (■ “Action”) ]" },
+      { ref:"Ax 6.3 — Action and Transformation", text:"Every transformation leaves a trace in the world.", diagram:"[ (● → ●’) ⊑ (■ “Memory”) ]" },
+      { ref:"Ax 6.4 — Action and Transformation", text:"To act is how the subject impacts totality.", diagram:"[ (■ “Self”) ⊑ (■ “World”) → (■ “History”) ]" },
+
+      // 7 — Ethics and Value
+      { ref:"Ax 7.1 — Ethics and Value", text:"Ethics is not a set of facts, but a perspective on the world.", diagram:"[ ⊙ ⊑ (■ “Value”) ]" },
+      { ref:"Ax 7.2 — Ethics and Value", text:"Good and evil are not objects, but structures of action.", diagram:"[ (■ “Action”) → ⟨ ●₁ (Good), ●₂ (Evil) ⟩ ]" },
+      { ref:"Ax 7.3 — Ethics and Value", text:"Ethics is how we transform the world through will.", diagram:"[ (■ “Will”) → (■ “Ethics”) → (■ “Transformation”) ]" },
+      { ref:"Ax 7.4 — Ethics and Value", text:"The value of an action is shown in its effects on totality.", diagram:"[ (■ “Action”) ⊑ (■ “World”) → (■ “Responsibility”) ]" },
+
+      // 8 — Freedom and Constraint
+      { ref:"Ax 8.1 — Freedom and Constraint", text:"Action is always situated within a field of possibilities.", diagram:"[ (■ “Self”) → ⟨ ●₁, ●₂, ●₃ ⟩ ]" },
+      { ref:"Ax 8.2 — Freedom and Constraint", text:"Freedom is not the absence of constraints, but the choice among possibilities.", diagram:"[ (■ “Freedom”) → (● “Conscious Choice”) ]" },
+      { ref:"Ax 8.3 — Freedom and Constraint", text:"Constraints may be imposed by the world or by the subject itself.", diagram:"[ (■ “World”) ⊑ (■ “Rule”) ⊑ (■ “Self”) ]" },
+      { ref:"Ax 8.4 — Freedom and Constraint", text:"Responsibility arises from the awareness of constraint.", diagram:"[ (■ “Choice”) → (■ “Consequence”) → (■ “Responsibility”) ]" },
+
+      // 9 — Intersubjectivity and Dialogue
+      { ref:"Ax 9.1 — Intersubjectivity and Dialogue", text:"Individual experience is always connected to that of the other.", diagram:"[ (■ “Self”) ⊑ (■ “You”) → (■ “We”) ]" },
+      { ref:"Ax 9.2 — Intersubjectivity and Dialogue", text:"Dialogue is the space where reality is negotiated between subjects.", diagram:"[ (■ “Speech”) ⊑ (■ “Listening”) → (■ “Understanding”) ]" },
+      { ref:"Ax 9.3 — Intersubjectivity and Dialogue", text:"Misunderstanding is a divergence between conceptual maps.", diagram:"[ (■ “Self”) → (● “Map A” ⊖ “Map B”) ← (■ “You”) ]" },
+      { ref:"Ax 9.4 — Intersubjectivity and Dialogue", text:"Shared truth emerges from agreement between subjects.", diagram:"[ (■ “Dialogue”) → (■ “Intersubjective Truth”) ]" },
+
+      // 10 — Time and Memory
+      { ref:"Ax 10.1 — Time and Memory", text:"The present is the intersection of past and future.", diagram:"[ (■ “Past”) ⊑ (● “Present”) ⊑ (■ “Future”) ]" },
+      { ref:"Ax 10.2 — Time and Memory", text:"Memory is the selective recording of facts.", diagram:"[ (● “Fact”) → (■ “Memory”) → (● “Narration”) ]" },
+      { ref:"Ax 10.3 — Time and Memory", text:"The future is a field of open possibilities.", diagram:"[ (■ “Future”) → ⟨ ●₁, ●₂, ●₃ ⟩ ]" },
+      { ref:"Ax 10.4 — Time and Memory", text:"History is the construction of meaning through time.", diagram:"[ (■ “Memory”) ⊑ (■ “Interpretation”) → (■ “History”) ]" },
+
+      // 11 — Knowledge and the Unknown
+      { ref:"Ax 11.1 — Knowledge and the Unknown", text:"To know is to reduce uncertainty in facts.", diagram:"[ (● “Unknown”) → (■ “Inquiry”) → (● “Known”) ]" },
+      { ref:"Ax 11.2 — Knowledge and the Unknown", text:"Every knowledge is limited by its own horizon.", diagram:"[ (■ “Knowledge”) ⊑ ⟨ ● (Known), ⟨ ? ⟩ (Unknown) ⟩ ]" },
+      { ref:"Ax 11.3 — Knowledge and the Unknown", text:"The unknown is what lies beyond language.", diagram:"[ (■ “Edge of Knowledge”) → # ]" },
+
+      // 12 — Power and Structure
+      { ref:"Ax 12.1 — Power and Structure", text:"Power is the capacity to impact reality.", diagram:"[ (■ “Will”) → (■ “Action”) → (■ “Consequence”) ]" },
+      { ref:"Ax 12.2 — Power and Structure", text:"Social structures define the limits of power.", diagram:"[ (■ “Society”) ⊑ (■ “Norm”) ⊑ (■ “Power”) ]" },
+      { ref:"Ax 12.3 — Power and Structure", text:"Power can generate order or oppression.", diagram:"[ (■ “Authority”) → ⟨ ● (Justice), ● (Domination) ⟩ ]" },
+
+      // 13 — Contingency and Necessity
+      { ref:"Ax 13.1 — Contingency and Necessity", text:"Not everything that happens is necessary.", diagram:"[ (● “Event”) → ⟨ ● (Caused), ● (Random) ⟩ ]" },
+      { ref:"Ax 13.2 — Contingency and Necessity", text:"Contingency is the absence of deterministic constraint.", diagram:"[ (■ “Contingency”) ⊑ (● “Unpredictable Event”) ]" },
+      { ref:"Ax 13.3 — Contingency and Necessity", text:"Necessity and possibility define the space of reality.", diagram:"[ (■ “Determinism”) ⊑ (■ “Freedom”) → (■ “World”) ]" },
+
+      // 14 — Aesthetics and Form
+      { ref:"Ax 14.1 — Aesthetics and Form", text:"Aesthetics is the way the world reveals itself.", diagram:"[ (■ “Form”) → (■ “Perception”) → (■ “Aesthetic Experience”) ]" },
+      { ref:"Ax 14.2 — Aesthetics and Form", text:"Beauty is not a fact but a relationship.", diagram:"[ (■ “Subject”) ⊑ (■ “Object”) → (■ “Aesthetic Value”) ]" },
+      { ref:"Ax 14.3 — Aesthetics and Form", text:"Art is the expression of order within chaos.", diagram:"[ (■ “Creativity”) → (■ “Structure”) → (■ “Work”) ]" },
+
+      // 15 — End and Limit
+      { ref:"Ax 15.1 — End and Limit", text:"Every system has a limit beyond which it cannot proceed.", diagram:"[ (■ “System”) → (■ “Boundary”) → # ]" },
+      { ref:"Ax 15.2 — End and Limit", text:"The end of one path is the beginning of another.", diagram:"[ (■ “End”) → (■ “New Beginning”) ]" },
+      { ref:"Ax 15.3 — End and Limit", text:"The limit is not negation but the condition of the possible.", diagram:"[ (■ “Horizon”) → ⟨ ● (Reality), # (Beyond) ⟩ ]" },
+
+      // 16 — Reality and Falsehood
+      { ref:"Ax 16.1 — Reality and Falsehood", text:"The real is that which resists negation.", diagram:"[ (■ “Fact”) ⊖ (■ “Illusion”) ]" },
+      { ref:"Ax 16.2 — Reality and Falsehood", text:"Falsehood is an erroneous configuration of facts.", diagram:"[ (■ “Error”) → (● “Deceptive Representation”) ]" },
+      { ref:"Ax 16.3 — Reality and Falsehood", text:"Truth emerges from the comparison of alternative configurations.", diagram:"[ (■ “Thesis”) ⊑ (■ “Antithesis”) → (■ “Synthesis”) ]" },
+
+      // 17 — Meaning and Absurdity
+      { ref:"Ax 17.1 — Meaning and Absurdity", text:"Meaning is a connection between distinct elements.", diagram:"[ (■ “Sign”) ⊑ (■ “Interpretation”) → (■ “Meaning”) ]" },
+      { ref:"Ax 17.2 — Meaning and Absurdity", text:"The absurd is the absence of meaningful connection.", diagram:"[ (■ “Logical Divergence”) → (■ “Absurd”) ]" },
+      { ref:"Ax 17.3 — Meaning and Absurdity", text:"Existence itself is a play between sense and nonsense.", diagram:"[ (■ “World”) ⊑ (⟨ ● (Sense), ● (Nonsense) ⟩) ]" },
+
+      // 18 — Desire and Limit
+      { ref:"Ax 18.1 — Desire and Limit", text:"Desire is the tension toward what is lacking.", diagram:"[ (■ “Self”) → (■ “Lack”) → (■ “Desire”) ]" },
+      { ref:"Ax 18.2 — Desire and Limit", text:"The limit is what restrains or shapes desire.", diagram:"[ (■ “Obstacle”) ⊑ (■ “Will”) → (■ “Action”) ]" },
+      { ref:"Ax 18.3 — Desire and Limit", text:"Desire is the engine of change.", diagram:"[ (■ “Dream”) → (■ “Intention”) → (■ “Reality”) ]" },
+
+      // 19 — Solitude and Community
+      { ref:"Ax 19.1 — Solitude and Community", text:"Every existence is situated between solitude and belonging.", diagram:"[ (■ “Self”) ⊑ ⟨ (■ “Solitude”), (■ “Community”) ⟩ ]" },
+      { ref:"Ax 19.2 — Solitude and Community", text:"Community is the construction of bonds between individuals.", diagram:"[ (■ “Self”) ⊑ (■ “You”) → (■ “We”) ]" },
+      { ref:"Ax 19.3 — Solitude and Community", text:"Solitude is not the absence of the other, but an inner space.", diagram:"[ (■ “Withdrawal”) → (■ “Reflection”) → (■ “Understanding”) ]" },
+
+      // 20 — Body and Mind
+      { ref:"Ax 20.1 — Body and Mind", text:"The mind is the body organized into consciousness.", diagram:"[ (■ “Body”) → (■ “Perception”) → (■ “Consciousness”) ]" },
+      { ref:"Ax 20.2 — Body and Mind", text:"Experience is the interaction between matter and thought.", diagram:"[ (■ “Sensation”) ⊑ (■ “Concept”) → (■ “Experience”) ]" },
+      { ref:"Ax 20.3 — Body and Mind", text:"The boundary between body and mind is a fluid interface.", diagram:"[ (■ “Neurons”) ⊑ (■ “Thought”) → (■ “Subjectivity”) ]" },
+
+      // 21 — Conflict and Reconciliation
+      { ref:"Ax 21.1 — Conflict and Reconciliation", text:"Conflict is a divergence between opposing forces.", diagram:"[ (■ “Thesis”) ⊖ (■ “Antithesis”) ]" },
+      { ref:"Ax 21.2 — Conflict and Reconciliation", text:"Reconciliation is the emergence of a new equilibrium.", diagram:"[ (■ “Thesis”) ⊑ (■ “Antithesis”) → (■ “Synthesis”) ]" },
+      { ref:"Ax 21.3 — Conflict and Reconciliation", text:"Conflict can generate growth or destruction.", diagram:"[ (■ “Clash”) → ⟨ (■ “Evolution”), (■ “Chaos”) ⟩ ]" },
+
+      // 22 — The Reflection of Necessity
+      { ref:"Ax 22.1 — The Reflection of Necessity", text:"Nothing is necessary in an absolute sense.", diagram:"[ (■ “Possibility”) ⊑ (■ “Contingency”) ]" },
+      { ref:"Ax 22.2 — The Reflection of Necessity", text:"Necessity is merely a relation between conditions.", diagram:"[ (■ “If A, then B”) → (■ “Local Determinism”) ]" },
+      { ref:"Ax 22.3 — The Reflection of Necessity", text:"The world is a configuration among infinite alternatives.", diagram:"[ (■ “Reality”) ⊑ ⟨ (■ “Possible 1”), (■ “Possible 2”), (■ “Possible N”) ⟩ ]" },
+
+      // 23 — Nothingness and Being
+      { ref:"Ax 23.1 — Nothingness and Being", text:"Nothingness is the absence of all determination.", diagram:"[ (■ “Nothing”) ⊖ (■ “Being”) ]" },
+      { ref:"Ax 23.2 — Nothingness and Being", text:"Being is what manifests in the world.", diagram:"[ (■ “Being”) → (■ “Fact”) ]" },
+      { ref:"Ax 23.3 — Nothingness and Being", text:"Nothingness and being are the poles of philosophical thought.", diagram:"[ (■ “Thought”) ⊑ ⟨ (■ “Being”), (■ “Nothing”) ⟩ ]" },
+
+      // 24 — The End of Thought
+      { ref:"Ax 24.1 — The End of Thought", text:"The limit of saying is not absence, but excess.", diagram:"[ (■ “Expression”) → (■ “Overflow”) → # ]" },
+      { ref:"Ax 24.2 — The End of Thought", text:"Silence is the recursive pause through which thought reorganizes itself", diagram:"[ (■“Unsayable”) ↻ (■“Silence”) ⊑ (■“Reconfiguration”)  ]" },
+      { ref:"Ax 24.3 — The End of Thought", text:"Philosophy is the boundary between what can be said and what can only be lived.", diagram:"[ (■ “Reflection”) ⊑ (■ “Existence”) → (■ “Direct Experience”) ]" }
+    ];
+
+    function pad2(n){ return String(n).padStart(2,"0"); }
+    function toISODate(d){
+      return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
+    }
+    function niceDate(d){
+      return d.toLocaleDateString("en-US", { weekday:"long", year:"numeric", month:"long", day:"numeric" });
+    }
+    function dayOfYear(d){
+      const start = new Date(d.getFullYear(), 0, 0);
+      const diff = d - start;
+      const oneDay = 1000*60*60*24;
+      return Math.floor(diff / oneDay);
+    }
+
+    // Deterministic mapping: day-of-year -> item index
+    function pickIndexForDate(d){
+      const doy = dayOfYear(d); // 1..365/366
+      // Spread by multiplying with a prime-ish number then modulo.
+      return (doy * 37) % ITEMS.length;
+    }
+
+    function setView(d){
+      const idx = pickIndexForDate(d);
+      const item = ITEMS[idx];
+
+      document.getElementById("datePill").textContent = niceDate(d);
+      document.getElementById("slotInfo").textContent = `Day ${dayOfYear(d)} • Item ${idx+1} of ${ITEMS.length}`;
+      document.getElementById("axiomRef").textContent = item.ref;
+      document.getElementById("axiomText").textContent = item.text;
+      document.getElementById("axiomDiagram").textContent = item.diagram;
+
+      const iso = toISODate(d);
+      const picker = document.getElementById("datePicker");
+      if(picker.value !== iso) picker.value = iso;
+
+      // Update URL (shareable) without reloading
+      const url = new URL(window.location.href);
+      url.searchParams.set("date", iso);
+      window.history.replaceState({}, "", url.toString());
+    }
+
+    function parseDateParam(){
+      const url = new URL(window.location.href);
+      const p = url.searchParams.get("date");
+      if(!p) return null;
+      const d = new Date(p + "T00:00:00");
+      return isNaN(d.getTime()) ? null : d;
+    }
+
+    function addDays(d, delta){
+      const x = new Date(d);
+      x.setDate(x.getDate() + delta);
+      return x;
+    }
+
+    // UI
+    let current = parseDateParam() || new Date();
+
+    document.getElementById("prevBtn").addEventListener("click", () => {
+      current = addDays(current, -1);
+      setView(current);
+    });
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      current = addDays(current, +1);
+      setView(current);
+    });
+    document.getElementById("todayBtn").addEventListener("click", () => {
+      current = new Date();
+      setView(current);
+    });
+    document.getElementById("datePicker").addEventListener("change", (e) => {
+      const d = new Date(e.target.value + "T00:00:00");
+      if(!isNaN(d.getTime())){
+        current = d;
+        setView(current);
+      }
+    });
+
+    document.getElementById("copyBtn").addEventListener("click", async () => {
+      const ref = document.getElementById("axiomRef").textContent;
+      const text = document.getElementById("axiomText").textContent;
+      const diag = document.getElementById("axiomDiagram").textContent;
+      const date = document.getElementById("datePill").textContent;
+      const payload = `${date}\n${ref}\n${text}\n${diag}`;
+      try{
+        await navigator.clipboard.writeText(payload);
+        document.getElementById("copyBtn").textContent = "Copied";
+        setTimeout(()=>document.getElementById("copyBtn").textContent="Copy", 900);
+      }catch{
+        alert("Copy failed (clipboard permissions).");
+      }
+    });
+
+    document.getElementById("shareBtn").addEventListener("click", async () => {
+      const url = window.location.href;
+      try{
+        if(navigator.share){
+          await navigator.share({ title:"Daily Axiom", text:"Daily reflection", url });
+        }else{
+          await navigator.clipboard.writeText(url);
+          document.getElementById("shareBtn").textContent = "Link copied";
+          setTimeout(()=>document.getElementById("shareBtn").textContent="Share link", 900);
+        }
+      }catch{
+        // no-op
+      }
+    });
+
+    // Initial render
+    setView(current);
+
+    /********************
+     * Background p5.js (copied structure from index)
+     ********************/
+    new p5(function(p){
+      const NODE_TARGET = 12;
+      const EDGE_TARGET = 18;
+      const PARTICLE_MAX = 5;
+      const JITTER = 10;
+      const STROKE_ALPHA = 40;
+
+      let state = 0;
+      let nodes = [], edges = [], particles = [];
+      let t0 = 0, triAlpha = 0, fadeAlpha = 0;
+
+      p.setup = function(){
+        p.createCanvas(p.windowWidth, p.windowHeight);
+        p.pixelDensity(1);
+        p.frameRate(60);
+        resetCycle();
+      };
+
+      p.windowResized = function(){
+        p.resizeCanvas(p.windowWidth, p.windowHeight);
+      };
+
+      function resetCycle(){
+        nodes.length = 0;
+        edges.length = 0;
+        particles.length = 0;
+        triAlpha = 0;
+        fadeAlpha = 0;
+        state = 0;
+        t0 = p.millis();
+      }
+
+      p.draw = function(){
+        p.background(255);
+        const t = (p.millis() - t0) / 1000;
+
+        if(state === 0){
+          if(nodes.length < NODE_TARGET && t > nodes.length * 0.22){
+            const angle = p.map(nodes.length, 0, NODE_TARGET - 1, 0, p.TWO_PI);
+            const rad = p.random(90, Math.min(p.width, p.height) / 3.0);
+            const cx = p.width/2 + p.cos(angle + p.random(-0.06,0.06)) * rad + p.random(-14,14);
+            const cy = p.height/2 + p.sin(angle + p.random(-0.07,0.07)) * rad + p.random(-10,10);
+            const s  = p.random(14, 28);
+            const typ = p.random([0,1,2]);
+            nodes.push({x: cx, y: cy, s: s, t: typ, a: 0});
+          }
+          nodes.forEach(n => {
+            n.a = Math.min(1, n.a + 0.045);
+            drawNode(n);
+          });
+          if(nodes.length === NODE_TARGET && t > 4.5){
+            state = 1;
+            t0 = p.millis();
+          }
+        }
+
+        if(state === 1){
+          nodes.forEach(drawNode);
+
+          if(edges.length < EDGE_TARGET && p.frameCount % 6 === 0){
+            const a = p.floor(p.random(nodes.length));
+            const b = p.floor(p.random(nodes.length));
+            if(a !== b && !edges.some(e => (e[0] === a && e[1] === b) || (e[0] === b && e[1] === a))){
+              edges.push([a, b, p.random([0,1])]);
+            }
+          }
+
+          p.stroke(18,18,18,STROKE_ALPHA);
+          p.strokeWeight(2);
+          edges.forEach(e => {
+            const n1 = nodes[e[0]];
+            const n2 = nodes[e[1]];
+            if(e[2] === 0){
+              p.line(n1.x, n1.y, n2.x, n2.y);
+            } else {
+              p.noFill();
+              p.bezier(
+                n1.x, n1.y,
+                n1.x + p.random(-JITTER, JITTER), n1.y + p.random(-JITTER, JITTER),
+                n2.x + p.random(-JITTER, JITTER), n2.y + p.random(-JITTER, JITTER),
+                n2.x, n2.y
+              );
+            }
+          });
+
+          if(particles.length < PARTICLE_MAX && p.frameCount % 16 === 0 && edges.length > 0){
+            const e = edges[p.floor(p.random(edges.length))];
+            const a = nodes[e[0]];
+            const b = nodes[e[1]];
+            if(a && b){
+              particles.push({ax: a.x, ay: a.y, bx: b.x, by: b.y, u: 0, life: p.random(70,120)});
+            }
+          }
+
+          particles.forEach(pt => {
+            pt.u += 1 / pt.life;
+            const x = p.lerp(pt.ax, pt.bx, pt.u);
+            const y = p.lerp(pt.ay, pt.by, pt.u);
+            p.noStroke();
+            p.fill(24,24,24,90);
+            p.circle(x, y, 5);
+          });
+          particles = particles.filter(pt => pt.u < 1);
+
+          if(t > 7){
+            state = 2;
+            t0 = p.millis();
+          }
+        }
+
+        if(state === 2){
+          nodes.forEach(drawNode);
+
+          p.stroke(18,18,18,STROKE_ALPHA);
+          p.strokeWeight(2);
+          edges.forEach(e => {
+            const n1 = nodes[e[0]];
+            const n2 = nodes[e[1]];
+            if(e[2] === 0){
+              p.line(n1.x, n1.y, n2.x, n2.y);
+            } else {
+              p.noFill();
+              p.bezier(
+                n1.x, n1.y,
+                n1.x + p.random(-JITTER, JITTER), n1.y + p.random(-JITTER, JITTER),
+                n2.x + p.random(-JITTER, JITTER), n2.y + p.random(-JITTER, JITTER),
+                n2.x, n2.y
+              );
+            }
+          });
+
+          triAlpha = Math.min(1, triAlpha + 0.01);
+          drawLogo(p.width/2, p.height/2, Math.min(p.width, p.height)/5, 200 * triAlpha);
+
+          if(triAlpha >= 1 && t > 3.6){
+            state = 3;
+            t0 = p.millis();
+          }
+        }
+
+        if(state === 3){
+          fadeAlpha = Math.min(1, fadeAlpha + 0.02);
+          p.noStroke();
+          p.fill(255, 255 * fadeAlpha);
+          p.rect(0, 0, p.width, p.height);
+          if(fadeAlpha >= 1) resetCycle();
+        }
+      };
+
+      function drawNode(n){
+        p.noStroke();
+        p.fill(20,20,20, 205 * n.a);
+        if(n.t === 0) p.circle(n.x, n.y, n.s);
+        else if(n.t === 1) p.ellipse(n.x, n.y, n.s * 1.35, n.s * 1.35 * p.random(0.9, 1.08));
+        else p.rect(n.x - n.s/2, n.y - n.s/2, n.s, n.s, 7);
+      }
+
+      function drawLogo(cx, cy, r, alpha=255){
+        p.push();
+        p.translate(cx, cy);
+        p.fill(0, alpha);
+        p.stroke(0, alpha * 0.4);
+        p.strokeWeight(3);
+        p.triangle(
+          p.cos(-p.PI/2) * r, p.sin(-p.PI/2) * r,
+          p.cos(p.PI/6) * r,  p.sin(p.PI/6) * r,
+          p.cos(5*p.PI/6) * r, p.sin(5*p.PI/6) * r
+        );
+        p.pop();
+      }
+    }, document.getElementById('p5-bg'));
+  </script>
+</body>
+</html>
