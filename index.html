@@ -197,13 +197,21 @@
       border:0;
     }
 
-    /* --- NEW: tiny ambient gateway (very low, under the animation) --- */
-    .ambient-gateway{
+    /* --- NEW: tiny gateways (very low, under the animation) --- */
+    .ambient-gateways{
       position:relative;
-      z-index:2;                 /* above the p5 layer */
+      z-index:2;               /* above the p5 layer */
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:18px;
+      margin: 110vh auto 70px; /* "very low": one full viewport below */
+      width: fit-content;
+    }
+
+    .ambient-gateway{
       display:block;
       width:fit-content;
-      margin: 110vh auto 70px;   /* "very low": one full viewport below */
       text-align:center;
       text-decoration:none;
       color:#000;
@@ -284,11 +292,18 @@
     </section>
   </div>
 
-  <!-- NEW: the tiny triangle button, very low on the page -->
-  <a class="ambient-gateway"
-     href="DIA▲MANIFESTO Ambient Generator.html"
-     aria-label="Open DIA▲MANIFESTO Ambient Generator"
-     title="Open DIA▲MANIFESTO Ambient Generator">▲</a>
+  <!-- NEW: the tiny triangle buttons, very low on the page -->
+  <div class="ambient-gateways" aria-label="DIA▲MANIFESTO Gateways">
+    <a class="ambient-gateway"
+       href="DIA▲MANIFESTO Ambient Generator.html"
+       aria-label="Open DIA▲MANIFESTO Ambient Generator"
+       title="Open DIA▲MANIFESTO Ambient Generator">▲</a>
+
+    <a class="ambient-gateway"
+       href="DIA▲MANIFESTO Daily Axiom.html"
+       aria-label="Open DIA▲MANIFESTO Daily Axiom"
+       title="Open DIA▲MANIFESTO Daily Axiom">▼</a>
+  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js"></script>
   <script>
