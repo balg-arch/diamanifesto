@@ -249,16 +249,38 @@
       opacity:1;
     }
 
-    /* ===== Mobile-friendly: top buttons stacked, no overlap with title ===== */
+    /* ===== Mobile-friendly: top buttons stacked, visible, no overlap with title ===== */
     @media (max-width: 760px){
+      /* Keep buttons visible: fixed + centered, stacked vertically */
       .topbar-left,
       .topbar-right{
-        position: static;
-        margin: 8px 12px;
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        right: auto;
+        margin: 0;
         text-align: center;
+        z-index: 9999;
       }
 
+      .topbar-left{ top: 12px; }
+      .topbar-right{ top: 58px; }
+
       .interact-btn{
+        max-width: calc(100vw - 24px);
+        white-space: normal;     /* allow wrapping */
+        padding: 8px 12px;
+        font-size: 13px;
+        justify-content: center;
+      }
+
+      /* Reserve space so hero/title never sits under the fixed buttons */
+      .wrap{
+        padding-top: 132px;
+      }
+    }
+
+.interact-btn{
         max-width: calc(100vw - 24px);
         white-space: normal;     /* allow wrapping */
         padding: 8px 12px;
