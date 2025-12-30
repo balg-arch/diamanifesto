@@ -108,6 +108,16 @@
       transform:translateY(-1px);
     }
 
+    /* Prevent top buttons overlap on small screens */
+    @media (max-width: 760px){
+      .topbar-left{ top: 12px; left: 12px; }
+      .topbar-right{ top: 60px; right: 12px; }
+      .interact-btn{
+        max-width: calc(100vw - 24px);
+        white-space: normal;
+      }
+    }
+
     /* --- layout (derived from index) --- */
     .wrap{
       position:relative;
