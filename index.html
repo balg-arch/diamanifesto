@@ -165,25 +165,40 @@
       z-index:9999;
     }
 
+    /* ---- Top Buttons: Subtle gradient (Style B, text-only) ---- */
     .interact-btn{
-      display:inline-block;
-      padding:10px 14px;
-      background:#fff;
+      padding: 10px 14px;
+      border: 1px solid #e8e8ee;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #ffffff, #fafafe);
+      box-shadow: 0 6px 16px rgba(0,0,0,.06);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
       color:#111;
       text-decoration:none;
-      border:1px solid #e0e0e0;
-      border-radius:10px;
       font-weight:600;
       letter-spacing:.02em;
-      box-shadow:0 4px 14px rgba(0,0,0,.05);
       font-size:14px;
-      transition:border-color .15s ease, box-shadow .15s ease, transform .15s ease;
-    }
 
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+    }
     .interact-btn:hover{
-      border-color:#ccc;
-      box-shadow:0 10px 24px rgba(0,0,0,.08);
-      transform:translateY(-1px);
+      transform: translateY(-1px);
+      border-color:#dadade;
+      box-shadow: 0 14px 28px rgba(0,0,0,.10);
+      background: linear-gradient(180deg, #ffffff, #f7f7fc);
+    }
+    .interact-btn:focus-visible{
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(17,17,17,.08), 0 0 0 6px rgba(17,17,17,.06);
+    }
+    @media (pointer: coarse){
+      .interact-btn{ padding: 12px 16px; }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .interact-btn{ transition: none; }
     }
 
     .sr-only{
@@ -232,56 +247,6 @@
       outline-offset:6px;
       border-radius:10px;
       opacity:1;
-    }
-
-    @media (max-width: 820px){
-      .wrap{ padding: 8vh 16px 18vh; }
-
-      .topbar-left, .topbar-right{
-        position: static;
-        margin: 8px 0;
-        z-index: auto;
-      }
-
-      .interact-btn{
-        padding: 8px 12px;
-        font-size: 13px;
-      }
-
-      #p5-bg{ display:none !important; }
-
-      .ambient-gateways{
-        margin: 85vh auto 56px;
-      }
-    }
-
-    /* ---- Top Buttons: Subtle gradient (Style B, text-only) ---- */
-    .interact-btn{
-      padding: 10px 14px;
-      border: 1px solid #e8e8ee;
-      border-radius: 12px;
-      background: linear-gradient(180deg, #ffffff, #fafafe);
-      box-shadow: 0 6px 16px rgba(0,0,0,.06);
-      display: inline-flex; align-items: center; gap: 8px;
-      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
-    }
-    .interact-btn:hover{
-      transform: translateY(-1px);
-      border-color:#dadade;
-      box-shadow: 0 14px 28px rgba(0,0,0,.10);
-      background: linear-gradient(180deg, #ffffff, #f7f7fc);
-    }
-    .interact-btn:focus-visible{
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(17,17,17,.08), 0 0 0 6px rgba(17,17,17,.06);
-    }
-    /* Touch-friendly padding on coarse pointers */
-    @media (pointer: coarse){
-      .interact-btn{ padding: 12px 16px; }
-    }
-    /* Reduce motion */
-    @media (prefers-reduced-motion: reduce){
-      .interact-btn{ transition: none; }
     }
   </style>
 </head>
