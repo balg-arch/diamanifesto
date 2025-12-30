@@ -168,6 +168,40 @@ main, .container, body {
 }
 </style>
 
+
+<style id="mobile-friendly-top-buttons">
+/* Mobile-friendly: stack the top buttons and keep them from covering content */
+@media (max-width: 760px){
+  .topbar,
+  .interact-badge{
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    margin: 8px 12px !important;
+    text-align: center;
+    backdrop-filter: none;
+  }
+
+  .back-btn{
+    max-width: calc(100vw - 24px);
+    white-space: normal;
+    display: inline-block;
+  }
+
+  .interact-badge{
+    border-radius: 12px;
+    padding: 0.45rem 0.9rem;
+  }
+
+  /* The page currently reserves space for fixed elements; remove that on mobile */
+  main, .container, body{
+    margin-top: 0 !important;
+  }
+}
+</style>
+
 </head>
 <body><div class="topbar"><a class="back-btn" href="index.html">Back to DIA▲MANIFESTO Index</a></div><div class="interact-badge"><a href="https://chatgpt.com/g/g-685faef0137c8191b81171de69f26076-dia-manifesto-beta" rel="noopener noreferrer" target="_blank">Interact with the DIA▲MANIFESTO</a></div>
   
