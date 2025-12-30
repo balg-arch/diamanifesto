@@ -110,13 +110,37 @@
 
     /* Prevent top buttons overlap on small screens */
     @media (max-width: 760px){
-      .topbar-left{ top: 12px; left: 12px; }
-      .topbar-right{ top: 60px; right: 12px; }
+      /* Mobile-friendly: stack top buttons and keep them out of the hero */
+      .topbar-left, .topbar-right{
+        position: static;
+        margin: 8px 12px;
+        text-align: center;
+      }
       .interact-btn{
         max-width: calc(100vw - 24px);
         white-space: normal;
+        padding: 8px 12px;
+        font-size: 13px;
       }
+
+      /* Lock the big title “DIA▲MANIFESTO” (no wrap / no forced breaking) */
+      body{ overflow-wrap: normal; word-break: normal; }
+      .title{
+        white-space: nowrap;
+        overflow-wrap: normal;
+        word-break: normal;
+      }
+
+      /* Comfortable spacing on small screens */
+      .wrap{ padding: 8vh 16px 20vh; }
     }
+
+    /* Very small phones (≤ 380px) */
+    @media (max-width: 380px){
+      .title{ font-size: clamp(2.2rem, 10vw, 2.6rem); }
+      .wrap{ padding-top: 7vh; }
+    }
+
 
     /* --- layout (derived from index) --- */
     .wrap{
