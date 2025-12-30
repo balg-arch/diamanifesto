@@ -11,15 +11,12 @@
   <meta name="theme-color" content="#ffffff"/>
   <meta name="color-scheme" content="light only"/>
 
-  <!-- Meta Description (canonical, non-promotional) -->
   <meta name="description" content="DIA▲MANIFESTO is a living architecture of thought, articulated through axioms and symbols, designed to activate relational and responsible thinking.">
 
-  <!-- Favicon & App Icons -->
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon-192.png" sizes="192x192">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
 
-  <!-- Open Graph / Twitter -->
   <meta property="og:title" content="DIA▲MANIFESTO — a living architecture of thought">
   <meta property="og:description" content="DIA▲MANIFESTO is a living architecture of thought, articulated through axioms and symbols, designed to activate relational and responsible thinking.">
   <meta property="og:type" content="website">
@@ -27,7 +24,6 @@
   <meta property="og:image" content="https://diamanifesto.org/favicon-192.png">
   <meta name="twitter:card" content="summary">
 
-  <!-- Structured Data: WebSite + WebPage + CreativeWork (no Organization) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -78,8 +74,8 @@
 
     body{
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial;
-      overflow-wrap:anywhere;
-      word-break:break-word;
+      overflow-wrap: normal;
+      word-break: normal;
     }
 
     #p5-bg{
@@ -107,12 +103,15 @@
 
     .title{
       font-family:"Cormorant Garamond", serif;
-      font-size:clamp(2.8rem, 5.8vw, 6rem);
+      font-size:clamp(2.6rem, 5.8vw, 6rem);
       font-weight:700;
       letter-spacing:.01em;
       margin:0 0 16px;
       color:#000;
       line-height:.95;
+      white-space: nowrap;
+      overflow-wrap: normal;
+      word-break: normal;
     }
 
     .divider{
@@ -141,6 +140,8 @@
       box-shadow:var(--shadow);
       transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
       font-size:1.05rem;
+      overflow-wrap:anywhere;
+      word-break:break-word;
     }
 
     .link:hover{
@@ -197,15 +198,14 @@
       border:0;
     }
 
-    /* --- NEW: tiny gateways (very low, under the animation) --- */
     .ambient-gateways{
       position:relative;
-      z-index:2;               /* above the p5 layer */
+      z-index:2;
       display:flex;
       justify-content:center;
       align-items:center;
       gap:18px;
-      margin: 110vh auto 70px; /* "very low": one full viewport below */
+      margin: 110vh auto 70px;
       width: fit-content;
     }
 
@@ -261,7 +261,6 @@
         <a class="link" href="DIA▲MANIFESTO.html">Go to the OFFICIAL ENGLISH VERSION OF DIA▲MANIFESTO</a>
       </nav>
 
-      <!-- Accessible, non-visual disambiguation -->
       <section class="sr-only" aria-label="What DIA▲MANIFESTO is / is not">
         <h2>What DIA▲MANIFESTO is</h2>
         <p>DIA▲MANIFESTO is a living architecture of thought, articulated through axioms and symbols, designed to activate relational and responsible thinking.</p>
@@ -274,7 +273,6 @@
         </ul>
       </section>
 
-      <!-- Accessible, non-visual: meaning of the name -->
       <section class="sr-only" aria-label="Meaning of the name DIA▲MANIFESTO">
         <h2>Meaning of the name DIA▲MANIFESTO</h2>
         <dl>
@@ -292,7 +290,6 @@
     </section>
   </div>
 
-  <!-- NEW: the tiny triangle buttons, very low on the page -->
   <div class="ambient-gateways" aria-label="DIA▲MANIFESTO Gateways">
     <a class="ambient-gateway"
        href="DIA▲MANIFESTO Ambient Generator.html"
@@ -481,4 +478,3 @@
   </script>
 </body>
 </html>
-

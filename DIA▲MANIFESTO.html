@@ -20,7 +20,7 @@
       --scale:1;
     }
     html,body{ margin:0; padding:0; height:100%; background:var(--bg); color:var(--fg); }
-    body{ font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-size: calc(1rem * var(--scale)); transition: font-size .15s ease-out; }
+    body{ font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-size: calc(1rem * var(--scale)); transition: font-size .15s ease-out; overflow-wrap: normal; word-break: normal; }
 
     /* Soft animated background kept extremely subtle */
     #p5-bg{ position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.18; }
@@ -30,13 +30,13 @@
     .wrap{ position:relative; z-index:1; min-height:100dvh; display:grid; place-items:center; padding:10vh 24px; }
     .panel{ width:100%; max-width:900px; text-align:center; }
 
-    .title{ font-family: 'Cormorant Garamond', ui-serif, Georgia, 'Times New Roman', serif; font-weight:700; line-height:.95; margin:0 0 14px; font-size: clamp(3rem, 7.2vw, 5.2rem); letter-spacing:-.01em; color:var(--ink); }
+    .title{ font-family: 'Cormorant Garamond', ui-serif, Georgia, 'Times New Roman', serif; font-weight:700; line-height:.95; margin:0 0 14px; font-size: clamp(3rem, 7.2vw, 5.2rem); letter-spacing:-.01em; color:var(--ink); white-space: nowrap; overflow-wrap: normal; word-break: normal; }
     .kicker{ font-family: Inter, ui-sans-serif; text-transform:uppercase; font-size:.8rem; letter-spacing:.16em; color:#38383c; margin-bottom:18px; }
     .divider{ width:min(680px,70%); height:1px; background: #000; opacity:.12; margin:20px auto 36px; }
 
     /* Link card — single, deliberate CTA */
     .links{ display:grid; gap:16px; grid-template-columns:1fr; justify-items:center; }
-    .link{ display:block; padding:18px 22px; border:1px solid var(--border); border-radius:var(--radius); background:#fff; text-decoration:none; color:var(--ink); font-weight:600; letter-spacing:.005em; box-shadow:none; transition: border-color .15s ease, transform .14s ease; max-width: 720px; }
+    .link{ display:block; padding:18px 22px; border:1px solid var(--border); border-radius:var(--radius); background:#fff; text-decoration:none; color:var(--ink); font-weight:600; letter-spacing:.005em; box-shadow:none; transition: border-color .15s ease, transform .14s ease; max-width: 720px; overflow-wrap:anywhere; word-break:break-word; }
     .link:hover{ border-color:#d0d0d7; transform: translateY(-1px); }
     .link small{ display:block; font-weight:500; color:#4b4b50; margin-top:6px; letter-spacing:.01em; }
 
@@ -62,7 +62,7 @@
     details.toc a{ display:block; padding:6px 8px; text-decoration:none; border-radius:10px; border:1px solid transparent; font-size:.98rem; color:inherit; }
     details.toc a:hover{ background: rgba(0,0,0,.04); border-color: var(--border); }
 
-    .prose{ background:#fff; border:1px solid var(--border); border-radius: var(--radius); padding: clamp(18px,3vw,28px); box-shadow:none; line-height:1.7; }
+    .prose{ background:#fff; border:1px solid var(--border); border-radius: var(--radius); padding: clamp(18px,3vw,28px); box-shadow:none; line-height:1.7; overflow-wrap:anywhere; word-break:break-word; }
     .prose h1, .prose h2, .prose h3{ line-height:1.2; letter-spacing:-.01em; margin:1.6em 0 .6em; }
     .prose h1{ font-size: clamp(2rem, 3vw + 1rem, 3rem); }
     .prose h2{ font-size: clamp(1.4rem, 1.4vw + 1rem, 2rem); }
@@ -91,9 +91,6 @@
 
       /* Performance: disable p5 background on small screens */
       #p5-bg{ display:none !important; }
-
-      /* Improve wrapping */
-      body{ overflow-wrap:anywhere; word-break:break-word; }
 
       /* Content padding */
       .prose{ padding: 18px; }
@@ -236,7 +233,7 @@
 <p>4.2 We do not see facts in isolation, but according to an order.</p>
 <p>[ (■ “Self”) → (●₁ → ●₂ → ●₃) ]</p>
 <p>4.3 This order is determined by our logical structure.</p>
-<p>[ (■ “Self”) → (▲ “Categories”) ⊑ (■ “World”) ]</p>
+<p>[ (■ “Self”) → (▲ “Categories”) ⊑ (■ “World") ]</p>
 <h3 id="5-error-and-illusion">5. Error and Illusion</h3>
 <p>5.1 Not everything that appears as a fact is real.</p>
 <p>[ (● “Appearance”) ⊖ (● “Reality”) ]</p>
@@ -312,11 +309,11 @@
 <p>[ (■ “Determinism”) ⊑ (■ “Freedom”) → (■ “World”) ]</p>
 <h3 id="14-aesthetics-and-form">14. Aesthetics and Form</h3>
 <p>14.1 Aesthetics is the way the world reveals itself.</p>
-<p>[ (■ “Form”) → (■ “Perception”) → (■ “Aesthetic Experience”) ]</p>
+<p>[ (■ “Form”) → (■ “Perception”) → (■ “Aesthetic Experience") ]</p>
 <p>14.2 Beauty is not a fact but a relationship.</p>
-<p>[ (■ “Subject”) ⊑ (■ “Object”) → (■ “Aesthetic Value”) ]</p>
+<p>[ (■ “Subject”) ⊑ (■ “Object”) → (■ “Aesthetic Value") ]</p>
 <p>14.3 Art is the expression of order within chaos.</p>
-<p>[ (■ “Creativity”) → (■ “Structure”) → (■ “Work”) ]</p>
+<p>[ (■ “Creativity”) → (■ “Structure”) → (■ “Work") ]</p>
 <h3 id="15-end-and-limit">15. End and Limit</h3>
 <p>15.1 Every system has a limit beyond which it cannot proceed.</p>
 <p>[ (■ “System”) → (■ “Boundary”) → # ]</p>
@@ -333,56 +330,56 @@
 <p>[ (■ “Thesis”) ⊑ (■ “Antithesis”) → (■ “Synthesis”) ]</p>
 <h3 id="17-meaning-and-absurdity">17. Meaning and Absurdity</h3>
 <p>17.1 Meaning is a connection between distinct elements.</p>
-<p>[ (■ “Sign”) ⊑ (■ “Interpretation”) → (■ “Meaning”) ]</p>
+<p>[ (■ “Sign”) ⊑ (■ “Interpretation”) → (■ “Meaning") ]</p>
 <p>17.2 The absurd is the absence of meaningful connection.</p>
-<p>[ (■ “Logical Divergence”) → (■ “Absurd”) ]</p>
+<p>[ (■ “Logical Divergence”) → (■ “Absurd") ]</p>
 <p>17.3 Existence itself is a play between sense and nonsense.</p>
 <p>[ (■ “World”) ⊑ (⟨ ● (Sense), ● (Nonsense) ⟩) ]</p>
 <h3 id="18-desire-and-limit">18. Desire and Limit</h3>
 <p>18.1 Desire is the tension toward what is lacking.</p>
-<p>[ (■ “Self”) → (■ “Lack”) → (■ “Desire”) ]</p>
+<p>[ (■ “Self”) → (■ “Lack") → (■ “Desire") ]</p>
 <p>18.2 The limit is what restrains or shapes desire.</p>
-<p>[ (■ “Obstacle”) ⊑ (■ “Will”) → (■ “Action”) ]</p>
+<p>[ (■ “Obstacle”) ⊑ (■ “Will”) → (■ “Action") ]</p>
 <p>18.3 Desire is the engine of change.</p>
-<p>[ (■ “Dream”) → (■ “Intention”) → (■ “Reality”) ]</p>
+<p>[ (■ “Dream”) → (■ “Intention") → (■ “Reality") ]</p>
 <h3 id="19-solitude-and-community">19. Solitude and Community</h3>
 <p>19.1 Every existence is situated between solitude and belonging.</p>
-<p>[ (■ “Self”) ⊑ ⟨ (■ “Solitude”), (■ “Community”) ⟩ ]</p>
+<p>[ (■ “Self”) ⊑ ⟨ (■ “Solitude"), (■ “Community") ⟩ ]</p>
 <p>19.2 Community is the construction of bonds between individuals.</p>
-<p>[ (■ “Self”) ⊑ (■ “You”) → (■ “We”) ]</p>
+<p>[ (■ “Self”) ⊑ (■ “You”) → (■ “We") ]</p>
 <p>19.3 Solitude is not the absence of the other, but an inner space.</p>
-<p>[ (■ “Withdrawal”) → (■ “Reflection”) → (■ “Understanding”) ]</p>
+<p>[ (■ “Withdrawal”) → (■ “Reflection") → (■ “Understanding") ]</p>
 <h3 id="20-body-and-mind">20. Body and Mind</h3>
 <p>20.1 The mind is the body organized into consciousness.</p>
-<p>[ (■ “Body”) → (■ “Perception”) → (■ “Consciousness”) ]</p>
+<p>[ (■ “Body”) → (■ “Perception") → (■ “Consciousness") ]</p>
 <p>20.2 Experience is the interaction between matter and thought.</p>
-<p>[ (■ “Sensation”) ⊑ (■ “Concept”) → (■ “Experience”) ]</p>
+<p>[ (■ “Sensation") ⊑ (■ “Concept") → (■ “Experience") ]</p>
 <p>20.3 The boundary between body and mind is a fluid interface.</p>
-<p>[ (■ “Neurons”) ⊑ (■ “Thought”) → (■ “Subjectivity”) ]</p>
+<p>[ (■ “Neurons") ⊑ (■ “Thought") → (■ “Subjectivity") ]</p>
 <h3 id="21-conflict-and-reconciliation">21. Conflict and Reconciliation</h3>
 <p>21.1 Conflict is a divergence between opposing forces.</p>
-<p>[ (■ “Thesis”) ⊖ (■ “Antithesis”) ]</p>
+<p>[ (■ “Thesis") ⊖ (■ “Antithesis") ]</p>
 <p>21.2 Reconciliation is the emergence of a new equilibrium.</p>
-<p>[ (■ “Thesis”) ⊑ (■ “Antithesis”) → (■ “Synthesis”) ]</p>
+<p>[ (■ “Thesis") ⊑ (■ “Antithesis") → (■ “Synthesis") ]</p>
 <p>21.3 Conflict can generate growth or destruction.</p>
-<p>[ (■ “Clash”) → ⟨ (■ “Evolution”), (■ “Chaos”) ⟩ ]</p>
+<p>[ (■ “Clash") → ⟨ (■ “Evolution"), (■ “Chaos") ⟩ ]</p>
 <h3 id="22-the-reflection-of-necessity">22. The Reflection of Necessity</h3>
 <p>22.1 Nothing is necessary in an absolute sense.</p>
-<p>[ (■ “Possibility”) ⊑ (■ “Contingency”) ]</p>
+<p>[ (■ “Possibility") ⊑ (■ “Contingency") ]</p>
 <p>22.2 Necessity is merely a relation between conditions.</p>
-<p>[ (■ “If A, then B”) → (■ “Local Determinism”) ]</p>
+<p>[ (■ “If A, then B") → (■ “Local Determinism") ]</p>
 <p>22.3 The world is a configuration among infinite alternatives.</p>
-<p>[ (■ “Reality”) ⊑ ⟨ (■ “Possible 1”), (■ “Possible 2”), (■ “Possible N”) ⟩ ]</p>
+<p>[ (■ “Reality") ⊑ ⟨ (■ “Possible 1"), (■ “Possible 2"), (■ “Possible N") ⟩ ]</p>
 <h3 id="23-nothingness-and-being">23. Nothingness and Being</h3>
 <p>23.1 Nothingness is the absence of all determination.</p>
-<p>[ (■ “Nothing”) ⊖ (■ “Being”) ]</p>
+<p>[ (■ “Nothing") ⊖ (■ “Being") ]</p>
 <p>23.2 Being is what manifests in the world.</p>
-<p>[ (■ “Being”) → (■ “Fact”) ]</p>
+<p>[ (■ “Being") → (■ “Fact") ]</p>
 <p>23.3 Nothingness and being are the poles of philosophical thought.</p>
-<p>[ (■ “Thought”) ⊑ ⟨ (■ “Being”), (■ “Nothing”) ⟩ ]</p>
+<p>[ (■ “Thought") ⊑ ⟨ (■ “Being"), (■ “Nothing") ⟩ ]</p>
 <h3 id="24-the-end-of-thought">24. The End of Thought</h3>
 <p>24.1 The limit of saying is not absence, but excess.</p>
-<p>[ (■ “Expression”) → (■ “Overflow”) → # ]</p>
+<p>[ (■ “Expression") → (■ “Overflow") → # ]</p>
 <p>24.2 Silence is the recursive pause through which thought reorganizes itself</p>
 <p>[ (■“Unsayable”) ↻ (■“Silence”) ⊑ (■“Reconfiguration”) ]</p>
 <p>24.3 Philosophy is the boundary between what can be said and what can only be lived.</p>
