@@ -3,189 +3,295 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DIA▲MANIFESTO</title>
+  <title>DIA▲MANIFESTO // OFFICIAL ENGLISH VERSION</title>
   <meta name="color-scheme" content="light only" />
 
-  <!-- Typography: refined, editorial -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#ffffff; 
-      --fg:#0b0b0c; 
-      --muted:#6a6a6f; 
-      --border:#e9e9ee; 
-      --ink:#111111;
-      --radius: 12px;
-      --scale:1;
-    }
-    html,body{ margin:0; padding:0; height:100%; background:var(--bg); color:var(--fg); }
-    body{ font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-size: calc(1rem * var(--scale)); transition: font-size .15s ease-out; overflow-wrap: normal; word-break: normal; }
+      --bg: #ffffff;
+      --fg: #1a1a1a;
+      --muted: #666;
+      --border: rgba(0,0,0,0.08);
+      --accent-bg: rgba(0,0,0,0.03);
+      --code-color: #2d2d2d;
 
-    /* Soft animated background kept extremely subtle */
-    #p5-bg{ position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.18; }
+      --radius: 12px;
+      --shadow-card: 0 4px 24px rgba(0,0,0,0.03);
+
+      --font-serif: "Cormorant Garamond", serif;
+      --font-sans: "Inter", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+
+      --scale: 1;
+    }
+
+    html, body{
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    body{
+      font-family: var(--font-sans);
+      font-size: calc(1.05rem * var(--scale));
+      line-height: 1.6;
+      transition: font-size .15s ease-out;
+    }
+
+    #p5-bg{ position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.12; }
     @media (prefers-reduced-motion: reduce){ #p5-bg{ display:none; } }
 
-    /* Layout: generous whitespace, editorial rhythm */
-    .wrap{ position:relative; z-index:1; min-height:100dvh; display:grid; place-items:center; padding:10vh 24px; }
-    .panel{ width:100%; max-width:900px; text-align:center; }
+    .wrap{
+      position: relative;
+      z-index: 1;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 100px 24px 60px;
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 60px;
+      align-items: start;
+    }
 
-    .title{ font-family: 'Cormorant Garamond', ui-serif, Georgia, 'Times New Roman', serif; font-weight:700; line-height:.95; margin:0 0 14px; font-size: clamp(3rem, 7.2vw, 5.2rem); letter-spacing:-.01em; color:var(--ink); white-space: nowrap; overflow-wrap: normal; word-break: normal; }
-    .kicker{ font-family: Inter, ui-sans-serif; text-transform:uppercase; font-size:.8rem; letter-spacing:.16em; color:#38383c; margin-bottom:18px; }
-    .divider{ width:min(680px,70%); height:1px; background: #000; opacity:.12; margin:20px auto 36px; }
+    .sidebar{
+      position: sticky;
+      top: 100px;
+      max-height: calc(100vh - 140px);
+      overflow-y: auto;
+      padding-right: 10px;
+      scrollbar-width: thin;
+      scrollbar-color: #ddd transparent;
+    }
 
-    /* Link card — single, deliberate CTA */
-    .links{ display:grid; gap:16px; grid-template-columns:1fr; justify-items:center; }
-    .link{ display:block; padding:18px 22px; border:1px solid var(--border); border-radius:var(--radius); background:#fff; text-decoration:none; color:var(--ink); font-weight:600; letter-spacing:.005em; box-shadow:none; transition: border-color .15s ease, transform .14s ease; max-width: 720px; overflow-wrap:anywhere; word-break:break-word; }
-    .link:hover{ border-color:#d0d0d7; transform: translateY(-1px); }
-    .link small{ display:block; font-weight:500; color:#4b4b50; margin-top:6px; letter-spacing:.01em; }
+    .toc-title{
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 16px;
+      font-weight: 600;
+      display: block;
+    }
 
-    /* Subtle note / provenance */
-    .note{ margin: 40px auto 0; color:#4b4b50; font-size:.95rem; max-width:60ch; }
-    .note strong{ color:#1a1a1d; font-weight:700; }
+    .toc-list{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
 
-    /* Top buttons */
-    .topbar-right{ position: fixed; top:16px; right:16px; z-index:9999; }
-    .interact-btn{ display:inline-block; padding:10px 14px; background:#fff; color:#111; text-decoration:none; border:1px solid #e0e0e0; border-radius:10px; font-weight:600; letter-spacing:.02em; box-shadow:0 4px 14px rgba(0,0,0,.05); font-size:14px; transition:border-color .15s ease, box-shadow .15s ease, transform .15s ease; }
-    .interact-btn:hover{ border-color:#ccc; box-shadow:0 10px 24px rgba(0,0,0,.08); transform:translateY(-1px); }
-    .topbar-left{ position: fixed; top:16px; left:16px; z-index:9999; }
+    .toc-link{
+      display: block;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.85rem;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      border-left: 2px solid transparent;
+      line-height: 1.3;
+    }
 
-    /* Footer — true black text and links */
-    footer{ position:relative; z-index:1; text-align:center; padding: 28px 16px 40px; color:#000000; font-size:.9rem; }
-    footer a{ color:inherit; }
+    .toc-link:hover{
+      background: var(--accent-bg);
+      color: #000;
+    }
 
-    .layout{ display:grid; grid-template-columns: 280px 1fr; gap: clamp(16px,2.5vw,28px); margin-top: clamp(16px,3vw,32px); }
-    @media (max-width: 980px){ .layout{ grid-template-columns:1fr; } details.toc{ position:relative; top:auto; } }
-    details.toc{ position: sticky; top: 100px; align-self:start; background:#fff; border:1px solid var(--border); border-radius: var(--radius); padding:14px 18px; max-height: calc(100dvh - 140px); overflow:auto; }
-    details.toc > summary{ list-style:none; cursor:pointer; font-weight:600; text-transform:uppercase; letter-spacing:.12em; font-size:.95rem; color:var(--muted); }
-    details.toc[open] > summary{ margin-bottom:8px; }
-    details.toc a{ display:block; padding:6px 8px; text-decoration:none; border-radius:10px; border:1px solid transparent; font-size:.98rem; color:inherit; }
-    details.toc a:hover{ background: rgba(0,0,0,.04); border-color: var(--border); }
+    .header-panel{
+      text-align: center;
+      margin-bottom: 60px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-    .prose{ background:#fff; border:1px solid var(--border); border-radius: var(--radius); padding: clamp(18px,3vw,28px); box-shadow:none; line-height:1.7; overflow-wrap:anywhere; word-break:break-word; }
-    .prose h1, .prose h2, .prose h3{ line-height:1.2; letter-spacing:-.01em; margin:1.6em 0 .6em; }
-    .prose h1{ font-size: clamp(2rem, 3vw + 1rem, 3rem); }
-    .prose h2{ font-size: clamp(1.4rem, 1.4vw + 1rem, 2rem); }
-    .prose h3{ font-size: clamp(1.1rem, .8vw + 1rem, 1.35rem); }
-    .prose hr{ border:none; border-top:1px dashed var(--border); margin: 2.2em 0; }
+    .main-title{
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 700;
+      line-height: 0.9;
+      margin: 0 0 16px;
+      letter-spacing: -0.02em;
+    }
 
-    .toolbar{ display:flex; gap:8px; justify-content:flex-end; align-items:center; position: sticky; top: 12px; background: transparent; padding: 8px 0; z-index: 20; }
-    .toolbar .zoom{ appearance:none; border:1px solid var(--border); background:#fff; color:inherit; padding:.35rem .55rem; border-radius:10px; font:inherit; cursor:pointer; }
-    .toolbar .zoom:hover{ background:#f5f5f7; }
+    .divider{
+      width: 60px;
+      height: 2px;
+      background: #e0e0e0;
+      margin: 24px auto;
+    }
 
-    /* -------- Mobile fixes (≤ 820px) -------- */
-    @media (max-width: 820px) {
-      .wrap{ padding: 8vh 16px 20vh; padding-top: calc(8vh + 132px); }
-      .layout{ grid-template-columns: 1fr; }
+    .toolbar{
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 20px;
+      position: sticky;
+      top: 20px;
+      z-index: 10;
+      pointer-events: none;
+    }
 
-      /* TOC as accordion */
-      details.toc{ position: static; align-self: stretch; padding:10px 14px; max-height: none; }
-      details.toc a{ padding:8px; border-radius:10px; display:block; }
+    .toolbar button{
+      pointer-events: auto;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(0,0,0,0.1);
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
 
-      /* Zoom toolbar: non-sticky and centered */
-      .toolbar{ position: static; justify-content: center; margin-top: 12px; }
+    .toolbar button:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
 
-      /* Top buttons (mobile): centered + stacked while staying fixed */
-      .topbar-left,
-      .topbar-right{
+    section.axiom-card{
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-card);
+      scroll-margin-top: 100px;
+    }
+
+    h2{
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      margin-top: 0;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      color: #000;
+    }
+
+    h3{
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: #000;
+    }
+
+    p{ margin-bottom: 12px; color: #333; }
+    strong{ color: #000; font-weight: 600; }
+
+    .formula{
+      font-family: var(--font-mono);
+      font-size: 0.85em;
+      background: var(--accent-bg);
+      padding: 10px 14px;
+      border-radius: 6px;
+      border-left: 3px solid #ccc;
+      color: var(--code-color);
+      display: block;
+      margin: 8px 0 24px;
+      overflow-x: auto;
+    }
+
+    .nav-fixed{ position: fixed; top: 20px; z-index: 1000; }
+    .nav-left{ left: 24px; }
+    .nav-right{ right: 24px; }
+
+    .glass-btn{
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 12px;
+      text-decoration: none;
+      color: #1a1a1a;
+      font-size: 0.85rem; font-weight: 500;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      transition: all 0.3s ease;
+    }
+
+    .glass-btn:hover{
+      background: rgba(255, 255, 255, 0.95);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    footer{
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    footer a{ color: #000; text-decoration: none; }
+
+    @media (max-width: 900px){
+      .wrap{ grid-template-columns: 1fr; padding-top: 140px; }
+      .sidebar{
+        position: relative; top: 0; max-height: none;
+        margin-bottom: 40px; background: #f9f9f9; padding: 20px; border-radius: 12px;
+      }
+      .nav-left, .nav-right{
         position: fixed;
         left: 50%;
         transform: translateX(-50%);
-        right: auto;
-        margin: 0;
-        text-align: center;
-        z-index: 9999;
-      }
-      .topbar-left{ top: 12px; }
-      .topbar-right{ top: 58px; }
-
-      .interact-btn{
-        max-width: calc(100vw - 24px);
-        white-space: normal;     /* allow wrapping */
-        padding: 8px 12px;
-        font-size: 13px;
+        width: 90%;
         justify-content: center;
       }
-
-      /* Performance: disable p5 background on small screens */
-      #p5-bg{ display:none !important; }
-
-      /* Content padding */
-      .prose{ padding: 18px; }
-
-      /* Footer: iOS safe-area */
-      footer{ padding-bottom: max(40px, env(safe-area-inset-bottom)); }
+      .nav-left{ top: 16px; }
+      .nav-right{ top: 64px; }
+      .axiom-card{ padding: 24px; }
     }
-
-    /* Very small phones (≤ 380px) */
-    @media (max-width: 380px){
-      .title{ font-size: clamp(2.2rem, 10vw, 2.6rem); }
-      .divider{ margin:16px auto 24px; }
-    }
-  
-/* ---- Top Buttons: Subtle gradient (Style B, text-only) ---- */
-.interact-btn{
-  padding: 10px 14px;
-  border: 1px solid #e8e8ee;
-  border-radius: 12px;
-  background: linear-gradient(180deg, #ffffff, #fafafe);
-  box-shadow: 0 6px 16px rgba(0,0,0,.06);
-  display: inline-flex; align-items: center; gap: 8px;
-  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
-}
-.interact-btn:hover{
-  transform: translateY(-1px);
-  border-color:#dadade;
-  box-shadow: 0 14px 28px rgba(0,0,0,.10);
-  background: linear-gradient(180deg, #ffffff, #f7f7fc);
-}
-.interact-btn:focus-visible{
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(17,17,17,.08), 0 0 0 6px rgba(17,17,17,.06);
-}
-/* Touch-friendly padding on coarse pointers */
-@media (pointer: coarse){
-  .interact-btn{ padding: 12px 16px; }
-}
-/* Reduce motion */
-@media (prefers-reduced-motion: reduce){
-  .interact-btn{ transition: none; }
-}
-
-</style>
+  </style>
 </head>
+
 <body>
-  <!-- Topbar buttons (left/right) remain unchanged -->
-  <div class="topbar-left">
-    <a class="interact-btn" href="index.html">Back to DIA▲MANIFESTO Index</a>
-  </div>
-  <div class="topbar-right">
-    <a class="interact-btn" href="https://chatgpt.com/g/g-685faef0137c8191b81171de69f26076-dia-manifesto" target="_blank">Interact with DIA▲MANIFESTO GPT</a>
+
+  <div class="nav-fixed nav-left">
+    <a href="index.html" class="glass-btn">← Back to Index</a>
   </div>
 
-  <!-- Soft animated background -->
+  <div class="nav-fixed nav-right">
+    <a href="https://chatgpt.com/g/g-685faef0137c8191b81171de69f26076-dia-manifesto" target="_blank" class="glass-btn">Interact with DIA▲MANIFESTO GPT</a>
+  </div>
+
   <div id="p5-bg"></div>
 
-  <!-- Content -->
-  <main class="wrap">
-    <section class="panel" aria-label="Index">
-      <h1 class="title">DIA▲MANIFESTO</h1>
-      <div class="divider" aria-hidden="true"></div>
+  <div class="wrap">
 
-      <!-- Toolbar: text size controls -->
-      <div class="toolbar" aria-label="Text size controls">
-        <button type="button" class="zoom minus" aria-label="Decrease text size" title="Decrease text size">A−</button>
-        <button type="button" class="zoom reset" aria-label="Default size" title="Default size">A</button>
-        <button type="button" class="zoom plus" aria-label="Increase text size" title="Increase text size">A+</button>
+    <aside class="sidebar">
+      <div class="toc-title">CONTENTS</div>
+      <nav class="toc-list" id="toc-container"></nav>
+    </aside>
+
+    <main class="content-area">
+
+      <div class="header-panel">
+        <h1 class="main-title">DIA▲MANIFESTO</h1>
+        <div class="divider"></div>
       </div>
 
-      <div class="layout">
-        <!-- TOC converted to details/summary for better mobile UX -->
-        <details class="toc" aria-label="Table of contents" open>
-          <summary>Contents</summary>
-          <div id="toc-list"></div>
-        </details>
+      <div class="toolbar">
+        <button id="btn-dec" title="Smaller text">A−</button>
+        <button id="btn-reset" title="Reset">Reset</button>
+        <button id="btn-inc" title="Larger text">A+</button>
+      </div>
 
+      <section class="axiom-card" id="document">
         <article id="content" class="prose" aria-label="Document">
 <p><br/></p><hr/>
 <h2 id="▲-preliminary-matters">▲ // PRELIMINARY MATTERS</h2>
@@ -403,161 +509,85 @@
 <p>24.3 Philosophy is the boundary between what can be said and what can only be lived.</p>
 <p>[ (■ “Reflection”) ⊑ (■ “Existence”) → (■ “Direct Experience”) ]</p>
         </article>
-      </div>
-    </section>
-  </main>
-  <footer>
+      </section>
+
+    </main>
+
+    <footer>
     <div class="contact-note">For inquiries, please write to <a href="mailto:diamanifesto@proton.me">diamanifesto@proton.me</a></div>
     <div style="text-align:center; margin-top:2em;">
       <p>© 2025 <strong>DIA▲MANIFESTO</strong></p>
       <p style="font-size:0.9em; color:#4b4b50;">First published online on December 12, 2025</p>
     </div>
   </footer>
-  <!-- p5 background (calm, cyclical) -->
+
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js"></script>
   <script>
-    // Update year (only if an element with id="year" exists)
-    const yearEl = document.getElementById('year');
-    if (yearEl) { yearEl.textContent = new Date().getFullYear(); }
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduce && window.innerWidth > 820){
+      new p5(p => {
+        let nodes=[], edges=[], t0=0, state=0;
+        p.setup = () => { p.createCanvas(p.windowWidth, p.windowHeight); reset(); };
+        p.windowResized = () => p.resizeCanvas(p.windowWidth, p.windowHeight);
+        function reset(){ nodes=[]; edges=[]; t0=p.millis(); state=0; }
 
-    // Respect reduced motion
-    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const force = document.documentElement.dataset.anim === 'on';
-    if(!reduce || force){
-      new p5(function(p){
-        const NODE_TARGET = 10;    // fewer nodes
-        const EDGE_TARGET = 14;    // fewer edges
-        const PARTICLE_MAX = 4;    // fewer particles
-        const JITTER = 8;          // less jitter
-        const STROKE_ALPHA = 60;   // very soft lines
-
-        let state=0, nodes=[], edges=[], particles=[], t0=0, triAlpha=0, fadeAlpha=0;
-        // Focus point for animation placement
-        let fx=0, fy=0;
-        function setFocus(){
-          const w = p.width, h = p.height;
-          // Desktop/tablet: move to top-right-ish so it doesn't sit under the title
-          if (w >= 900){ fx = w * 0.72; fy = h * 0.38; }
-          // Mobile: lower to avoid covering the hero
-          else { fx = w * 0.50; fy = h * 0.72; }
-        }
-
-
-        p.setup = function(){ p.createCanvas(p.windowWidth, p.windowHeight); p.pixelDensity(1); p.frameRate(60); setFocus(); reset(); };
-        p.windowResized = function(){ p.resizeCanvas(p.windowWidth, p.windowHeight); setFocus(); };
-        function reset(){ nodes.length=0; edges.length=0; particles.length=0; triAlpha=0; fadeAlpha=0; state=0; t0=p.millis(); }
-
-        p.draw=function(){
-          p.background(255);
-          const t=(p.millis()-t0)/1000;
-
-          if(state===0){
-            if(nodes.length < NODE_TARGET && t > nodes.length * 0.24){
-              const ang=p.map(nodes.length,0,NODE_TARGET-1,0,p.TWO_PI);
-              const rad=p.random(90, Math.min(p.width,p.height)/3.2);
-              const cx=fx + Math.cos(ang + p.random(-0.06,0.06))*rad + p.random(-12,12);
-              const cy=fy + Math.sin(ang + p.random(-0.06,0.06))*rad + p.random(-10,10);
-              const s=p.random(12,24); const typ=p.random([0,1,2]);
-              nodes.push({x:cx,y:cy,s:s,t:typ,a:0});
+        p.draw = () => {
+          p.clear();
+          let t = (p.millis()-t0)/1000;
+          if(nodes.length < 12 && p.frameCount % 12 === 0) {
+             nodes.push({x: p.random(p.width), y: p.random(p.height), vx: p.random(-0.4,0.4), vy: p.random(-0.4,0.4)});
+          }
+          p.stroke(0, 30);
+          p.beginShape(p.LINES);
+          for(let i=0; i<nodes.length; i++){
+            let n = nodes[i];
+            n.x += n.vx; n.y += n.vy;
+            if(n.x<0||n.x>p.width) n.vx*=-1;
+            if(n.y<0||n.y>p.height) n.vy*=-1;
+            for(let j=i+1; j<nodes.length; j++){
+              let d = p.dist(n.x, n.y, nodes[j].x, nodes[j].y);
+              if(d < 180) { p.vertex(n.x, n.y); p.vertex(nodes[j].x, nodes[j].y); }
             }
-            nodes.forEach(n=>{ n.a=Math.min(1,n.a+0.045); drawNode(n); });
-            if(nodes.length===NODE_TARGET && t>4.2){ state=1; t0=p.millis(); }
           }
-
-          if(state===1){
-            nodes.forEach(drawNode);
-            if(edges.length < EDGE_TARGET && p.frameCount % 7===0){
-              const a=p.floor(p.random(nodes.length)); const b=p.floor(p.random(nodes.length));
-              if(a!==b && !edges.some(e=> (e[0]===a&&e[1]===b)||(e[0]===b&&e[1]===a))){ edges.push([a,b,p.random([0,1])]); }
-            }
-            p.stroke(18,18,18,STROKE_ALPHA); p.strokeWeight(2);
-            edges.forEach(e=>{ const n1=nodes[e[0]], n2=nodes[e[1]]; if(e[2]===0)p.line(n1.x,n1.y,n2.x,n2.y); else{ p.noFill(); p.bezier(n1.x,n1.y, n1.x+p.random(-JITTER,JITTER), n1.y+p.random(-JITTER,JITTER), n2.x+p.random(-JITTER,JITTER), n2.y+p.random(-JITTER,JITTER), n2.x,n2.y); } });
-            if(particles.length < PARTICLE_MAX && p.frameCount % 18===0 && edges.length>0){
-              const e=edges[p.floor(p.random(edges.length))]; const a=nodes[e[0]], b=nodes[e[1]]; if(a&&b) particles.push({ax:a.x,ay:a.y,bx:b.x,by:b.y,u:0,life:p.random(70,120)});
-            }
-            particles.forEach(pt=>{ pt.u += 1/pt.life; const x=p.lerp(pt.ax,pt.bx,pt.u), y=p.lerp(pt.ay,pt.by,pt.u); p.noStroke(); p.fill(24,24,24,160); p.circle(x,y,4.5); });
-            particles = particles.filter(pt=> pt.u<1);
-            if(t>7){ state=2; t0=p.millis(); }
-          }
-
-          if(state===2){
-            nodes.forEach(drawNode);
-            p.stroke(18,18,18,STROKE_ALPHA); p.strokeWeight(2);
-            edges.forEach(e=>{ const n1=nodes[e[0]], n2=nodes[e[1]]; if(e[2]===0)p.line(n1.x,n1.y,n2.x,n2.y); else{ p.noFill(); p.bezier(n1.x,n1.y, n1.x+p.random(-JITTER,JITTER), n1.y+p.random(-JITTER,JITTER), n2.x+p.random(-JITTER,JITTER), n2.y+p.random(-JITTER,JITTER), n2.x,n2.y); } });
-            triAlpha = Math.min(1, triAlpha + 0.01);
-            drawLogo(fx, fy, Math.min(p.width,p.height)/5, 180*triAlpha);
-            if(triAlpha>=1 && t>3.4){ state=3; t0=p.millis(); }
-          }
-
-          if(state===3){
-            const a = Math.min(1, (p.millis()-t0)/2200);
-            p.noStroke(); p.fill(255,255*a); p.rect(0,0,p.width,p.height);
-            if(a>=1) reset();
-          }
-
-          function drawNode(n){
-            p.noStroke(); p.fill(20,20,20, 205*n.a);
-            if(n.t===0) p.circle(n.x,n.y,n.s);
-            else if(n.t===1) p.ellipse(n.x,n.y,n.s*1.32,n.s*1.32 * p.random(0.92,1.06));
-            else p.rect(n.x-n.s/2,n.y-n.s/2,n.s,n.s,7);
-          }
-          function drawLogo(cx,cy,r,alpha){
-            p.push(); p.translate(cx,cy); p.fill(0,alpha); p.stroke(0, alpha*0.35); p.strokeWeight(3);
-            p.triangle( Math.cos(-Math.PI/2)*r, Math.sin(-Math.PI/2)*r,
-                        Math.cos(Math.PI/6)*r,  Math.sin(Math.PI/6)*r,
-                        Math.cos(5*Math.PI/6)*r, Math.sin(5*Math.PI/6)*r );
-            p.pop();
-          }
+          p.endShape();
+          if(t > 40) reset();
         };
       }, document.getElementById('p5-bg'));
     }
-  </script>
-  <script>
-    // Build TOC from h2 and h3
-    (function(){
-      const content = document.getElementById('content');
-      const toc = document.getElementById('toc-list');
-      if(content && toc){
-        const headings = content.querySelectorAll('h2, h3');
-        const ul = document.createElement('ul');
-        ul.style.listStyle='none'; ul.style.paddingLeft='0';
-        headings.forEach(h=>{
-          if(!h.id){ h.id = h.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g,'-'); }
-          const li = document.createElement('li');
-          li.style.margin = h.tagName==='H2' ? '6px 0' : '4px 0 4px 14px';
-          const a=document.createElement('a'); a.href = `#${h.id}`; a.textContent = h.textContent; li.appendChild(a); ul.appendChild(li);
-        });
-        toc.appendChild(ul);
-      }
-    })();
 
-    // Zoom controls with persistence
-    (function(){
-      const key='fontScale'; const min=0.85, max=1.6, step=0.1;
-      const get=()=>parseFloat(localStorage.getItem(key)||'1');
-      const set=(v)=>{ const n=Math.min(max, Math.max(min, v)); document.documentElement.style.setProperty('--scale', n); localStorage.setItem(key, n); };
-      set(get());
-      const $=(s)=>document.querySelector(s);
-      const minus=$('.toolbar .minus'), plus=$('.toolbar .plus'), reset=$('.toolbar .reset');
-      if(minus) minus.addEventListener('click', ()=>set(get()-step));
-      if(plus) plus.addEventListener('click', ()=>set(get()+step));
-      if(reset) reset.addEventListener('click', ()=>set(1));
-    })();
+    document.addEventListener('DOMContentLoaded', () => {
+      const headings = document.querySelectorAll('.axiom-card h2, .axiom-card h3');
+      const tocContainer = document.getElementById('toc-container');
 
-    // Reset overly large desktop scale on small screens
-    (function(){
-      try{
-        var isNarrow = window.matchMedia('(max-width: 820px)').matches;
-        if(isNarrow){
-          var key='fontScale';
-          var saved = parseFloat(localStorage.getItem(key)||'1');
-          if(saved > 1.2){ 
-            localStorage.setItem(key, '1'); 
-            document.documentElement.style.setProperty('--scale', 1); 
-          }
-        }
-      }catch(e){}
-    })();
+      headings.forEach(h => {
+        if(!h.id) return;
+        const link = document.createElement('a');
+        link.href = `#${h.id}`;
+        let text = h.textContent.replace('▲ // ', '');
+        link.textContent = text;
+        link.className = 'toc-link';
+        if(h.tagName === 'H3') link.style.paddingLeft = '20px';
+
+        const li = document.createElement('li');
+        li.appendChild(link);
+        tocContainer.appendChild(li);
+      });
+    });
+
+    let scale = parseFloat(localStorage.getItem('dia_scale')) || 1;
+    const root = document.documentElement;
+    const updateScale = (val) => {
+      scale = Math.min(1.4, Math.max(0.8, val));
+      root.style.setProperty('--scale', scale);
+      localStorage.setItem('dia_scale', scale);
+    };
+    updateScale(scale);
+
+    document.getElementById('btn-inc').onclick = () => updateScale(scale + 0.1);
+    document.getElementById('btn-dec').onclick = () => updateScale(scale - 0.1);
+    document.getElementById('btn-reset').onclick = () => updateScale(1);
   </script>
 </body>
 </html>
