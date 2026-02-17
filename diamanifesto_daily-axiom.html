@@ -4,19 +4,32 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
 
-  <title>DIA▲MANIFESTO // DAILY AXIOM</title>
+  <title>DIA▲MANIFESTO // Daily Axiom</title>
+  <link rel="canonical" href="https://diamanifesto.org/diamanifesto_daily-axiom.html"/>
+  
   <meta name="robots" content="index, follow"/>
   <meta name="theme-color" content="#ffffff"/>
   <meta name="color-scheme" content="light only"/>
 
-  <meta name="description" content="A daily axiom or aspect from DIA▲MANIFESTO for reflective practice.">
-  
+  <meta name="description" content="Daily Axiom: one proposition per day from DIA▲MANIFESTO, presented as a prompt for reflection."/>
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/favicon-192.png" sizes="192x192">
+  <link rel="icon" href="/favicon-48x48.png" type="image/png" sizes="48x48">
+  <link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="/site.webmanifest?v=1">
+
+  <meta property="og:title" content="DIA▲MANIFESTO // Daily Axiom"/>
+  <meta property="og:description" content="One proposition per day — a prompt for reflection."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://diamanifesto.org/diamanifesto_daily-axiom.html"/>
+  <meta property="og:image" content="https://diamanifesto.org/favicon-192.png"/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://diamanifesto.org/favicon-192.png"/>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap');
 
     :root{
       --bg:#ffffff;
@@ -88,7 +101,7 @@
       margin:16px auto 22px;
     }
 
-    /* Topbars */
+    
     .topbar-left{
       position:fixed;
       top:16px;
@@ -280,7 +293,7 @@
         white-space: normal;
       }
 
-      /* Keep existing page buttons behavior (UNCHANGED) */
+      
       .interact-btn{
         max-width: calc(100vw - 24px);
         width: 100%;
@@ -295,6 +308,37 @@
       }
     }
   </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://diamanifesto.org/#website",
+      "name": "DIA▲MANIFESTO",
+      "url": "https://diamanifesto.org/",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://diamanifesto.org/diamanifesto_daily-axiom.html#webpage",
+      "url": "https://diamanifesto.org/diamanifesto_daily-axiom.html",
+      "name": "DIA▲MANIFESTO // Daily Axiom",
+      "isPartOf": {
+        "@id": "https://diamanifesto.org/#website"
+      },
+      "inLanguage": "en",
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "DIA▲MANIFESTO Daily Axiom",
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "Web",
+        "description": "Daily Axiom: one proposition per day from DIA▲MANIFESTO, presented as a prompt for reflection."
+      }
+    }
+  ]
+}
+  </script>
 </head>
 
 <body>
@@ -345,7 +389,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js"></script>
 
   <script>
-    const ITEMS = [
+const ITEMS = [
       { ref:"Ax 1.1 — The Totality of Facts", text:"The world unfolds as a relational set of all facts.", diagram:"[ ⟨ ●₁ ⊡ ●₂ ⊡ ●₃ ⊡ ●ₙ ⟩ → ⊙ ]" },
       { ref:"Ax 1.2 — The Totality of Facts", text:"What exists is not isolated, but always in relation to something else.", diagram:"[ ● ─ ⊑ ─ ● ]" },
       { ref:"Ax 1.3 — The Totality of Facts", text:"Every fact is a possible configuration of reality.", diagram:"[ ● → ⟨ ●₁, ●₂, ●₃ ⟩ ]" },

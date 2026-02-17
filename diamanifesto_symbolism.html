@@ -3,59 +3,68 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DIA▲MANIFESTO // SYMBOLISM</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>DIA▲MANIFESTO // Symbolism Workbench</title>
+  <link rel="canonical" href="https://diamanifesto.org/diamanifesto_symbolism.html"/>
 
- <meta name="description" content="DIA▲MANIFESTO is a living architecture of thought, articulated through axioms and symbols, designed to activate relational and responsible thinking.">
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#ffffff"/>
+  <meta name="color-scheme" content="light only"/>
 
+  <meta name="description" content="A Symbolism Workbench for DIA▲MANIFESTO: compose text using its symbolic notation and grammar, with a quick symbol map and writing tools."/>
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/favicon-192.png" sizes="192x192">
+  <link rel="icon" href="/favicon-48x48.png" type="image/png" sizes="48x48">
+  <link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="/site.webmanifest?v=1">
 
-  <meta property="og:title" content="DIA▲MANIFESTO — a living architecture of thought">
-  <meta property="og:description" content="DIA▲MANIFESTO is a living architecture of thought, articulated through axioms and symbols, designed to activate relational and responsible thinking.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://diamanifesto.org/">
-  <meta property="og:image" content="https://diamanifesto.org/favicon-192.png">
+  <meta property="og:title" content="DIA▲MANIFESTO // Symbolism Workbench"/>
+  <meta property="og:description" content="A Symbolism Workbench for DIA▲MANIFESTO: compose text using its symbolic notation and grammar, with a quick symbol map and writing tools."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://diamanifesto.org/diamanifesto_symbolism.html"/>
+  <meta property="og:image" content="https://diamanifesto.org/favicon-192.png"/>
   <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://diamanifesto.org/favicon-192.png"/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "https://diamanifesto.org/#website",
-        "name": "DIA▲MANIFESTO",
-        "url": "https://diamanifesto.org/",
-        "inLanguage": "en"
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://diamanifesto.org/#website",
+      "name": "DIA▲MANIFESTO",
+      "url": "https://diamanifesto.org/",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://diamanifesto.org/diamanifesto_symbolism.html#webpage",
+      "url": "https://diamanifesto.org/diamanifesto_symbolism.html",
+      "name": "DIA▲MANIFESTO // Symbolism Workbench",
+      "isPartOf": {
+        "@id": "https://diamanifesto.org/#website"
       },
-      {
-        "@type": "WebPage",
-        "@id": "https://diamanifesto.org/#webpage",
-        "url": "https://diamanifesto.org/",
-        "name": "DIA▲MANIFESTO — a living architecture of thought",
-        "isPartOf": { "@id": "https://diamanifesto.org/#website" },
-        "inLanguage": "en",
-        "about": {
-          "@type": "CreativeWork",
-          "name": "DIA▲MANIFESTO",
-          "description": "DIA▲MANIFESTO is a living architecture of thought, articulated through axioms and symbols, designed to activate relational and responsible thinking."
-        }
+      "inLanguage": "en",
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "DIA▲MANIFESTO Symbolism Workbench",
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "Web",
+        "description": "A Symbolism Workbench for DIA▲MANIFESTO: compose text using its symbolic notation and grammar, with a quick symbol map and writing tools."
       }
-    ]
-  }
+    }
+  ]
+}
   </script>
 
   <style>
-    :root {
+:root {
     
       --bg: #fdfdfd;
       --surface: #ffffff;
@@ -82,7 +91,7 @@
       font-family: var(--font-ui);
       color: var(--ink);
       background: var(--bg);
-      /* Subtle mesh gradient background */
+      
       background-image: 
         radial-gradient(at 0% 0%, rgba(0,0,0,0.03) 0px, transparent 50%),
         radial-gradient(at 100% 100%, rgba(0,0,0,0.03) 0px, transparent 50%);
@@ -178,7 +187,7 @@
       gap: 4px;
       transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
       box-shadow: var(--shadow-sm);
-      height: 64px; /* Fixed height for uniformity */
+      height: 64px; 
     }
 
     .btn-sym:hover {
@@ -262,20 +271,15 @@
       min-height: 400px;
       padding: 30px;
       outline: none;
-      font-size: 18px; /* Default */
+      font-size: 18px; 
       line-height: 1.7;
       white-space: pre-wrap;
       color: #222;
-      font-family: var(--font-ui); /* Default text font */
+      font-family: var(--font-ui); 
     }
     
     #editor::first-letter, #editor {
-        /* We rely on the user typing normal text in Inter, 
-           but symbols will inherit the font from the button insert if we styled spans, 
-           but here we just paste raw text. The symbols render ok in Inter, 
-           but would be better in Cormorant. 
-           (Advanced: wrapping symbols in spans is complex for a simple contenteditable).
-           We stick to Inter for the editor for consistency. */
+        
     }
     
     .legend-section {
@@ -326,7 +330,7 @@
 
     .legend-card p {
       margin: 0;
-      padding-left: 34px; /* Align with text above */
+      padding-left: 34px; 
       font-size: 0.85rem;
       color: var(--muted);
       line-height: 1.4;
@@ -483,7 +487,7 @@
   <div id="toast" class="toast" role="status" aria-live="polite">Action completed</div>
 
   <script>
-    const editor = document.getElementById('editor');
+const editor = document.getElementById('editor');
     const toast = document.getElementById('toast');
 
     function showToast(msg){
@@ -492,7 +496,6 @@
       setTimeout(()=> toast.classList.remove('show'), 2000);
     }
 
-    // Insert symbol logic
     function insertSymbol(sym){
       editor.focus();
       const sel = window.getSelection();
@@ -527,8 +530,6 @@
         newRange.setStartAfter(node);
         newRange.setEndAfter(node);
       } else {
-        // Place caret between brackets
-        // Note: Simple logic for text node splitting
         newRange.setStart(node, left.length);
         newRange.setEnd(node, left.length);
       }
@@ -536,23 +537,18 @@
       sel.addRange(newRange);
     }
 
-    // Bind Buttons
     document.querySelectorAll('.btn-sym').forEach(btn=>{
       btn.addEventListener('click', (e)=>{
-        // Prevent focus loss flickering
         e.preventDefault();
         const left = btn.dataset.left;
         const right = btn.dataset.right;
         
-        // Add small tactile feedback animation logic if needed, 
-        // though CSS active state handles visual part.
         
         if(left && right) wrapSelection(left, right);
         else insertSymbol(btn.dataset.sym);
       });
     });
 
-    // Copy Function
     document.getElementById('copyAll').addEventListener('click', async ()=>{
       const text = editor.innerText;
       try {
@@ -566,7 +562,6 @@
       }
     });
 
-    // Clear Function
     document.getElementById('clear').addEventListener('click', ()=>{
       if(confirm('Clear current text?')){
         editor.innerText = '';
@@ -575,13 +570,11 @@
       }
     });
 
-    // Font Size
     const fontRange = document.getElementById('fontRange');
     const updateFont = () => editor.style.fontSize = fontRange.value + 'px';
     fontRange.addEventListener('input', updateFont);
     window.addEventListener('load', updateFont);
 
-    // Keyboard Shortcuts
     const keyMap = new Map([
       ['1','⊙'], ['2','▲'], ['3','■'], ['4','⊡'], ['5','●'],
       ['6','⊑'], ['7','→'], ['8','⊖'], ['9','∴'],
@@ -599,7 +592,6 @@
       }
     });
 
-    // Auto-focus
     window.addEventListener('load', ()=> editor.focus());
   </script>
 </body>

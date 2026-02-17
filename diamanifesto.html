@@ -3,60 +3,66 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DIA▲MANIFESTO // OFFICIAL ENGLISH VERSION</title>
-  <meta name="color-scheme" content="light only" />
+  <title>DIA▲MANIFESTO // Official English Version</title>
+  <link rel="canonical" href="https://diamanifesto.org/diamanifesto.html"/>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#ffffff"/>
+  <meta name="color-scheme" content="light only"/>
 
- <meta name="description" content="DIA▲MANIFESTO is a living architecture of thought, articulated through axioms and symbols, designed to activate relational and responsible thinking.">
+  <meta name="description" content="Read the official English version of DIA▲MANIFESTO: a structured architecture of thought articulated through axioms, symbols, and relational logic."/>
 
+  <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/favicon-192.png" sizes="192x192">
+  <link rel="icon" href="/favicon-48x48.png" type="image/png" sizes="48x48">
+  <link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="/site.webmanifest?v=1">
 
-  <meta property="og:title" content="DIA▲MANIFESTO — a living architecture of thought">
-  <meta property="og:description" content="DIA▲MANIFESTO is a living architecture of thought, articulated through axioms and symbols, designed to activate relational and responsible thinking.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://diamanifesto.org/">
-  <meta property="og:image" content="https://diamanifesto.org/favicon-192.png">
+  <meta property="og:title" content="DIA▲MANIFESTO // Official English Version"/>
+  <meta property="og:description" content="Read the official English version of DIA▲MANIFESTO: a structured architecture of thought articulated through axioms, symbols, and relational logic."/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="https://diamanifesto.org/diamanifesto.html"/>
+  <meta property="og:image" content="https://diamanifesto.org/favicon-192.png"/>
   <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://diamanifesto.org/favicon-192.png"/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "https://diamanifesto.org/#website",
-        "name": "DIA▲MANIFESTO",
-        "url": "https://diamanifesto.org/",
-        "inLanguage": "en"
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://diamanifesto.org/#website",
+      "name": "DIA▲MANIFESTO",
+      "url": "https://diamanifesto.org/",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://diamanifesto.org/diamanifesto.html#webpage",
+      "url": "https://diamanifesto.org/diamanifesto.html",
+      "name": "DIA▲MANIFESTO // Official English Version",
+      "isPartOf": {
+        "@id": "https://diamanifesto.org/#website"
       },
-      {
-        "@type": "WebPage",
-        "@id": "https://diamanifesto.org/#webpage",
-        "url": "https://diamanifesto.org/",
-        "name": "DIA▲MANIFESTO — a living architecture of thought",
-        "isPartOf": { "@id": "https://diamanifesto.org/#website" },
-        "inLanguage": "en",
-        "about": {
-          "@type": "CreativeWork",
-          "name": "DIA▲MANIFESTO",
-          "description": "DIA▲MANIFESTO is a living architecture of thought, articulated through axioms and symbols, designed to activate relational and responsible thinking."
-        }
+      "inLanguage": "en",
+      "about": {
+        "@type": "CreativeWork",
+        "name": "DIA▲MANIFESTO (Official English Version)",
+        "description": "Read the official English version of DIA▲MANIFESTO: a structured architecture of thought articulated through axioms, symbols, and relational logic."
       }
-    ]
-  }
+    }
+  ]
+}
   </script>
 
   <style>
-    :root{
+:root{
       --bg: #ffffff;
       --fg: #1a1a1a;
       --muted: #666;
@@ -577,7 +583,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js"></script>
   <script>
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(!reduce && window.innerWidth > 820){
       new p5(p => {
         let nodes=[], edges=[], t0=0, state=0;
