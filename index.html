@@ -768,6 +768,58 @@
       }
     }
 
+
+    /* ── Mobile centering correction ── */
+
+    @media (max-width: 760px){
+      .topbar{
+        position: fixed;
+        left: 0;
+        right: 0;
+      }
+
+      .wrap{
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: calc(142px + env(safe-area-inset-top, 0px));
+        padding-bottom: calc(126px + env(safe-area-inset-bottom, 0px));
+      }
+
+      .wrap::before{
+        top: 50%;
+        width: min(88vw, 540px);
+      }
+
+      .panel{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .title-mark{
+        max-width: 100%;
+        text-align: center;
+      }
+
+      .title{
+        display: block;
+        max-width: 100%;
+        text-align: center;
+        font-size: clamp(2.85rem, 13.2vw, 4.9rem);
+        line-height: 0.9;
+      }
+    }
+
+    @media (max-width: 380px){
+      .title{
+        font-size: clamp(2.34rem, 13.6vw, 3.25rem);
+      }
+    }
+
   </style>
 </head>
 
@@ -879,6 +931,19 @@ new p5(function(p){
         ORBITERS = compact ? 24 : 42;
       }
 
+      function getVisualCenterY(){
+        const compact = p.windowWidth <= 760;
+        if(!compact) return p.height * 0.5;
+
+        const topbar = document.querySelector('.topbar');
+        const gateways = document.querySelector('.ambient-gateways');
+        const topInset = topbar ? topbar.getBoundingClientRect().bottom : 0;
+        const bottomInset = gateways ? Math.max(0, p.height - gateways.getBoundingClientRect().top) : 0;
+        const usableHeight = Math.max(240, p.height - topInset - bottomInset);
+
+        return topInset + usableHeight * 0.5;
+      }
+
       function resetField(){
         nodes = [];
         edges = [];
@@ -889,7 +954,7 @@ new p5(function(p){
 
         const minSide = Math.min(p.width, p.height);
         const cx = p.width * 0.5;
-        const cy = p.height * 0.5;
+        const cy = getVisualCenterY();
 
         for(let i = 0; i < NODE_TARGET; i++){
           const angle = (p.TWO_PI / NODE_TARGET) * i + p.random(-0.1, 0.1);
@@ -937,7 +1002,7 @@ new p5(function(p){
         p.clear();
         const elapsed = p.millis();
         const cx = p.width * 0.5;
-        const cy = p.height * 0.5;
+        const cy = getVisualCenterY();
         const minSide = Math.min(p.width, p.height);
 
         drawArchitecturalRings(cx, cy, minSide, elapsed);
