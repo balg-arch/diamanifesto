@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 
   <title>DIA▲MANIFESTO // Index</title>
   <link rel="canonical" href="https://diamanifesto.org/"/>
@@ -65,174 +65,389 @@
   <style>
 :root{
       --bg: #ffffff;
-      --fg: #1a1a1a;
+      --fg: #050505;
       --accent: #000000;
-      --glass-bg: rgba(255, 255, 255, 0.75);
-      --glass-border: rgba(0, 0, 0, 0.06);
-      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
-      --radius-sm: 10px;
-      --radius-lg: 18px;
+      --muted: rgba(0, 0, 0, 0.56);
+      --hairline: rgba(0, 0, 0, 0.12);
+      --hairline-soft: rgba(0, 0, 0, 0.075);
+      --surface: rgba(255, 255, 255, 0.74);
+      --surface-solid: #ffffff;
+      --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.08);
+      --shadow-tight: 0 12px 34px rgba(0, 0, 0, 0.10);
+      --radius-sm: 999px;
+      --radius-lg: 34px;
       --font-serif: "Cormorant Garamond", serif;
       --font-sans: "Inter", system-ui, sans-serif;
+      --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+      --ease-sculpt: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *{
+      box-sizing: border-box;
     }
 
     html, body{
       margin: 0;
       padding: 0;
-      height: 100%;
+      min-height: 100%;
       background: var(--bg);
       color: var(--fg);
     }
 
+    html{
+      scroll-behavior: smooth;
+    }
+
     body{
+      min-height: 100vh;
+      min-height: 100dvh;
       font-family: var(--font-sans);
+      overflow-x: hidden;
       overflow-wrap: normal;
       word-break: normal;
       -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+      isolation: isolate;
+      touch-action: manipulation;
     }
-    
+
+    body::before,
+    body::after{
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    body::before{
+      background:
+        radial-gradient(circle at 50% 18%, rgba(0,0,0,0.075), transparent 12%),
+        radial-gradient(circle at 18% 78%, rgba(0,0,0,0.055), transparent 20%),
+        radial-gradient(circle at 84% 72%, rgba(0,0,0,0.045), transparent 18%),
+        linear-gradient(180deg, #fff 0%, #fbfbfb 58%, #fff 100%);
+      opacity: 0.82;
+    }
+
+    body::after{
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.035) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.42), transparent 69%);
+      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.42), transparent 69%);
+      opacity: 0;
+      animation: gridReveal 1.6s var(--ease-out) forwards 0.2s;
+    }
+
     #p5-bg{
       position: fixed;
       inset: 0;
       z-index: 0;
       pointer-events: none;
       opacity: 0;
-      animation: fadeInCanvas 2s ease-out forwards;
-    }
-
-    @keyframes fadeInCanvas {
-        to { opacity: 1; }
+      mix-blend-mode: multiply;
+      filter: contrast(1.05);
+      animation: fadeInCanvas 2s var(--ease-out) forwards;
     }
 
     .wrap{
       position: relative;
-      z-index: 1;
+      z-index: 2;
       min-height: 100vh;
       min-height: 100dvh;
       display: grid;
       place-items: center;
-      padding: 6vh 20px;
-      box-sizing: border-box;
+      padding: calc(clamp(148px, 15vh, 190px) + env(safe-area-inset-top, 0px)) 24px calc(120px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .wrap::before{
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: min(76vw, 880px);
+      aspect-ratio: 1;
+      transform: translate(-50%, -50%) rotate(45deg);
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 44px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.88), rgba(255,255,255,0.18));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.8), 0 40px 120px rgba(0,0,0,0.055);
+      opacity: 0;
+      animation: monolithIn 1.4s var(--ease-sculpt) forwards 0.28s;
+      pointer-events: none;
     }
 
     .panel{
+      position: relative;
       width: 100%;
-      max-width: 820px;
+      max-width: 1040px;
       text-align: center;
+      padding: clamp(34px, 5vw, 76px) clamp(16px, 4vw, 56px);
     }
-    
+
+    .panel::before,
+    .panel::after{
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(78vw, 720px);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.22), transparent);
+      opacity: 0;
+      animation: lineOpen 1.2s var(--ease-out) forwards 0.72s;
+      pointer-events: none;
+    }
+
+    .panel::before{ top: 0; }
+    .panel::after{ bottom: 0; animation-delay: 0.82s; }
+
+    .title-mark{
+      position: relative;
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(28px) scale(0.985);
+      animation: titleArrival 1.25s var(--ease-sculpt) forwards 0.42s;
+    }
+
+    .title-mark::before,
+    .title-mark::after{
+      content: "";
+      position: absolute;
+      inset: -24px -34px;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 32px;
+      opacity: 0;
+      transform: scale(0.94);
+      transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out), border-color 0.55s var(--ease-out);
+      pointer-events: none;
+    }
+
+    .title-mark::after{
+      inset: -42px -58px;
+      border-radius: 44px;
+      border-style: dashed;
+      border-color: rgba(0,0,0,0.06);
+      transition-delay: 0.03s;
+    }
+
+    .title-mark::before,
+    .title-mark::after{
+      opacity: 0.42;
+      transform: scale(1);
+    }
+
     .title{
       font-family: var(--font-serif);
-      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-size: clamp(3.25rem, 9vw, 8.4rem);
       font-weight: 700;
-      letter-spacing: -0.02em;
-      margin: 0 0 16px;
+      letter-spacing: -0.035em;
+      margin: 0;
       color: var(--accent);
-      line-height: 0.9;
+      line-height: 0.86;
       white-space: nowrap;
-      
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-      animation-delay: 0.2s;
+      display: inline-block;
+      text-shadow: 0 18px 42px rgba(0,0,0,0.055);
+      transition:
+        transform 0.8s var(--ease-sculpt),
+        letter-spacing 0.8s var(--ease-sculpt),
+        filter 0.8s var(--ease-sculpt),
+        text-shadow 0.8s var(--ease-sculpt);
+      will-change: transform;
     }
+
+    
 
     .divider{
-      width: 60px;
-      height: 2px;
-      background: #e0e0e0;
-      margin: 24px auto 32px;
-      border-radius: 2px;
-      
+      position: relative;
+      width: min(460px, 58vw);
+      height: 1px;
+      margin: clamp(26px, 4vw, 44px) auto 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.58), transparent);
       opacity: 0;
-      animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-      animation-delay: 0.4s;
+      transform: scaleX(0.4);
+      animation: dividerBuild 1.18s var(--ease-out) forwards 0.86s;
     }
 
-    .links{
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-      
-      opacity: 0;
-      animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-      animation-delay: 0.6s;
-    }
-    
-    .link{
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px 40px;
-      
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border);
-      
-      border-radius: var(--radius-lg);
-      text-decoration: none;
-      color: var(--accent);
-      font-weight: 500;
-      letter-spacing: 0.01em;
-      font-size: 1.1rem;
-      box-shadow: var(--glass-shadow);
-      
-      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    .divider::before,
+    .divider::after{
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border: 1px solid rgba(0,0,0,0.62);
+      background: #fff;
+      transform: translateY(-50%) rotate(45deg);
+      box-shadow: 0 0 0 7px rgba(255,255,255,0.72);
     }
 
-    .link:hover{
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
-      border-color: rgba(0,0,0,0.15);
-      background: rgba(255, 255, 255, 0.9);
-    }
-    
-    .link:active{
-        transform: translateY(-1px);
-    }
-    
-    .topbar-right, .topbar-left {
+    .divider::before{ left: calc(50% - 54px); }
+    .divider::after{ right: calc(50% - 54px); }
+
+    .topbar-right,
+    .topbar-left{
       position: fixed;
-      top: 24px;
+      top: calc(24px + env(safe-area-inset-top, 0px));
       z-index: 9999;
+      opacity: 0;
+      animation: navDrop 1s var(--ease-out) forwards 0.72s;
     }
-    .topbar-right { right: 24px; }
-    .topbar-left { left: 24px; }
+
+    .topbar-right{ right: 24px; }
+    .topbar-left{ left: 24px; }
 
     .interact-btn{
-      padding: 10px 18px;
-      
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(0,0,0,0.08);
-      
+      position: relative;
+      min-height: 46px;
+      padding: 13px 18px;
+      isolation: isolate;
+      overflow: hidden;
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(18px) saturate(1.35);
+      -webkit-backdrop-filter: blur(18px) saturate(1.35);
+      border: 1px solid rgba(0,0,0,0.12);
       border-radius: var(--radius-sm);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-      
+      box-shadow: 0 8px 26px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.95);
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-
-      color: #333;
+      justify-content: center;
+      gap: 10px;
+      color: #000;
       text-decoration: none;
-      font-weight: 500;
-      letter-spacing: 0.01em;
+      font-weight: 600;
+      letter-spacing: -0.01em;
       font-size: 13px;
       font-family: var(--font-sans);
+      transition:
+        transform 0.45s var(--ease-out),
+        border-color 0.45s var(--ease-out),
+        box-shadow 0.45s var(--ease-out),
+        background 0.45s var(--ease-out);
+    }
 
-      transition: all 0.3s ease;
+    .interact-btn::before{
+      content: "";
+      width: 7px;
+      height: 7px;
+      border: 1px solid currentColor;
+      transform: rotate(45deg);
+      flex: 0 0 auto;
+      transition: transform 0.45s var(--ease-out), background 0.45s var(--ease-out);
     }
-    
-    .interact-btn:hover{
-      transform: translateY(-2px);
-      border-color: rgba(0,0,0,0.2);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+
+    .interact-btn::after{
+      content: "";
+      position: absolute;
+      inset: -1px;
+      z-index: -1;
+      border-radius: inherit;
+      background: linear-gradient(120deg, transparent 0%, rgba(0,0,0,0.055) 30%, transparent 62%);
+      transform: translateX(-115%);
+      transition: transform 0.75s var(--ease-out);
+    }
+
+    .interact-btn:hover,
+    .interact-btn:focus-visible{
+      transform: translateY(-3px);
+      border-color: rgba(0,0,0,0.34);
+      box-shadow: var(--shadow-tight), inset 0 1px 0 rgba(255,255,255,1);
+      background: rgba(255,255,255,0.94);
+      outline: none;
+    }
+
+    .interact-btn:hover::before,
+    .interact-btn:focus-visible::before{
+      transform: rotate(225deg) scale(1.08);
+      background: #000;
+    }
+
+    .interact-btn:hover::after,
+    .interact-btn:focus-visible::after{
+      transform: translateX(115%);
+    }
+
+
+    .enter-portal{
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      margin-top: clamp(28px, 4vw, 42px);
+      padding: 15px 34px;
+      isolation: isolate;
+      overflow: hidden;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(20px) saturate(1.35);
+      -webkit-backdrop-filter: blur(20px) saturate(1.35);
+      border: 1px solid rgba(0,0,0,0.14);
+      border-radius: 999px;
+      box-shadow: 0 12px 34px rgba(0,0,0,0.075), inset 0 1px 0 rgba(255,255,255,0.98);
       color: #000;
-      background: #fff;
+      text-decoration: none;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: enterRise 1s var(--ease-out) forwards 1.02s;
+      transition:
+        transform 0.45s var(--ease-out),
+        border-color 0.45s var(--ease-out),
+        box-shadow 0.45s var(--ease-out),
+        background 0.45s var(--ease-out),
+        letter-spacing 0.45s var(--ease-out);
     }
-    
+
+    .enter-portal::before{
+      content: "";
+      width: 8px;
+      height: 8px;
+      margin-right: 14px;
+      border: 1px solid currentColor;
+      transform: rotate(45deg);
+      transition: transform 0.45s var(--ease-out), background 0.45s var(--ease-out);
+    }
+
+    .enter-portal::after{
+      content: "";
+      position: absolute;
+      inset: -1px;
+      z-index: -1;
+      border-radius: inherit;
+      background: linear-gradient(120deg, transparent 0%, rgba(0,0,0,0.065) 34%, transparent 66%);
+      transform: translateX(-115%);
+      transition: transform 0.8s var(--ease-out);
+    }
+
+    .enter-portal:hover,
+    .enter-portal:focus-visible{
+      transform: translateY(-4px);
+      border-color: rgba(0,0,0,0.38);
+      box-shadow: 0 16px 42px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,1);
+      background: rgba(255,255,255,0.96);
+      letter-spacing: 0.3em;
+      outline: none;
+    }
+
+    .enter-portal:hover::before,
+    .enter-portal:focus-visible::before{
+      transform: rotate(225deg) scale(1.08);
+      background: #000;
+    }
+
+    .enter-portal:hover::after,
+    .enter-portal:focus-visible::after{
+      transform: translateX(115%);
+    }
+
     .sr-only{
       position: absolute !important;
       width: 1px;
@@ -244,90 +459,302 @@
       white-space: nowrap;
       border: 0;
     }
-    
+
     .ambient-gateways{
-      position: relative;
-      z-index: 2;
+      position: fixed;
+      left: 50%;
+      bottom: calc(26px + env(safe-area-inset-bottom, 0px));
+      z-index: 4;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 32px;
-      margin: 10vh auto 60px; 
+      gap: 14px;
       width: fit-content;
-      
+      padding: 8px;
+      border: 1px solid rgba(0,0,0,0.10);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(18px) saturate(1.25);
+      -webkit-backdrop-filter: blur(18px) saturate(1.25);
+      box-shadow: 0 16px 42px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
       opacity: 0;
-      animation: fadeIn 1.5s ease forwards;
-      animation-delay: 1.2s;
+      transform: translateX(-50%) translateY(22px);
+      animation: gatewayRise 1s var(--ease-out) forwards 1.05s;
+    }
+
+    .ambient-gateways::before{
+      content: "";
+      position: absolute;
+      inset: -10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.05);
+      pointer-events: none;
     }
 
     .ambient-gateway{
+      position: relative;
       display: grid;
       place-items: center;
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       text-decoration: none;
       color: var(--accent);
-      font-size: 14px;
-      
+      font-size: 16px;
       border-radius: 50%;
       background: transparent;
-      transition: all 0.3s ease;
-      opacity: 0.4;
+      border: 1px solid transparent;
+      transition:
+        transform 0.45s var(--ease-out),
+        background 0.45s var(--ease-out),
+        border-color 0.45s var(--ease-out),
+        box-shadow 0.45s var(--ease-out),
+        opacity 0.45s var(--ease-out);
+      opacity: 0.62;
+      outline: none;
     }
-    
-    .ambient-gateway:hover{
+
+    .ambient-gateway::after{
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 1px solid rgba(0,0,0,0.16);
+      border-radius: 50%;
+      opacity: 0;
+      transform: scale(0.35);
+      transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
+    }
+
+    .ambient-gateway:hover,
+    .ambient-gateway:focus-visible{
       opacity: 1;
-      background: rgba(0,0,0,0.04);
+      background: #fff;
+      border-color: rgba(0,0,0,0.16);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.09);
+      transform: translateY(-4px) scale(1.06);
+    }
+
+    .ambient-gateway:hover::after,
+    .ambient-gateway:focus-visible::after{
+      opacity: 1;
       transform: scale(1.1);
     }
-    
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+
+    @keyframes fadeInCanvas{
+      to{ opacity: 1; }
     }
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+
+    @keyframes gridReveal{
+      from{ opacity: 0; transform: scale(1.04); }
+      to{ opacity: 1; transform: scale(1); }
     }
-    
+
+    @keyframes monolithIn{
+      from{ opacity: 0; transform: translate(-50%, -50%) rotate(45deg) scale(0.84); }
+      to{ opacity: 1; transform: translate(-50%, -50%) rotate(45deg) scale(1); }
+    }
+
+    @keyframes titleArrival{
+      from{ opacity: 0; transform: translateY(28px) scale(0.985); filter: blur(10px); }
+      to{ opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+
+    @keyframes dividerBuild{
+      from{ opacity: 0; transform: scaleX(0.4); }
+      to{ opacity: 1; transform: scaleX(1); }
+    }
+
+    @keyframes lineOpen{
+      from{ opacity: 0; width: 0; }
+      to{ opacity: 1; width: min(78vw, 720px); }
+    }
+
+    @keyframes navDrop{
+      from{ opacity: 0; transform: translateY(-16px); }
+      to{ opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes gatewayRise{
+      from{ opacity: 0; transform: translateX(-50%) translateY(22px); }
+      to{ opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    @keyframes enterRise{
+      from{ opacity: 0; transform: translateY(18px); }
+      to{ opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp{
+      from{ opacity: 0; transform: translateX(-50%) translateY(12px); }
+      to{ opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *, *::before, *::after{
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 900px){
+      .wrap::before{
+        width: min(92vw, 720px);
+        border-radius: 32px;
+      }
+
+      .wrap::after{
+        letter-spacing: 0.28em;
+      }
+    }
+
     @media (max-width: 760px){
-      .topbar-left, .topbar-right{
-        position: fixed;
+      body::after{
+        background-size: 38px 38px;
+      }
+
+      .topbar-left,
+      .topbar-right{
         left: 50%;
-        transform: translateX(-50%);
         right: auto;
-        width: 90%;
-        text-align: center;
+        width: min(92vw, 420px);
         display: flex;
         justify-content: center;
       }
 
-      .topbar-left{ top: 16px; }
-      .topbar-right{ top: 64px; }
+      .topbar-left{ top: calc(14px + env(safe-area-inset-top, 0px)); }
+      .topbar-right{ top: calc(70px + env(safe-area-inset-top, 0px)); }
 
       .interact-btn{
         width: 100%;
-        justify-content: center;
+        min-height: 48px;
+        padding: 12px 16px;
         font-size: 12px;
-        padding: 10px 14px;
-        background: rgba(255, 255, 255, 0.9);
+        line-height: 1.2;
       }
 
       .wrap{
-        padding-top: 140px;
+        padding: calc(158px + env(safe-area-inset-top, 0px)) 18px calc(116px + env(safe-area-inset-bottom, 0px));
       }
-      
-      .title {
+
+      .wrap::before{
+        top: 52%;
+        width: 92vw;
+      }
+
+      .panel{
+        padding-inline: 0;
+      }
+
+      .title{
+        font-size: clamp(3.05rem, 14vw, 5.6rem);
         white-space: normal;
       }
-      
-      .link {
-          padding: 20px 24px;
-          font-size: 1rem;
-          width: 100%;
-          box-sizing: border-box;
+
+      .title-mark::before{
+        inset: -16px -14px;
+      }
+
+      .title-mark::after{
+        inset: -28px -24px;
+      }
+
+      .divider{
+        width: min(320px, 72vw);
+      }
+
+      .ambient-gateways{
+        bottom: calc(18px + env(safe-area-inset-bottom, 0px));
       }
     }
+
+    @media (max-width: 420px){
+      .topbar-right{ top: calc(76px + env(safe-area-inset-top, 0px)); }
+      .interact-btn{ font-size: 11.5px; }
+      .wrap{ padding-top: calc(170px + env(safe-area-inset-top, 0px)); }
+      .title{ font-size: clamp(2.8rem, 15vw, 4.6rem); }
+      .ambient-gateway{ width: 44px; height: 44px; }
+    }
+
+    @media (max-width: 380px){
+      .topbar-left,
+      .topbar-right{
+        width: calc(100vw - 24px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
+      }
+
+      .interact-btn{
+        min-height: 46px;
+        padding-inline: 12px;
+        font-size: 10.8px;
+        letter-spacing: -0.02em;
+      }
+
+      .interact-btn::before{
+        width: 6px;
+        height: 6px;
+      }
+
+      .wrap{
+        padding-left: calc(14px + env(safe-area-inset-left, 0px));
+        padding-right: calc(14px + env(safe-area-inset-right, 0px));
+      }
+
+      .title{
+        font-size: clamp(2.42rem, 14.2vw, 3.35rem);
+        letter-spacing: -0.045em;
+      }
+
+      .divider{
+        width: min(260px, 70vw);
+      }
+
+      .ambient-gateways{
+        gap: 8px;
+        padding: 7px;
+      }
+
+      .ambient-gateway{
+        width: 42px;
+        height: 42px;
+        font-size: 15px;
+      }
+    }
+
+    @media (max-height: 620px) and (orientation: landscape){
+      .topbar-left,
+      .topbar-right{
+        top: calc(12px + env(safe-area-inset-top, 0px));
+        width: auto;
+      }
+
+      .topbar-left{ left: calc(14px + env(safe-area-inset-left, 0px)); }
+      .topbar-right{ right: calc(14px + env(safe-area-inset-right, 0px)); left: auto; }
+
+      .interact-btn{
+        min-height: 40px;
+        padding: 10px 13px;
+        font-size: 11px;
+      }
+
+      .wrap{
+        padding-top: calc(82px + env(safe-area-inset-top, 0px));
+        padding-bottom: calc(86px + env(safe-area-inset-bottom, 0px));
+      }
+
+      .panel{
+        padding-block: 18px;
+      }
+
+      .title{
+        font-size: clamp(2.8rem, 8vw, 5rem);
+        white-space: nowrap;
+      }
+
+      .ambient-gateways{
+        bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+      }
+    }
+
   </style>
 </head>
 
@@ -351,14 +778,11 @@
 
   <div class="wrap">
     <section class="panel" aria-label="Index">
-      <h1 class="title">DIA▲MANIFESTO</h1>
+      <div class="title-mark" aria-hidden="false">
+        <h1 class="title">DIA▲MANIFESTO</h1>
+      </div>
       <div class="divider" aria-hidden="true"></div>
-
-      <nav class="links" aria-label="Main link">
-        <a class="link" href="diamanifesto.html">
-          Go to the OFFICIAL ENGLISH VERSION OF DIA▲MANIFESTO
-        </a>
-      </nav>
+      <a class="enter-portal" href="diamanifesto.html" aria-label="Read DIA▲MANIFESTO">READ DIA▲MANIFESTO</a>
 
       <section class="sr-only" aria-label="What DIA▲MANIFESTO is / is not">
         <h2>What DIA▲MANIFESTO is</h2>
@@ -376,13 +800,13 @@
         <h2>Meaning of the name DIA▲MANIFESTO</h2>
         <dl>
           <dt>DIA</dt>
-          <dd>From the Greek prefix “dia-”, meaning through or across.</dd>
+          <dd>From the Greek prefix "dia-", meaning through or across.</dd>
 
           <dt>▲</dt>
           <dd>Differentiation: the emergence of structure.</dd>
 
           <dt>MANIFESTO</dt>
-          <dd>From the Latin “manifestus”, meaning made evident.</dd>
+          <dd>From the Latin "manifestus", meaning made evident.</dd>
         </dl>
       </section>
 
@@ -393,7 +817,14 @@
     <a class="ambient-gateway"
        href="diamanifesto_ambient-generator.html"
        aria-label="Open DIA▲MANIFESTO Ambient Generator"
-       title="Open DIA▲MANIFESTO Ambient Generator">▲</a>
+       title="Open DIA▲MANIFESTO Ambient Generator">▼</a>
+
+    <a class="ambient-gateway"
+       href="https://entering-diamanifesto.nexus/"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Open Entering DIA▲MANIFESTO"
+       title="Open Entering DIA▲MANIFESTO">▲</a>
 
     <a class="ambient-gateway"
        href="diamanifesto_daily-axiom.html"
@@ -404,174 +835,242 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js"></script>
   <script>
 new p5(function(p){
-      const NODE_TARGET = 12;
-      const EDGE_TARGET = 18;
-      const PARTICLE_MAX = 5;
-      const JITTER = 10;
-      const STROKE_ALPHA = 40;
+      let NODE_TARGET = 18;
+      let EDGE_TARGET = 32;
+      let PARTICLE_MAX = 9;
+      let ORBITERS = 42;
 
-      let state = 0;
-      let nodes = [], edges = [], particles = [];
-      let t0 = 0, triAlpha = 0, fadeAlpha = 0;
+      let nodes = [], edges = [], particles = [], orbiters = [];
+      let centerPulse = 0;
+      let lastEdgeAt = 0;
 
       p.setup = function(){
+        configureForViewport();
         p.createCanvas(p.windowWidth, p.windowHeight);
-        p.pixelDensity(1);
-        p.frameRate(60);
-        resetCycle();
+        p.pixelDensity(p.windowWidth <= 760 ? 1 : Math.min(2, p.displayDensity()));
+        p.frameRate(p.windowWidth <= 760 ? 42 : 60);
+        resetField();
       };
 
       p.windowResized = function(){
+        configureForViewport();
+        p.pixelDensity(p.windowWidth <= 760 ? 1 : Math.min(2, p.displayDensity()));
+        p.frameRate(p.windowWidth <= 760 ? 42 : 60);
         p.resizeCanvas(p.windowWidth, p.windowHeight);
+        resetField();
       };
 
-      function resetCycle(){
-        nodes.length = 0;
-        edges.length = 0;
-        particles.length = 0;
-        triAlpha = 0;
-        fadeAlpha = 0;
-        state = 0;
-        t0 = p.millis();
+      function configureForViewport(){
+        const compact = p.windowWidth <= 760 || p.windowHeight <= 620;
+        NODE_TARGET = compact ? 12 : 18;
+        EDGE_TARGET = compact ? 20 : 32;
+        PARTICLE_MAX = compact ? 5 : 9;
+        ORBITERS = compact ? 24 : 42;
+      }
+
+      function resetField(){
+        nodes = [];
+        edges = [];
+        particles = [];
+        orbiters = [];
+        centerPulse = 0;
+        lastEdgeAt = 0;
+
+        const minSide = Math.min(p.width, p.height);
+        const cx = p.width * 0.5;
+        const cy = p.height * 0.5;
+
+        for(let i = 0; i < NODE_TARGET; i++){
+          const angle = (p.TWO_PI / NODE_TARGET) * i + p.random(-0.1, 0.1);
+          const ring = i % 3;
+          const radius = minSide * (ring === 0 ? 0.18 : ring === 1 ? 0.285 : 0.39) + p.random(-18, 18);
+          nodes.push({
+            x: cx + p.cos(angle) * radius,
+            y: cy + p.sin(angle) * radius,
+            bx: cx + p.cos(angle) * radius,
+            by: cy + p.sin(angle) * radius,
+            s: p.random(4, 9),
+            phase: p.random(p.TWO_PI),
+            shape: p.random([0,1,2]),
+            a: 0
+          });
+        }
+
+        for(let i = 0; i < NODE_TARGET; i++){
+          const next = (i + 1) % NODE_TARGET;
+          const jump = (i + 6) % NODE_TARGET;
+          edges.push({a: i, b: next, alpha: p.random(18, 38), curve: p.random(-0.32, 0.32)});
+          if(i % 2 === 0) edges.push({a: i, b: jump, alpha: p.random(10, 24), curve: p.random(-0.42, 0.42)});
+        }
+
+        while(edges.length < EDGE_TARGET){
+          const a = p.floor(p.random(nodes.length));
+          const b = p.floor(p.random(nodes.length));
+          if(a !== b && !edges.some(e => (e.a === a && e.b === b) || (e.a === b && e.b === a))){
+            edges.push({a, b, alpha: p.random(7, 20), curve: p.random(-0.55, 0.55)});
+          }
+        }
+
+        for(let i = 0; i < ORBITERS; i++){
+          orbiters.push({
+            r: p.random(minSide * 0.18, minSide * 0.58),
+            a: p.random(p.TWO_PI),
+            speed: p.random(0.00055, 0.00165) * p.random([-1, 1]),
+            size: p.random(0.7, 2.2),
+            alpha: p.random(16, 54)
+          });
+        }
       }
 
       p.draw = function(){
-        p.background(255); 
-        const t = (p.millis() - t0) / 1000;
+        p.clear();
+        const elapsed = p.millis();
+        const cx = p.width * 0.5;
+        const cy = p.height * 0.5;
+        const minSide = Math.min(p.width, p.height);
 
-        if(state === 0){
-          if(nodes.length < NODE_TARGET && t > nodes.length * 0.22){
-            const angle = p.map(nodes.length, 0, NODE_TARGET - 1, 0, p.TWO_PI);
-            const rad = p.random(90, Math.min(p.width, p.height) / 3.0);
-            const cx = p.width/2 + p.cos(angle + p.random(-0.06,0.06)) * rad + p.random(-14,14);
-            const cy = p.height/2 + p.sin(angle + p.random(-0.07,0.07)) * rad + p.random(-10,10);
-            const s  = p.random(14, 28);
-            const typ = p.random([0,1,2]);
-            nodes.push({x: cx, y: cy, s: s, t: typ, a: 0});
-          }
-          nodes.forEach(n => {
-            n.a = Math.min(1, n.a + 0.045);
-            drawNode(n);
-          });
-          if(nodes.length === NODE_TARGET && t > 4.5){
-            state = 1;
-            t0 = p.millis();
-          }
-        }
-
-        if(state === 1){
-          nodes.forEach(drawNode);
-
-          if(edges.length < EDGE_TARGET && p.frameCount % 6 === 0){
-            const a = p.floor(p.random(nodes.length));
-            const b = p.floor(p.random(nodes.length));
-            if(a !== b && !edges.some(e => (e[0] === a && e[1] === b) || (e[0] === b && e[1] === a))){
-              edges.push([a, b, p.random([0,1])]);
-            }
-          }
-
-          p.stroke(18,18,18,STROKE_ALPHA);
-          p.strokeWeight(2);
-          edges.forEach(e => {
-            const n1 = nodes[e[0]];
-            const n2 = nodes[e[1]];
-            if(e[2] === 0){
-              p.line(n1.x, n1.y, n2.x, n2.y);
-            } else {
-              p.noFill();
-              p.bezier(
-                n1.x, n1.y,
-                n1.x + p.random(-JITTER, JITTER), n1.y + p.random(-JITTER, JITTER),
-                n2.x + p.random(-JITTER, JITTER), n2.y + p.random(-JITTER, JITTER),
-                n2.x, n2.y
-              );
-            }
-          });
-
-          if(particles.length < PARTICLE_MAX && p.frameCount % 16 === 0 && edges.length > 0){
-            const e = edges[p.floor(p.random(edges.length))];
-            const a = nodes[e[0]];
-            const b = nodes[e[1]];
-            if(a && b){
-              particles.push({ax: a.x, ay: a.y, bx: b.x, by: b.y, u: 0, life: p.random(70,120)});
-            }
-          }
-
-          particles.forEach(pt => {
-            pt.u += 1 / pt.life;
-            const x = p.lerp(pt.ax, pt.bx, pt.u);
-            const y = p.lerp(pt.ay, pt.by, pt.u);
-            p.noStroke();
-            p.fill(24,24,24,90);
-            p.circle(x, y, 5);
-          });
-          particles = particles.filter(pt => pt.u < 1);
-
-          if(t > 7){
-            state = 2;
-            t0 = p.millis();
-          }
-        }
-
-        if(state === 2){
-          nodes.forEach(drawNode);
-
-          p.stroke(18,18,18,STROKE_ALPHA);
-          p.strokeWeight(2);
-          edges.forEach(e => {
-            const n1 = nodes[e[0]];
-            const n2 = nodes[e[1]];
-            if(e[2] === 0){
-              p.line(n1.x, n1.y, n2.x, n2.y);
-            } else {
-              p.noFill();
-              p.bezier(
-                n1.x, n1.y,
-                n1.x + p.random(-JITTER, JITTER), n1.y + p.random(-JITTER, JITTER),
-                n2.x + p.random(-JITTER, JITTER), n2.y + p.random(-JITTER, JITTER),
-                n2.x, n2.y
-              );
-            }
-          });
-
-          triAlpha = Math.min(1, triAlpha + 0.01);
-          drawLogo(p.width/2, p.height/2, Math.min(p.width, p.height)/5, 200 * triAlpha);
-
-          if(triAlpha >= 1 && t > 3.6){
-            state = 3;
-            t0 = p.millis();
-          }
-        }
-
-        if(state === 3){
-          fadeAlpha = Math.min(1, fadeAlpha + 0.02);
-          p.noStroke();
-          p.fill(255, 255 * fadeAlpha);
-          p.rect(0, 0, p.width, p.height);
-          if(fadeAlpha >= 1) resetCycle();
-        }
+        drawArchitecturalRings(cx, cy, minSide, elapsed);
+        drawOrbiters(cx, cy, elapsed);
+        updateNodes(elapsed);
+        drawEdges(elapsed);
+        drawParticles(elapsed);
+        drawNodes(elapsed);
+        drawBreathingTriangle(cx, cy, minSide, elapsed);
       };
 
-      function drawNode(n){
-        p.noStroke();
-        p.fill(20,20,20, 205 * n.a);
-        if(n.t === 0) p.circle(n.x, n.y, n.s);
-        else if(n.t === 1) p.ellipse(n.x, n.y, n.s * 1.35, n.s * 1.35 * p.random(0.9, 1.08));
-        else p.rect(n.x - n.s/2, n.y - n.s/2, n.s, n.s, 7);
+      function drawArchitecturalRings(cx, cy, minSide, elapsed){
+        p.push();
+        p.noFill();
+        p.strokeCap(p.ROUND);
+        const rings = [0.24, 0.36, 0.49];
+        rings.forEach((scale, index) => {
+          const wobble = p.sin(elapsed * 0.00055 + index) * 4;
+          p.stroke(0, 10 + index * 8);
+          p.strokeWeight(index === 1 ? 1.4 : 1);
+          p.circle(cx, cy, minSide * scale + wobble);
+        });
+
+        p.stroke(0, 18);
+        p.strokeWeight(1);
+        const r = minSide * 0.32;
+        for(let i = 0; i < 3; i++){
+          const a = -p.HALF_PI + i * p.TWO_PI / 3 + p.sin(elapsed * 0.00035) * 0.045;
+          p.line(cx, cy, cx + p.cos(a) * r, cy + p.sin(a) * r);
+        }
+        p.pop();
       }
 
-      function drawLogo(cx, cy, r, alpha=255){
+      function drawOrbiters(cx, cy, elapsed){
+        p.push();
+        p.noStroke();
+        orbiters.forEach(o => {
+          const a = o.a + elapsed * o.speed;
+          const x = cx + p.cos(a) * o.r;
+          const y = cy + p.sin(a * 1.03) * o.r * 0.72;
+          p.fill(0, o.alpha);
+          p.circle(x, y, o.size);
+        });
+        p.pop();
+      }
+
+      function updateNodes(elapsed){
+        nodes.forEach((n, i) => {
+          n.a = Math.min(1, n.a + 0.018 + i * 0.0008);
+          n.x = n.bx + p.sin(elapsed * 0.00072 + n.phase) * 8;
+          n.y = n.by + p.cos(elapsed * 0.00064 + n.phase) * 7;
+        });
+      }
+
+      function drawEdges(elapsed){
+        p.push();
+        p.noFill();
+        edges.forEach((e, i) => {
+          const a = nodes[e.a];
+          const b = nodes[e.b];
+          const reveal = Math.min(1, Math.max(0, (elapsed - i * 90) / 1300));
+          const alpha = e.alpha * reveal;
+          const midx = (a.x + b.x) * 0.5;
+          const midy = (a.y + b.y) * 0.5;
+          const dx = b.x - a.x;
+          const dy = b.y - a.y;
+          const cx = midx - dy * e.curve;
+          const cy = midy + dx * e.curve;
+          p.stroke(0, alpha);
+          p.strokeWeight(i % 5 === 0 ? 1.15 : 0.8);
+          p.bezier(a.x, a.y, cx, cy, cx, cy, b.x, b.y);
+        });
+        p.pop();
+      }
+
+      function drawParticles(elapsed){
+        if(elapsed - lastEdgeAt > 260 && particles.length < PARTICLE_MAX){
+          lastEdgeAt = elapsed;
+          const edge = edges[p.floor(p.random(edges.length))];
+          particles.push({ edge, u: 0, speed: p.random(0.004, 0.009), size: p.random(2.5, 4.6) });
+        }
+
+        p.push();
+        p.noStroke();
+        particles.forEach(pt => {
+          pt.u += pt.speed;
+          const a = nodes[pt.edge.a];
+          const b = nodes[pt.edge.b];
+          const u = easeInOut(pt.u);
+          const x = p.lerp(a.x, b.x, u);
+          const y = p.lerp(a.y, b.y, u);
+          p.fill(0, 74 * (1 - Math.abs(pt.u - 0.5)));
+          p.circle(x, y, pt.size);
+        });
+        particles = particles.filter(pt => pt.u < 1);
+        p.pop();
+      }
+
+      function drawNodes(elapsed){
+        p.push();
+        nodes.forEach(n => {
+          const pulse = 1 + p.sin(elapsed * 0.0019 + n.phase) * 0.12;
+          p.noStroke();
+          p.fill(0, 26 * n.a);
+          p.circle(n.x, n.y, n.s * 4.2 * pulse);
+          p.fill(0, 175 * n.a);
+          if(n.shape === 0){
+            p.circle(n.x, n.y, n.s * pulse);
+          } else if(n.shape === 1){
+            p.rectMode(p.CENTER);
+            p.rect(n.x, n.y, n.s * 1.08, n.s * 1.08, 2.5);
+          } else {
+            p.triangle(n.x, n.y - n.s * 0.75, n.x + n.s * 0.72, n.y + n.s * 0.55, n.x - n.s * 0.72, n.y + n.s * 0.55);
+          }
+        });
+        p.pop();
+      }
+
+      function drawBreathingTriangle(cx, cy, minSide, elapsed){
+        centerPulse = 0.5 + 0.5 * p.sin(elapsed * 0.0008);
+        const alpha = 18 + centerPulse * 30;
+        const r = minSide * (0.105 + centerPulse * 0.006);
         p.push();
         p.translate(cx, cy);
-        p.fill(0, alpha);
-        p.stroke(0, alpha * 0.4);
-        p.strokeWeight(3);
+        p.rotate(p.sin(elapsed * 0.00022) * 0.035);
+        p.noFill();
+        p.stroke(0, alpha);
+        p.strokeWeight(1.2);
         p.triangle(
           p.cos(-p.PI/2) * r, p.sin(-p.PI/2) * r,
-          p.cos(p.PI/6) * r,  p.sin(p.PI/6) * r,
+          p.cos(p.PI/6) * r, p.sin(p.PI/6) * r,
           p.cos(5*p.PI/6) * r, p.sin(5*p.PI/6) * r
         );
+        p.stroke(0, alpha * 0.5);
+        p.triangle(
+          p.cos(-p.PI/2) * r * 1.18, p.sin(-p.PI/2) * r * 1.18,
+          p.cos(p.PI/6) * r * 1.18, p.sin(p.PI/6) * r * 1.18,
+          p.cos(5*p.PI/6) * r * 1.18, p.sin(5*p.PI/6) * r * 1.18
+        );
         p.pop();
+      }
+
+      function easeInOut(x){
+        return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
       }
     }, document.getElementById('p5-bg'));
   </script>
