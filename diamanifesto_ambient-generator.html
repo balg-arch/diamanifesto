@@ -627,6 +627,354 @@
       }
     }
   </style>
+  <style>
+/* Editorial restyle — aligned with the DIA▲MANIFESTO index */
+:root{
+  --bg:#f7f7f4;
+  --fg:#080808;
+  --muted:#666661;
+  --soft:#ecece7;
+  --hairline:rgba(8,8,8,.22);
+  --hairline-strong:#080808;
+}
+
+html,
+body{ background:var(--bg); }
+
+body{
+  color:var(--fg);
+  background:var(--bg);
+}
+
+body::before{
+  display:block;
+  position:fixed;
+  inset:87px 0 auto;
+  width:auto;
+  height:1px;
+  border:0;
+  background:var(--fg);
+  opacity:1;
+  transform:none;
+  z-index:3;
+}
+
+body::after{ display:none; }
+
+.topbar-left{
+  position:fixed;
+  inset:0 auto auto 0;
+  z-index:10;
+  width:100%;
+  height:88px;
+  display:flex;
+  align-items:center;
+  padding:0 clamp(20px, 4vw, 64px);
+  background:var(--bg);
+}
+
+.interact-btn,
+.btn{
+  min-height:42px;
+  padding:11px 14px;
+  border:1px solid var(--fg);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  color:var(--fg);
+  font-size:.66rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  line-height:1.15;
+  text-transform:uppercase;
+  transition:background .18s ease,color .18s ease;
+}
+
+.interact-btn::before,
+.interact-btn::after,
+.btn::before,
+.btn::after{ display:none; }
+
+.interact-btn:hover,
+.interact-btn:focus-visible,
+.btn:hover,
+.btn:focus-visible{
+  transform:none;
+  border-color:var(--fg);
+  background:var(--fg);
+  color:var(--bg);
+  box-shadow:none;
+  outline:none;
+}
+
+.wrap{
+  display:block;
+  min-height:100vh;
+  min-height:100dvh;
+  padding:clamp(144px, 17vh, 208px) clamp(20px, 4vw, 64px) clamp(64px, 9vw, 128px);
+}
+
+.panel{
+  width:min(100%, 1280px);
+  padding:0;
+  margin:0 auto;
+  text-align:left;
+}
+
+.panel::before{ display:none; }
+
+.title{
+  margin:0;
+  color:var(--fg);
+  font-size:clamp(4.2rem, 11vw, 10rem);
+  font-weight:700;
+  line-height:.76;
+  letter-spacing:-.065em;
+}
+
+.divider{ display:none; }
+
+.subtitle{
+  width:min(100%, 46rem);
+  max-width:none;
+  margin:clamp(38px, 6vw, 76px) 0 clamp(52px, 7vw, 92px) auto;
+  padding-top:14px;
+  border-top:1px solid var(--fg);
+  color:var(--fg);
+  font-size:clamp(.95rem, 1.35vw, 1.1rem);
+  line-height:1.65;
+}
+
+.subtitle b{ color:var(--fg); }
+
+.grid{
+  display:grid;
+  grid-template-columns:minmax(300px, .85fr) minmax(0, 1.15fr);
+  gap:0;
+  margin:0;
+  border:1px solid var(--fg);
+  align-items:stretch;
+}
+
+.card{
+  padding:0;
+  overflow:hidden;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+
+.card:first-child{
+  border-right:1px solid var(--fg);
+}
+
+.card::before{ display:none; }
+
+.card h2{
+  margin:0;
+  padding:13px 18px;
+  border-bottom:1px solid var(--hairline);
+  color:var(--fg);
+  background:var(--soft);
+  font-size:.62rem;
+  font-weight:600;
+  letter-spacing:.14em;
+  opacity:1;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:minmax(130px, 1fr) minmax(120px, 1.25fr) 52px;
+  gap:14px;
+  align-items:center;
+  min-height:58px;
+  margin:0;
+  padding:10px 18px;
+  border-bottom:1px solid var(--hairline);
+}
+
+.row:has(.btn){
+  display:flex;
+  flex-wrap:wrap;
+}
+
+.row label{
+  font-size:.7rem;
+  font-weight:500;
+  letter-spacing:.02em;
+}
+
+.row input[type="range"]{
+  width:100%;
+  accent-color:var(--fg);
+}
+
+.row input[type="number"],
+.row select{
+  min-height:38px;
+  width:100%;
+  min-width:0;
+  padding:8px 10px;
+  border:1px solid var(--fg);
+  border-radius:0;
+  background:var(--bg);
+  box-shadow:none;
+  color:var(--fg);
+  font-size:.7rem;
+}
+
+.row input[type="number"]{ width:100%; }
+
+.mono{
+  font-family:var(--font-mono);
+  font-size:.66rem;
+}
+
+.pill{
+  min-height:42px;
+  padding:11px 13px;
+  border:1px solid var(--fg);
+  border-radius:0;
+  background:var(--soft);
+  box-shadow:none;
+}
+
+.sep{
+  height:34px;
+  margin:0;
+  border-bottom:1px solid var(--fg);
+  background:var(--bg);
+}
+
+.small{
+  margin:0;
+  padding:18px;
+  border-top:1px solid var(--hairline);
+  color:var(--muted);
+  font-size:.7rem;
+  line-height:1.6;
+}
+
+canvas{
+  width:calc(100% - 36px);
+  height:clamp(260px, 34vw, 420px);
+  margin:18px;
+  border:1px solid var(--fg);
+  border-radius:0;
+  background:
+    linear-gradient(90deg, rgba(8,8,8,.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(8,8,8,.055) 1px, transparent 1px),
+    var(--bg);
+  background-size:48px 48px;
+  box-shadow:none;
+}
+
+.kvs{
+  gap:0;
+  border-top:1px solid var(--fg);
+}
+
+.kv{
+  min-height:62px;
+  padding:14px 18px;
+  border:0;
+  border-bottom:1px solid var(--hairline);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+
+.kv b{
+  font-size:.62rem;
+  font-weight:600;
+  letter-spacing:.08em;
+}
+
+.kv span{
+  font-size:.62rem;
+}
+
+@media (max-width: 980px){
+  .grid{ grid-template-columns:1fr; }
+  .card:first-child{
+    border-right:0;
+    border-bottom:1px solid var(--fg);
+  }
+}
+
+@media (max-width: 620px){
+  body::before{ top:75px; }
+
+  .topbar-left{
+    height:76px;
+    padding:0 16px;
+  }
+
+  .interact-btn{ width:100%; }
+
+  .wrap{
+    padding:clamp(126px, 18vh, 164px) 16px 64px;
+  }
+
+  .title{
+    font-size:clamp(3rem, 14.5vw, 5rem);
+    white-space:nowrap;
+  }
+
+  .subtitle{
+    margin:38px 0 52px;
+    font-size:.92rem;
+  }
+
+  .row{
+    grid-template-columns:1fr 52px;
+    gap:10px;
+    padding:13px 14px;
+  }
+
+  .row label{ grid-column:1 / -1; }
+
+  .row:has(.btn){
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .row:has(.btn) .pill{
+    grid-column:1 / -1;
+  }
+
+  .btn{
+    width:100%;
+    min-width:0;
+  }
+
+  canvas{
+    width:calc(100% - 24px);
+    height:220px;
+    margin:12px;
+  }
+
+  .kv{
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .kv b{ white-space:normal; }
+  .kv span{
+    max-width:100%;
+    text-align:left;
+  }
+}
+
+@media (max-width: 380px){
+  .title{ font-size:2.75rem; }
+  .row:has(.btn){ grid-template-columns:1fr; }
+  .row:has(.btn) .pill{ grid-column:1; }
+}
+  </style>
 
 </head>
 
@@ -682,6 +1030,11 @@
           <div class="sep"></div>
 
           <h2>Sound Field</h2>
+          <div class="row">
+            <label for="volume">Volume</label>
+            <input id="volume" type="range" min="0" max="1" step="0.001" value="0.68"/>
+            <span class="mono" id="volumeV"></span>
+          </div>
           <div class="row">
             <label for="intensity">Intensity (⊙)</label>
             <input id="intensity" type="range" min="0" max="1" step="0.001" value="0.55"/>
@@ -800,12 +1153,14 @@
     randSec: el("randSec"),
     agency: el("agency"),
 
+    volume: el("volume"),
     intensity: el("intensity"),
     brightness: el("brightness"),
     density: el("density"),
     regen: el("regen"),
     silenceBias: el("silenceBias"),
 
+    volumeV: el("volumeV"),
     intensityV: el("intensityV"),
     brightnessV: el("brightnessV"),
     densityV: el("densityV"),
@@ -823,17 +1178,19 @@
   };
 
   function syncValues(){
+    ui.volumeV.textContent = `${Math.round(ui.volume.value * 100)}%`;
     ui.intensityV.textContent = fmt(ui.intensity.value);
     ui.brightnessV.textContent = fmt(ui.brightness.value);
     ui.densityV.textContent = fmt(ui.density.value);
     ui.regenV.textContent = fmt(ui.regen.value);
     ui.silenceV.textContent = fmt(ui.silenceBias.value);
   }
-  ["intensity","brightness","density","regen","silenceBias"].forEach(k => ui[k].addEventListener("input", syncValues));
+  ["volume","intensity","brightness","density","regen","silenceBias"].forEach(k => ui[k].addEventListener("input", syncValues));
   syncValues();
 
   let ctx = null;
   let master = null;
+  let limiter = null;
   let analyser = null;
   let running = false;
 
@@ -841,6 +1198,7 @@
     seed: (Date.now() & 0xffffffff) >>> 0,
     frozen: false,
 
+    volume: parseFloat(ui.volume.value),
     intensity: parseFloat(ui.intensity.value),
     brightness: parseFloat(ui.brightness.value),
     density: parseFloat(ui.density.value),
@@ -870,7 +1228,11 @@
 
   function midiToHz(m){ return 440 * Math.pow(2, (m-69)/12); }
 
-  function createReverbImpulse(ctx, seconds=2.6, decay=2.2){
+  function masterTarget(){
+    return Math.pow(clamp(state.volume), 1.25) * 0.62;
+  }
+
+  function createReverbImpulse(ctx, seconds=5.4, decay=3.7){
     const rate = ctx.sampleRate;
     const len = Math.max(1, Math.floor(seconds * rate));
     const impulse = ctx.createBuffer(2, len, rate);
@@ -891,7 +1253,16 @@
 
     master = ctx.createGain();
     master.gain.value = 0.0;
-    master.connect(ctx.destination);
+
+    limiter = ctx.createDynamicsCompressor();
+    limiter.threshold.value = -16;
+    limiter.knee.value = 12;
+    limiter.ratio.value = 5;
+    limiter.attack.value = 0.025;
+    limiter.release.value = 0.65;
+
+    master.connect(limiter);
+    limiter.connect(ctx.destination);
 
     analyser = ctx.createAnalyser();
     analyser.fftSize = 2048;
@@ -901,14 +1272,14 @@
 
     state.bus.filter = ctx.createBiquadFilter();
     state.bus.filter.type = "lowpass";
-    state.bus.filter.frequency.value = 1200;
-    state.bus.filter.Q.value = 0.35;
+    state.bus.filter.frequency.value = 1050;
+    state.bus.filter.Q.value = 0.22;
 
     state.bus.reverb = ctx.createConvolver();
-    state.bus.reverb.buffer = createReverbImpulse(ctx, 3.2, 2.5);
+    state.bus.reverb.buffer = createReverbImpulse(ctx);
 
-    const wet = ctx.createGain(); wet.gain.value = 0.32;
-    const dry = ctx.createGain(); dry.gain.value = 0.85;
+    const wet = ctx.createGain(); wet.gain.value = 0.42;
+    const dry = ctx.createGain(); dry.gain.value = 0.72;
 
     state.bus.drone.connect(state.bus.filter);
     state.bus.grains.connect(state.bus.filter);
@@ -925,7 +1296,7 @@
     const curve = new Float32Array(65536);
     for (let i=0;i<curve.length;i++){
       const x = (i/(curve.length-1))*2 - 1;
-      curve[i] = Math.tanh(1.6*x);
+      curve[i] = Math.tanh(1.22*x);
     }
     shaper.curve = curve;
     shaper.oversample = "2x";
@@ -944,11 +1315,13 @@
       stopNode(d.lfo);
       stopNode(d.gain);
       stopNode(d.filt);
+      if(d.pan) stopNode(d.pan);
     });
     state.grains.forEach(g => {
       stopNode(g.src);
       stopNode(g.gain);
       stopNode(g.filt);
+      if(g.pan) stopNode(g.pan);
     });
     state.drones = [];
     state.grains = [];
@@ -965,13 +1338,13 @@
   function generateConfig(){
     const r = mulberry32(state.seed = (state.seed + 0x9e3779b9) >>> 0);
 
-    const baseRoot = clamp01Midi(state.memory.lastRoot + Math.round((r()*2-1)*7), 36, 60);
+    const baseRoot = clamp01Midi(state.memory.lastRoot + Math.round((r()*2-1)*5), 38, 54);
     const scaleSets = [
-      [0,2,3,5,7,10],
       [0,2,4,7,9],
-      [0,1,5,7,10],
-      [0,3,6,7,10],
-      [0,2,5,7,11],
+      [0,2,5,7,9],
+      [0,3,5,7,10],
+      [0,2,4,7,11],
+      [0,3,5,8,10],
     ];
     const scale = scaleSets[Math.floor(r()*scaleSets.length)];
 
@@ -985,14 +1358,14 @@
     }
     chord.sort((a,b)=>a-b);
 
-    const drift = lerp(0.005, 0.06, r());
-    const grainRate = lerp(0.1, 2.2, r());
+    const drift = lerp(0.003, 0.022, r());
+    const grainRate = lerp(0.06, 0.72, r());
 
-    const detuneCents = lerp(3, 22, r());
-    const fmDepth = lerp(0.0, 70.0, r());
-    const lpBase = lerp(420, 4200, r());
+    const detuneCents = lerp(1.2, 7.0, r());
+    const fmDepth = lerp(0.0, 12.0, r());
+    const lpBase = lerp(520, 2400, r());
 
-    const silenceChance = lerp(0.04, 0.22, r());
+    const silenceChance = lerp(0.03, 0.14, r());
 
     const cfg = {
       root: baseRoot,
@@ -1006,6 +1379,8 @@
       stamp: (ctx ? ctx.currentTime : 0)
     };
     state.config = cfg;
+    state.memory.lastRoot = baseRoot;
+    state.memory.lastChord = chord.slice();
 
     ui.cfg.textContent =
       `⟨ root:${baseRoot} chord:[${chord.join(",")}] drift:${cfg.drift.toFixed(3)} ` +
@@ -1029,7 +1404,16 @@
   function startDrones(){
     const cfg = state.config || generateConfig();
 
-    state.drones.forEach(d => { try { d.osc.stop(); } catch(_){} });
+    state.drones.forEach(d => {
+      try { d.osc.stop(); } catch(_){}
+      try { d.lfo.stop(); } catch(_){}
+      try { d.osc.disconnect(); } catch(_){}
+      try { d.lfo.disconnect(); } catch(_){}
+      try { d.lfoGain.disconnect(); } catch(_){}
+      try { d.filt.disconnect(); } catch(_){}
+      try { d.gain.disconnect(); } catch(_){}
+      if(d.pan) try { d.pan.disconnect(); } catch(_){}
+    });
     state.drones = [];
 
     const voiceCount = clamp(Math.round(3 + state.density*3), 3, 6);
@@ -1037,20 +1421,24 @@
 
     chosen.forEach((semi, i) => {
       const osc = ctx.createOscillator();
-      osc.type = (i % 2 === 0) ? "sine" : "triangle";
+      osc.type = "sine";
 
       const gain = ctx.createGain();
       gain.gain.value = 0.0;
 
       const filt = ctx.createBiquadFilter();
       filt.type = "lowpass";
-      filt.Q.value = 0.35;
+      filt.Q.value = 0.18;
+      filt.frequency.value = lerp(780, 2100, state.brightness);
+
+      const pan = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+      if(pan) pan.pan.value = voiceCount === 1 ? 0 : lerp(-0.62, 0.62, i / (voiceCount - 1));
 
       const lfo = ctx.createOscillator();
       lfo.type = "sine";
       const lfoGain = ctx.createGain();
-      lfoGain.gain.value = lerp(6, 35, state.regen);
-      lfo.frequency.value = lerp(0.006, 0.08, cfg.drift) * (0.8 + Math.random()*0.6);
+      lfoGain.gain.value = lerp(1.5, 8.0, state.regen);
+      lfo.frequency.value = lerp(0.004, 0.022, cfg.drift) * (0.8 + Math.random()*0.5);
 
       lfo.connect(lfoGain);
       lfoGain.connect(osc.detune);
@@ -1061,17 +1449,22 @@
 
       osc.connect(filt);
       filt.connect(gain);
-      gain.connect(state.bus.drone);
+      if(pan){
+        gain.connect(pan);
+        pan.connect(state.bus.drone);
+      } else {
+        gain.connect(state.bus.drone);
+      }
 
       const t = ctx.currentTime;
-      const target = 0.12 + state.intensity * 0.28;
+      const target = 0.10 + state.intensity * 0.22;
       gain.gain.setValueAtTime(0.0, t);
-      gain.gain.linearRampToValueAtTime(target/voiceCount, t + 3.0 + i*0.4);
+      gain.gain.linearRampToValueAtTime(target/voiceCount, t + 6.0 + i*0.65);
 
       osc.start();
       lfo.start();
 
-      state.drones.push({osc, gain, filt, lfo, lfoGain});
+      state.drones.push({osc, gain, filt, pan, lfo, lfoGain});
     });
   }
 
@@ -1080,13 +1473,13 @@
     if(!cfg) return;
 
     const density = state.density;
-    const rate = cfg.grainRate * lerp(0.2, 2.4, density);
+    const rate = cfg.grainRate * lerp(0.18, 1.15, density);
 
-    const p = clamp(rate * 0.1, 0, 0.95);
+    const p = clamp(rate * 0.1, 0, 0.42);
     if(Math.random() > p) return;
 
     const baseMidi = cfg.root + cfg.chord[Math.floor(Math.random()*cfg.chord.length)];
-    const midi = baseMidi + (Math.random()<0.35 ? 12 : 0) + (Math.random()<0.1 ? 24 : 0);
+    const midi = baseMidi + (Math.random()<0.28 ? 12 : 0);
     const hz = midiToHz(midi);
 
     const src = ctx.createOscillator();
@@ -1096,43 +1489,56 @@
 
     const filt = ctx.createBiquadFilter();
     filt.type = "bandpass";
-    filt.Q.value = lerp(1.2, 8.0, Math.random());
-    filt.frequency.value = lerp(250, 4200, Math.random()) * lerp(0.7, 1.3, state.brightness);
+    filt.Q.value = lerp(0.55, 2.2, Math.random());
+    filt.frequency.value = Math.min(hz, lerp(420, 2200, Math.random()) * lerp(0.72, 1.05, state.brightness));
 
     const gain = ctx.createGain();
     gain.gain.value = 0.0;
+    const pan = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+    if(pan) pan.pan.value = lerp(-0.72, 0.72, Math.random());
 
     src.connect(filt);
     filt.connect(gain);
-    gain.connect(state.bus.grains);
+    if(pan){
+      gain.connect(pan);
+      pan.connect(state.bus.grains);
+    } else {
+      gain.connect(state.bus.grains);
+    }
 
     const t = ctx.currentTime;
-    const dur = lerp(0.04, 0.22, Math.random()) * lerp(0.8, 1.4, state.regen);
-    const a = lerp(0.005, 0.06, state.intensity) * lerp(0.2, 1.0, state.brightness);
+    const dur = lerp(0.75, 2.8, Math.random()) * lerp(0.9, 1.3, state.regen);
+    const a = lerp(0.002, 0.022, state.intensity) * lerp(0.35, 0.9, state.brightness);
 
     gain.gain.setValueAtTime(0.0, t);
-    gain.gain.linearRampToValueAtTime(a, t + dur*0.25);
+    gain.gain.linearRampToValueAtTime(a, t + dur*0.38);
     gain.gain.exponentialRampToValueAtTime(0.0001, t + dur);
 
     src.start(t);
     src.stop(t + dur + 0.02);
+    src.addEventListener("ended", () => {
+      try { src.disconnect(); } catch(_){}
+      try { filt.disconnect(); } catch(_){}
+      try { gain.disconnect(); } catch(_){}
+      if(pan) try { pan.disconnect(); } catch(_){}
+    }, { once:true });
 
-    state.grains.push({src, gain, filt, born:t});
-    state.grains = state.grains.filter(g => (ctx.currentTime - g.born) < 2.0);
+    state.grains.push({src, gain, filt, pan, born:t});
+    state.grains = state.grains.filter(g => (ctx.currentTime - g.born) < 4.0);
   }
 
   function applyGlobalTimbre(){
     const b = state.brightness;
     const i = state.intensity;
 
-    const lp = lerp(550, 5200, b) * (state.config ? lerp(0.85, 1.15, (state.config.lpBase/4200)) : 1.0);
-    state.bus.filter.frequency.setTargetAtTime(lp, ctx.currentTime, 0.15);
+    const lp = lerp(520, 2850, b) * (state.config ? lerp(0.88, 1.08, (state.config.lpBase/2400)) : 1.0);
+    state.bus.filter.frequency.setTargetAtTime(lp, ctx.currentTime, 0.8);
 
-    const droneGain = lerp(0.35, 1.15, i);
-    const grainGain = lerp(0.15, 1.00, i) * lerp(0.6, 1.2, state.density);
+    const droneGain = lerp(0.42, 0.92, i);
+    const grainGain = lerp(0.10, 0.58, i) * lerp(0.45, 1.0, state.density);
 
-    state.bus.drone.gain.setTargetAtTime(droneGain, ctx.currentTime, 0.25);
-    state.bus.grains.gain.setTargetAtTime(grainGain, ctx.currentTime, 0.25);
+    state.bus.drone.gain.setTargetAtTime(droneGain, ctx.currentTime, 0.75);
+    state.bus.grains.gain.setTargetAtTime(grainGain, ctx.currentTime, 0.75);
   }
 
   function agencyStep(){
@@ -1189,11 +1595,12 @@
     state.lastSilenceAt = ctx.currentTime;
     setStatus("# (boundary)");
     const t = ctx.currentTime;
-    const downTo = 0.06;
+    const target = masterTarget();
+    const downTo = target * 0.12;
     master.gain.cancelScheduledValues(t);
     master.gain.setValueAtTime(master.gain.value, t);
-    master.gain.linearRampToValueAtTime(downTo, t + 0.7);
-    master.gain.linearRampToValueAtTime(0.32, t + 2.2);
+    master.gain.linearRampToValueAtTime(downTo, t + 2.8);
+    master.gain.linearRampToValueAtTime(target, t + 7.5);
 
     generateConfig();
     startDrones();
@@ -1216,9 +1623,9 @@
         setStatus("■ (reconfigured)");
       } else {
         const cfg = state.config;
-        cfg.drift = clamp(cfg.drift * lerp(0.85, 1.25, Math.random()), 0.004, 0.08);
-        cfg.detuneCents = clamp(cfg.detuneCents * lerp(0.8, 1.25, Math.random()), 2, 28);
-        cfg.grainRate = clamp(cfg.grainRate * lerp(0.75, 1.3, Math.random()), 0.08, 2.5);
+        cfg.drift = clamp(cfg.drift * lerp(0.9, 1.12, Math.random()), 0.003, 0.025);
+        cfg.detuneCents = clamp(cfg.detuneCents * lerp(0.9, 1.12, Math.random()), 1.0, 8.0);
+        cfg.grainRate = clamp(cfg.grainRate * lerp(0.82, 1.18, Math.random()), 0.05, 0.8);
         setStatus("↻ (micro-regen)");
       }
     }
@@ -1290,6 +1697,8 @@
   function tick(){
     if(!running || !ctx) return;
 
+    state.volume = parseFloat(ui.volume.value);
+
     if(!state.frozen){
       state.intensity = parseFloat(ui.intensity.value);
       state.brightness = parseFloat(ui.brightness.value);
@@ -1339,10 +1748,11 @@
     generateConfig();
     startDrones();
 
+    state.volume = parseFloat(ui.volume.value);
     const t = ctx.currentTime;
     master.gain.cancelScheduledValues(t);
     master.gain.setValueAtTime(master.gain.value, t);
-    master.gain.linearRampToValueAtTime(0.32, t + 2.2);
+    master.gain.linearRampToValueAtTime(masterTarget(), t + 5.5);
 
     if(!tickTimer) tickTimer = setInterval(tick, 100);
     drawScope();
@@ -1356,12 +1766,12 @@
     const t = ctx.currentTime;
     master.gain.cancelScheduledValues(t);
     master.gain.setValueAtTime(master.gain.value, t);
-    master.gain.linearRampToValueAtTime(0.0, t + 1.1);
+    master.gain.linearRampToValueAtTime(0.0, t + 2.8);
 
     setTimeout(() => {
       killAll();
       setStatus("# (silence)");
-    }, 1200);
+    }, 2900);
   });
 
   ui.mode.addEventListener("change", () => {
@@ -1369,8 +1779,13 @@
     else ui.intent.textContent = "agency → observing";
   });
 
+  ui.volume.addEventListener("input", () => {
+    state.volume = parseFloat(ui.volume.value);
+    if(!running || !ctx || !master) return;
+    master.gain.setTargetAtTime(masterTarget(), ctx.currentTime, 0.12);
+  });
+
 })();
   </script>
 </body>
 </html>
-
